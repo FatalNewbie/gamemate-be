@@ -1,8 +1,8 @@
-package com.example.gamemate.domain.post.controller;
+package com.example.gamemate.domain.controller;
 
-import com.example.gamemate.domain.post.service.AccessLogService;
-import com.example.gamemate.domain.post.service.S3Service;
-import com.example.gamemate.domain.post.entity.AccessLog;
+import com.example.gamemate.domain.service.AccessLogService;
+import com.example.gamemate.domain.service.S3Service;
+import com.example.gamemate.domain.entity.AccessLog;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

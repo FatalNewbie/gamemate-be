@@ -1,9 +1,8 @@
-package com.example.gamemate.domain.post.service;
+package com.example.gamemate.domain.service;
 
 
-import com.example.gamemate.domain.post.entity.AccessLog;
-import com.example.gamemate.domain.post.repository.AccessLogRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.gamemate.domain.entity.AccessLog;
+import com.example.gamemate.domain.repository.AccessLogRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;

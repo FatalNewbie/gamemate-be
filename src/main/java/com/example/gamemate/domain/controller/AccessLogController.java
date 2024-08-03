@@ -1,14 +1,11 @@
-package com.example.gamemate.domain.post.controller;
+package com.example.gamemate.domain.controller;
 
-import com.example.gamemate.domain.post.entity.AccessLog;
-import com.example.gamemate.domain.post.service.AccessLogService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.gamemate.domain.entity.AccessLog;
+import com.example.gamemate.domain.service.AccessLogService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 

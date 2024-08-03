@@ -1,4 +1,4 @@
-package com.example.gamemate.domain.post.entity;
+package com.example.gamemate.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
