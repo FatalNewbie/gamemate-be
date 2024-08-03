@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/post")
 @Tag(name = "Post Comment", description = "Post Comment API")
+@RequestMapping("/post")
+@RestController
 public class PostCommentController {
 
     private final PostCommentService postCommentService;

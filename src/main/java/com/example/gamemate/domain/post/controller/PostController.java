@@ -19,9 +19,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/posts")
+
 @Tag(name = "Post", description = "Post API")
+@RequestMapping("/posts")
+@RestController
 public class PostController {
 
     private final PostService postService;
