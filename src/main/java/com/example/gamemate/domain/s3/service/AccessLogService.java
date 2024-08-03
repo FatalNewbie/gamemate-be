@@ -1,8 +1,8 @@
-package com.example.gamemate.domain.service;
+package com.example.gamemate.domain.s3.service;
 
 
-import com.example.gamemate.domain.entity.AccessLog;
-import com.example.gamemate.domain.repository.AccessLogRepository;
+import com.example.gamemate.domain.s3.entity.AccessLog;
+import com.example.gamemate.domain.s3.repository.AccessLogRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;

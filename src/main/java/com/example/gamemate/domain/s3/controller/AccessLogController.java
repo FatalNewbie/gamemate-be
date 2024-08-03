@@ -1,7 +1,7 @@
-package com.example.gamemate.domain.controller;
+package com.example.gamemate.domain.s3.controller;
 
-import com.example.gamemate.domain.entity.AccessLog;
-import com.example.gamemate.domain.service.AccessLogService;
+import com.example.gamemate.domain.s3.entity.AccessLog;
+import com.example.gamemate.domain.s3.service.AccessLogService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

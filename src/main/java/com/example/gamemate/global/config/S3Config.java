@@ -1,4 +1,4 @@
-package com.example.gamemate.global;
+package com.example.gamemate.global.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
