@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/post")
 @Tag(name = "Post Comment", description = "Post Comment API")
 public class PostCommentController {
 
@@ -21,14 +21,14 @@ public class PostCommentController {
     }
 
     //게시글 댓글 작성 api
-    @PostMapping("/post/{id}/comment")
+    @PostMapping("/{id}/comment")
     public ResponseEntity<Object> registerPostComment(@PathVariable Long id, @RequestBody PostCommentDTO postCommentDTO){
         postCommentService.createPostComment(id, postCommentDTO);
         return ResponseEntity.ok().build();
     }
 
     //게시글 댓글 수정 api
-    @PutMapping("/post/{postId}/comment/{commentId}")
+    @PutMapping("/{postId}/comment/{commentId}")
     public ResponseEntity<Object> editComment(@PathVariable Long postId, Long commentId, @RequestBody PostCommentDTO postCommentDTO){
         postCommentService.updateComment(postId, commentId, postCommentDTO);
         return ResponseEntity.ok().build();
@@ -36,7 +36,7 @@ public class PostCommentController {
 
 
     //게시글 댓글 삭제 api
-    @DeleteMapping("/post/{postId}/comment/{commentId}")
+    @DeleteMapping("/{postId}/comment/{commentId}")
     public ResponseEntity<Object> removeComment(@PathVariable Long postId, Long commentId){
         postCommentService.deleteComment(postId, commentId);
 
