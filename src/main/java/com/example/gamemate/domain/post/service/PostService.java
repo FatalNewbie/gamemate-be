@@ -4,7 +4,10 @@ import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.dto.*;
 import com.example.gamemate.domain.post.entity.PostComment;
 import com.example.gamemate.domain.post.mapper.PostMapper;
+import com.example.gamemate.domain.post.repository.PostCommentRepository;
 import com.example.gamemate.domain.post.repository.PostRepository;
+import com.example.gamemate.domain.user.entity.User;
+import com.example.gamemate.domain.user.repository.UserRepository;
 import com.example.gamemate.global.exception.PostExceptionCode;
 import com.example.gamemate.global.exception.RestApiException;
 import org.springframework.data.domain.Page;
@@ -12,18 +15,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final PostCommentRepository postCommentRepository;
     private final PostMapper mapper;
 
 
 
-    public PostService(PostRepository postRepository, PostMapper mapper) {
+    public PostService(PostRepository postRepository, UserRepository userRepository, PostCommentRepository postCommentRepository, PostMapper mapper) {
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
+        this.postCommentRepository = postCommentRepository;
         this.mapper = mapper;
     }
 
@@ -42,23 +50,24 @@ public class PostService {
     }
 
     //게시글 조회
-    public PostResponseDTO readPost(Long id){
+    public PostResponseDTO readPost(String username, Long id){
 
         // 게시글 조회
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
+
+        User user = userRepository.findByUsername(username);
 
         //부모 댓글 필터링해서 가져오기
         List<PostComment> parentComments = post.getPostComments().stream()
                 .filter(postComment -> postComment.getParentComment() == null)
                 .collect(Collectors.toList());
 
-        System.out.println(parentComments);
-
         //댓글 응답 DTO로 변환
         List<PostCommentsResponseDTO> postCommentDto = parentComments.stream()
                 .map(postComment -> PostCommentsResponseDTO.builder()
                         .id(postComment.getId())
+                        .username(postCommentRepository.findUsernameByCommentId(postComment.getId()))
                         .nickname(postComment.getNickname())
                         .content(postComment.getContent())
                         .recomments(getRecomments(postComment))
@@ -68,7 +77,8 @@ public class PostService {
         System.out.println(postCommentDto);
 
         return PostResponseDTO.builder()
-                .userId(post.getUserId())
+                .username(username)
+                .nickname(user.getNickname())
                 .gameTitle(post.getGameTitle())
                 .status(post.getStatus().toString())
                 .gameGenre(post.getGameGenre())
@@ -87,6 +97,7 @@ public class PostService {
         return parentComment.getReComments().stream()
                 .map(recomment -> RecommentsResponseDTO.builder()
                         .id(recomment.getId())
+                        .username(postCommentRepository.findUsernameByCommentId(recomment.getId()))
                         .nickname(recomment.getNickname())
                         .content(recomment.getContent())
                         .build())
@@ -96,19 +107,36 @@ public class PostService {
 
     //게시글 생성
     //Status 값에 따라서 다른 로직 처리
-    public Post createPost(PostDTO postDTO) {
+    public Post createPost(String username, PostDTO postDTO) {
+
+        User user = userRepository.findByUsername(username);
 
         if ("ON".equals(postDTO.getStatus())) {
-            return handleOnlinePost((OnlinePostDTO) postDTO);
+            return handleOnlinePost(user, (OnlinePostDTO) postDTO);
         } else if ("OFF".equals(postDTO.getStatus())) {
-            return handleOfflinePost((OfflinePostDTO) postDTO);
+            return handleOfflinePost(user, (OfflinePostDTO) postDTO);
         } else {
             throw new IllegalArgumentException("유효하지 않은 상태입니다.");
         }
     }
 
     //게시글 수정
-    public PostResponseDTO updatePost(Long id, PostUpdateDTO postUpdateDTO){
+    public PostResponseDTO updatePost(Long id, PostUpdateDTO postUpdateDTO) {
+
+//        return postRepository.findById(id)
+//                .map(existingPost -> {
+//                    if (postUpdateDTO.getStatus().equals("ON")){
+//                        existingPost.updateOnlinePost(postUpdateDTO.getMateCnt(), postUpdateDTO.getMateContent());
+//                    }
+//                    if (postUpdateDTO.getStatus().equals("OFF")){
+//                        existingPost.updateOfflinePost(postUpdateDTO.getMateCnt(), postUpdateDTO.getMateContent(),
+//                                postUpdateDTO.getMateRegionSi(), postUpdateDTO.getMateResionGu(),
+//                                postUpdateDTO.getLatitude(), postUpdateDTO.getLongitude());
+//                    }
+//                    Post updatedPost = postRepository.save(existingPost);
+//                    return mapper.PostToOfflinePostResponse(updatedPost);
+//                })
+//                .orElseThrow(() -> new IllegalStateException("Post with id " + id + "does note exist"));
 
         if (postUpdateDTO.getStatus().equals("ON")){
 
@@ -131,8 +159,10 @@ public class PostService {
                         return mapper.PostToOfflinePostResponse(updatedPost);
                     })
                     .orElseThrow(() -> new IllegalStateException("Post with id " + id + "does note exist"));
-        }
-        else throw new IllegalArgumentException("잘못된 접근");
+        } else throw new IllegalArgumentException("잘못된 접근");
+
+
+
     }
 
     //게시글 삭제
@@ -143,13 +173,14 @@ public class PostService {
 
 
     // 온라인 포스트 처리 로직
-    private Post handleOnlinePost(OnlinePostDTO onlinePostRequest) {
+    private Post handleOnlinePost(User user, OnlinePostDTO onlinePostRequest) {
 
         Post post = Post.builder()
                 .gameTitle(onlinePostRequest.getGameTitle())
                 .gameGenre(onlinePostRequest.getGameGenre())
                 .status(Post.OnOffStatus.ON)
-                .userId(onlinePostRequest.getUserId())
+                .user(user)
+                .nickname(user.getNickname())
                 .mateCnt(onlinePostRequest.getMateCnt())
                 .mateContent(onlinePostRequest.getMateContent())
                 .build();
@@ -158,14 +189,15 @@ public class PostService {
     }
 
     //오프라인 포스트 처리 로직
-    private Post handleOfflinePost(OfflinePostDTO offlinePostDTO) {
+    private Post handleOfflinePost(User user, OfflinePostDTO offlinePostDTO) {
 
 
         Post post = Post.builder()
                 .gameTitle(offlinePostDTO.getGameTitle())
                 .gameGenre(offlinePostDTO.getGameGenre())
                 .status(Post.OnOffStatus.OFF)
-                .userId(offlinePostDTO.getUserId())
+                .user(user)
+                .nickname(user.getNickname())
                 .mateCnt(offlinePostDTO.getMateCnt())
                 .mateContent(offlinePostDTO.getMateContent())
                 .mateRegionSi(offlinePostDTO.getMateRegionSi())
@@ -176,7 +208,5 @@ public class PostService {
 
         return postRepository.save(post);
     }
-
-
 
 }

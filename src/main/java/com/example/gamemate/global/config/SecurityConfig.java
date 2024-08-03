@@ -90,7 +90,7 @@ public class SecurityConfig {
             .authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/login", "/", "/join","/friend/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**").permitAll() // Swagger 경로 허용
-                .anyRequest().authenticated())
+                .anyRequest().permitAll())
 
             //JWTFilter 등록
             .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class)

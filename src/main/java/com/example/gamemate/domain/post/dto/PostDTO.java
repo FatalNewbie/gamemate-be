@@ -27,9 +27,6 @@ public abstract class PostDTO {
     private String status;
 
     @NotNull
-    private Long userId;
-
-    @NotNull
     private String gameGenre;
 
     @NotNull

@@ -1,6 +1,7 @@
 package com.example.gamemate.domain.post.controller;
 
 
+import com.amazonaws.services.ec2.model.UserData;
 import com.example.gamemate.domain.post.dto.PostDTO;
 import com.example.gamemate.domain.post.dto.PostUpdateDTO;
 import com.example.gamemate.domain.post.entity.Post;
@@ -9,18 +10,20 @@ import com.example.gamemate.domain.post.entity.PostComment;
 import com.example.gamemate.domain.post.service.PostService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.objenesis.ObjenesisHelper;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @Tag(name = "Post", description = "Post API")
+@Slf4j
 @RequestMapping("/posts")
 @RestController
 public class PostController {
@@ -52,16 +55,16 @@ public class PostController {
 
     //글 조회 api
     @GetMapping("/post/{id}")
-    public ResponseEntity<PostResponseDTO> getPostWithComments(@PathVariable Long id){
-        PostResponseDTO post = postService.readPost(id);
+    public ResponseEntity<PostResponseDTO> getPostWithComments(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails){
+        PostResponseDTO post = postService.readPost(userDetails.getUsername(), id);
         return ResponseEntity.ok(post);
     }
 
     //글 작성 api
     @PostMapping("/post")
-    public ResponseEntity<Object> registerPost(@Valid @RequestBody PostDTO postDTO){
+    public ResponseEntity<Object> registerPost(@Valid @RequestBody PostDTO postDTO, @AuthenticationPrincipal UserDetails userDetails){
 
-        postService.createPost(postDTO);
+        postService.createPost(userDetails.getUsername(), postDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

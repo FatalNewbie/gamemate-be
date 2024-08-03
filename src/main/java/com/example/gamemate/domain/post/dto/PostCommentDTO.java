@@ -14,8 +14,5 @@ public class PostCommentDTO {
     private Long pCommentId;
 
     @NotNull
-    private String nickname;
-
-    @NotNull
     private String content;
 }

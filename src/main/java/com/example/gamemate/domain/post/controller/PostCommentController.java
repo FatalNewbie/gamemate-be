@@ -5,6 +5,8 @@ import com.example.gamemate.domain.post.entity.PostComment;
 import com.example.gamemate.domain.post.service.PostCommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +24,8 @@ public class PostCommentController {
 
     //게시글 댓글 작성 api
     @PostMapping("/{id}/comment")
-    public ResponseEntity<Object> registerPostComment(@PathVariable Long id, @RequestBody PostCommentDTO postCommentDTO){
-        postCommentService.createPostComment(id, postCommentDTO);
+    public ResponseEntity<Object> registerPostComment(@PathVariable Long id, @RequestBody PostCommentDTO postCommentDTO, @AuthenticationPrincipal UserDetails userDetails){
+        postCommentService.createPostComment(userDetails.getUsername(), id, postCommentDTO);
         return ResponseEntity.ok().build();
     }
 

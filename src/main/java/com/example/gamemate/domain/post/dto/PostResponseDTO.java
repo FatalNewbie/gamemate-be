@@ -1,11 +1,13 @@
 package com.example.gamemate.domain.post.dto;
 
 import com.example.gamemate.domain.post.entity.Post;
+import com.example.gamemate.domain.user.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.SimpleTimeZone;
 
 @Getter
 public class PostResponseDTO {
@@ -13,7 +15,8 @@ public class PostResponseDTO {
     private String status;
     private String gameTitle;
     private String gameGenre;
-    private Long userId;
+    private String username;
+    private String nickname;
     private Integer mateCnt;
     private String mateContent;
     private String mateRegionSi;
@@ -27,7 +30,8 @@ public class PostResponseDTO {
         this.status = post.getStatus().toString();
         this.gameTitle = post.getGameTitle();
         this.gameGenre = post.getGameGenre();
-        this.userId = post.getUserId();
+        this.username = post.getUser().getUsername();
+        this.nickname = post.getNickname();
         this.mateCnt = post.getMateCnt();
         this.mateContent = post.getMateContent();
         this.mateRegionGu = post.getMateRegionGu();
@@ -38,12 +42,13 @@ public class PostResponseDTO {
     }
 
     @Builder
-    public PostResponseDTO(String status, String gameTitle, String gameGenre, Long userId, Integer mateCnt, String mateContent,
+    public PostResponseDTO(String status, String gameTitle, String gameGenre, String username, String nickname,Integer mateCnt, String mateContent,
                            String mateRegionSi, String mateRegionGu, BigDecimal latitude, BigDecimal longitude, List<PostCommentsResponseDTO> postComments){
         this.status = status;
         this.gameTitle = gameTitle;
         this.gameGenre = gameGenre;
-        this.userId = userId;
+        this.username = username;
+        this.nickname = nickname;
         this.mateCnt = mateCnt;
         this.mateContent = mateContent;
         this.mateRegionSi = mateRegionSi;

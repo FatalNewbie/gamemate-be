@@ -7,8 +7,12 @@ import com.example.gamemate.domain.post.mapper.PostCommentMapper;
 import com.example.gamemate.domain.post.mapper.PostMapper;
 import com.example.gamemate.domain.post.repository.PostCommentRepository;
 import com.example.gamemate.domain.post.repository.PostRepository;
+import com.example.gamemate.domain.user.entity.User;
+import com.example.gamemate.domain.user.repository.UserRepository;
 import com.example.gamemate.global.exception.PostExceptionCode;
 import com.example.gamemate.global.exception.RestApiException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,23 +21,25 @@ import java.util.List;
 @Service
 public class PostCommentService {
 
+    private final UserRepository userRepository;
     private final PostCommentRepository postCommentRepository;
     private final PostRepository postRepository;
     private final PostCommentMapper mapper;
 
-    public PostCommentService(PostCommentRepository postCommentRepository, PostRepository postRepository, PostCommentMapper mapper) {
+    public PostCommentService(UserRepository userRepository, PostCommentRepository postCommentRepository, PostRepository postRepository, PostCommentMapper mapper) {
+        this.userRepository = userRepository;
         this.postCommentRepository = postCommentRepository;
         this.postRepository = postRepository;
         this.mapper = mapper;
     }
 
     //게시글 댓글 생성
-    public void createPostComment(Long id, PostCommentDTO postCommentDTO){
+    public void createPostComment(String username, Long id, PostCommentDTO postCommentDTO){
 
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
 
-        System.out.println("부모 아이디 : " + postCommentDTO.getPCommentId());
+        User user = userRepository.findByUsername(username);
 
         //대댓글일 경우 실행되는 로직
         PostComment parentComment = null;
@@ -45,9 +51,10 @@ public class PostCommentService {
         ;
 
         PostComment postComment = PostComment.builder()
+                .user(user)
                 .post(post)
                 .parentComment(parentComment)
-                .nickname(postCommentDTO.getNickname())
+                .nickname(user.getNickname())
                 .content(postCommentDTO.getContent())
                 .build();
 
