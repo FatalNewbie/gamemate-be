@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S3 File Upload</title>
+    <script>
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a file first!');
+                return;
+            }
+
+            try {
+                // Presigned URL 요청
+                const response = await fetch(`/presigned-url?bucketName=gameexamplebucket&objectKey=${file.name}`);
+                if (!response.ok) {
+                    throw new Error('Failed to get presigned URL');
+                }
+                const presignedUrl = await response.text();
+
+                // S3에 파일 업로드
+                const uploadResponse = await fetch(presignedUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': file.type,
+                    },
+                    body: file
+                });
+
+                if (uploadResponse.ok) {
+                    document.getElementById('status').innerText = 'Upload successful!';
+                    const fileUrl = presignedUrl.split('?')[0];
+                    document.getElementById('fileUrl').innerHTML = `<a href="${fileUrl}" target="_blank">View uploaded file</a>`;
+                } else {
+                    throw new Error('Upload failed.');
+                }
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                document.getElementById('status').innerText = 'Error uploading file.';
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>S3 File Upload</h1>
+
+<!-- 직접 서버에 파일 업로드 폼 -->
+<h2>Upload File Directly</h2>
+<form method="post" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="file" id="fileInput" />
+    <button type="submit">Upload File</button>
+</form>
+<hr>
+
+<!-- Presigned URL을 이용한 파일 업로드 -->
+<h2>Upload File Using Presigned URL</h2>
+<button onclick="uploadFile()">Upload File Using Presigned URL</button>
+<p id="status"></p>
+<p id="fileUrl"></p>
+</body>
+</html>

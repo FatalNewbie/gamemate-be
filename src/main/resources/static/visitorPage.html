@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Increment Visitor Count</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Visitor Count for Today</h1>
+    <p id="visitor-count">Loading...</p>
+</div>
+
+<script>
+    // 오늘 날짜를 yyyy-MM-dd 형식으로 반환하는 함수
+    function getToday() {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd}`;
+    }
+
+    // 방문자 수를 증가시키고 업데이트된 방문자 수를 가져오는 함수
+    function incrementAndFetchVisitorCount() {
+        // 방문자 수를 증가시키기 위한 POST 요청
+        fetch('/visit', { method: 'POST' })
+            .then(() => {
+                // 성공적으로 증가된 후 방문자 수를 가져옴
+                fetchVisitorCount();
+            })
+            .catch(error => {
+                console.error('Error incrementing visitor count:', error);
+                document.getElementById('visitor-count').textContent = 'Error';
+            });
+    }
+
+    // 서버에서 오늘의 방문자 수를 가져오는 함수
+    function fetchVisitorCount() {
+        const date = getToday();
+        fetch(`/visit/${date}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('visitor-count').textContent = data;
+            })
+            .catch(error => {
+                console.error('Error fetching visitor count:', error);
+                document.getElementById('visitor-count').textContent = 'Error';
+            });
+    }
+
+    // 페이지 로드 시 방문자 수를 증가시키고 최신 수치를 가져옵니다.
+    document.addEventListener('DOMContentLoaded', incrementAndFetchVisitorCount);
+</script>
+</body>
+</html>
