@@ -1,6 +1,6 @@
 package com.example.gamemate.domain.post.entity;
 
-import com.example.gamemate.global.utils.BaseEntity;
+import com.example.gamemate.global.audit.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "post")
 @Entity
+
 public class Post extends BaseEntity {
 
     @Id
