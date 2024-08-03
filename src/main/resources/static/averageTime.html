@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>평균 실행 시간</title>
+    <script>
+        async function fetchAverageTime() {
+            try {
+                const response = await fetch('/averageTime');
+
+                if (!response.ok) {
+                    throw new Error('네트워크 응답이 좋지 않습니다.');
+                }
+
+                const averageTime = await response.text(); // 텍스트로 응답받기
+                document.getElementById('average-time').innerText = averageTime; // 평균 시간 표시
+            } catch (error) {
+                console.error('오류 발생:', error);
+                document.getElementById('average-time').innerText = '오류가 발생했습니다.';
+            }
+        }
+
+        // 페이지 로드 시 평균 시간 가져오기
+        window.onload = fetchAverageTime;
+    </script>
+</head>
+<body>
+<h1>웹사이트 평균 실행 시간</h1>
+<p>평균 실행 시간: <span id="average-time">로딩 중...</span> 초</p>
+</body>
+</html>
