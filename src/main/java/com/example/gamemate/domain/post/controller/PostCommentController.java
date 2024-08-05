@@ -26,9 +26,11 @@ public class PostCommentController {
 
     //게시글 댓글 작성 api
     @PostMapping("/{id}/comment")
-    public ResponseEntity<PostCommentResponseDTO> registerPostComment(@PathVariable Long id,
-                                                      @Valid @RequestBody PostCommentDTO postCommentDTO,
-                                                      @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<PostCommentResponseDTO> registerPostComment(
+            @PathVariable Long id,
+            @Valid @RequestBody PostCommentDTO postCommentDTO,
+            @AuthenticationPrincipal UserDetails userDetails
+    ){
 
         PostCommentResponseDTO postCommentResponseDTO =
                 postCommentService.createPostComment(userDetails.getUsername(), id, postCommentDTO);
@@ -38,10 +40,12 @@ public class PostCommentController {
 
     //게시글 댓글 수정 api
     @PutMapping("/{postId}/comment/{commentId}")
-    public ResponseEntity<Object> editComment(@PathVariable Long postId,
-                                              @PathVariable Long commentId,
-                                              @Valid @RequestBody PostCommentDTO postCommentDTO,
-                                              @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<Object> editComment(
+            @PathVariable Long postId,
+            @PathVariable Long commentId,
+            @Valid @RequestBody PostCommentDTO postCommentDTO,
+            @AuthenticationPrincipal UserDetails userDetails
+    ){
 
         PostCommentResponseDTO postCommentResponseDTO =
                 postCommentService.updateComment(userDetails.getUsername(), postId, commentId, postCommentDTO);
@@ -52,9 +56,11 @@ public class PostCommentController {
 
     //게시글 댓글 삭제 api
     @DeleteMapping("/{postId}/comment/{commentId}")
-    public ResponseEntity<Object> removeComment(@PathVariable Long postId,
-                                                @PathVariable Long commentId,
-                                                @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<Object> removeComment(
+            @PathVariable Long postId,
+            @PathVariable Long commentId,
+            @AuthenticationPrincipal UserDetails userDetails
+    ){
 
         postCommentService.deleteComment(userDetails.getUsername(), postId, commentId);
 

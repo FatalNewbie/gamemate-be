@@ -37,16 +37,16 @@ public class PostService {
         this.mapper = mapper;
     }
 
-    //온라인 게시글 리스트 조회
-    public Page<PostResponseDTO> readPostsOnline(Pageable pageable){
-        Page<Post> postPage = postRepository.findByStatus(Post.OnOffStatus.ON, pageable);
+    //게시글 리스트 조회
+    public Page<PostResponseDTO> readPosts(String status, Pageable pageable){
 
-        return postPage.map(PostResponseDTO::new);
-    }
+        Page<Post> postPage = null;
 
-    //오프라인 게시글 리스트 조회
-    public Page<PostResponseDTO> readPostsOffline(Pageable pageable){
-        Page<Post> postPage = postRepository.findByStatus(Post.OnOffStatus.OFF, pageable);
+        if(status.toUpperCase().equals("ON")){
+            postPage = postRepository.findByStatus(Post.OnOffStatus.ON, pageable);
+        }else {
+            postPage = postRepository.findByStatus(Post.OnOffStatus.OFF, pageable);
+        }
 
         return postPage.map(PostResponseDTO::new);
     }

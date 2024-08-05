@@ -37,27 +37,34 @@ public class PostController {
 
 
     //온라인 글 List 조회 api
-    @GetMapping("/online")
-    public ResponseEntity<Page<PostResponseDTO>> getAllOnlinePosts(@PageableDefault(size = 10) Pageable pageable){
+    @GetMapping
+    public ResponseEntity<Page<PostResponseDTO>> getAllOnlinePosts(
+            @RequestParam String status,
+            @PageableDefault(size = 10) Pageable pageable
+    ){
 
-        Page<PostResponseDTO> onlinePosts = postService.readPostsOnline(pageable);
+        Page<PostResponseDTO> posts = postService.readPosts(status, pageable);
 
-        return ResponseEntity.ok(onlinePosts);
+        return ResponseEntity.ok(posts);
     }
 
-    //오프라인 글 List 조회 api
-    @GetMapping("/offline")
-    public ResponseEntity<Page<PostResponseDTO>> getAllOfflinePosts(@PageableDefault(size = 10) Pageable pageable){
-
-        Page<PostResponseDTO> offlinePosts = postService.readPostsOffline(pageable);
-
-        return ResponseEntity.ok(offlinePosts);
-    }
+//    //오프라인 글 List 조회 api
+//    @GetMapping
+//    public ResponseEntity<Page<PostResponseDTO>> getAllOfflinePosts(
+//            @PageableDefault(size = 10) Pageable pageable
+//    ){
+//
+//        Page<PostResponseDTO> offlinePosts = postService.readPostsOffline(pageable);
+//
+//        return ResponseEntity.ok(offlinePosts);
+//    }
 
     //글 조회 api
-    @GetMapping("/post/{id}")
-    public ResponseEntity<PostResponseDTO> getPostWithComments(@PathVariable Long id,
-                                                               @AuthenticationPrincipal UserDetails userDetails){
+    @GetMapping("/{id}")
+    public ResponseEntity<PostResponseDTO> getPostWithComments(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails
+    ){
 
         PostResponseDTO post = postService.readPost(userDetails.getUsername(), id);
 
@@ -65,9 +72,11 @@ public class PostController {
     }
 
     //글 작성 api
-    @PostMapping("/post")
-    public ResponseEntity<PostResponseDTO> registerPost(@Valid @RequestBody PostDTO postDTO,
-                                               @AuthenticationPrincipal UserDetails userDetails){
+    @PostMapping
+    public ResponseEntity<PostResponseDTO> registerPost(
+            @Valid @RequestBody PostDTO postDTO,
+            @AuthenticationPrincipal UserDetails userDetails
+    ){
 
         postService.createPost(userDetails.getUsername(), postDTO);
 
@@ -75,10 +84,12 @@ public class PostController {
     }
 
     //글 수정 api
-    @PutMapping("/post/{id}")
-    public ResponseEntity<PostResponseDTO> editPost(@PathVariable Long id,
-                                           @Valid @RequestBody PostUpdateDTO postUpdateDTO,
-                                           @AuthenticationPrincipal UserDetails userDetails){
+    @PutMapping("/{id}")
+    public ResponseEntity<PostResponseDTO> editPost(
+            @PathVariable Long id,
+            @Valid @RequestBody PostUpdateDTO postUpdateDTO,
+            @AuthenticationPrincipal UserDetails userDetails
+    ){
 
         PostResponseDTO postResponseDTO = postService.updatePost(userDetails.getUsername(), id, postUpdateDTO);
 
@@ -86,10 +97,11 @@ public class PostController {
     }
 
     //글 삭제 api
-    @Transactional
-    @DeleteMapping("post/{id}")
-    public ResponseEntity<PostResponseDTO> removePost(@PathVariable Long id,
-                                             @AuthenticationPrincipal UserDetails userDetails){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<PostResponseDTO> removePost(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails
+    ){
 
         postService.deletePost(userDetails.getUsername(), id);
 
