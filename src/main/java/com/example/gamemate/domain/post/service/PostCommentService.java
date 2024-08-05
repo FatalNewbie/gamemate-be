@@ -1,5 +1,6 @@
 package com.example.gamemate.domain.post.service;
 
+import com.example.gamemate.domain.post.dto.PostCommentResponseDTO;
 import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.entity.PostComment;
 import com.example.gamemate.domain.post.dto.PostCommentDTO;
@@ -9,6 +10,7 @@ import com.example.gamemate.domain.post.repository.PostCommentRepository;
 import com.example.gamemate.domain.post.repository.PostRepository;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.repository.UserRepository;
+import com.example.gamemate.global.exception.CommonExceptionCode;
 import com.example.gamemate.global.exception.PostExceptionCode;
 import com.example.gamemate.global.exception.RestApiException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -34,7 +36,7 @@ public class PostCommentService {
     }
 
     //게시글 댓글 생성
-    public void createPostComment(String username, Long id, PostCommentDTO postCommentDTO){
+    public PostCommentResponseDTO createPostComment(String username, Long id, PostCommentDTO postCommentDTO){
 
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
@@ -59,32 +61,54 @@ public class PostCommentService {
                 .build();
 
         postCommentRepository.save(postComment);
+
+        return mapper.postCommentToPostCommentResponseDTO(postComment);
     }
 
     //게시글 댓글 수정
-    public void updateComment(Long postId, Long commentId, PostCommentDTO postCommentDTO){
+    public PostCommentResponseDTO updateComment(String username, Long postId, Long commentId, PostCommentDTO postCommentDTO){
 
-        postRepository.findById(postId)
+        //게시글이 존재하지 않는 경우
+        //** 게시글이 sofeDelete 된 경우도 작성 필요 **//
+        Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
 
-        postCommentRepository.findById(commentId)
+        PostComment postComment = postCommentRepository.findById(commentId)
+                .orElseThrow(() -> new RestApiException(PostExceptionCode.COMMENT_NOT_FOUND));
+
+        //유저가 맞지 않는 경우
+        if(!postComment.getUser().getUsername().equals(username))
+            throw new RestApiException(CommonExceptionCode.USER_NOT_MATCH);
+
+        PostCommentResponseDTO postCommentResponseDTO = postCommentRepository.findById(commentId)
                 .map(existingPostComment -> {
                     existingPostComment.updateComment(postCommentDTO.getContent());
 
                     PostComment updatedPostComment = postCommentRepository.save(existingPostComment);
                     return mapper.postCommentToPostCommentResponseDTO(updatedPostComment);
                 })
-                .orElseThrow(() -> new IllegalStateException("PostComment with id " + commentId + "does note exist"));
+                .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
+
+        return postCommentResponseDTO;
     }
 
     //게시글 댓글 삭제
-    public void deleteComment(Long postId, Long commentId){
-        postRepository.findById(postId)
+    public void deleteComment(String username, Long postId, Long commentId){
+
+        //게시글이 존재하지 않는 경우
+        Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
 
-        postCommentRepository.findById(commentId)
+        //댓글이 존재하지 않는 경우
+        PostComment postComment = postCommentRepository.findById(commentId)
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.COMMENT_NOT_FOUND));
 
+        //유저가 맞지 않는 경우
+        if(!postComment.getUser().getUsername().equals(username))
+            throw new RestApiException(CommonExceptionCode.USER_NOT_MATCH);
+
+
+        //대댓글의 원댓글 id 받아오기
         Long pCommentId = postCommentRepository.getPCommentId(commentId);
 
         /*
@@ -114,6 +138,7 @@ public class PostCommentService {
             postCommentRepository.findById(commentId)
                     .ifPresent(existingPostComment -> {
 
+                        //원댓글은 softDelete
                         existingPostComment.deleteComment(LocalDateTime.now(), "삭제된 댓글입니다.");
                         postCommentRepository.save(existingPostComment);
                     });

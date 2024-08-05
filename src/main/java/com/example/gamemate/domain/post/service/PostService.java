@@ -8,11 +8,13 @@ import com.example.gamemate.domain.post.repository.PostCommentRepository;
 import com.example.gamemate.domain.post.repository.PostRepository;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.repository.UserRepository;
+import com.example.gamemate.global.exception.CommonExceptionCode;
 import com.example.gamemate.global.exception.PostExceptionCode;
 import com.example.gamemate.global.exception.RestApiException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -84,6 +86,7 @@ public class PostService {
                 .gameGenre(post.getGameGenre())
                 .mateCnt(post.getMateCnt())
                 .mateContent(post.getMateContent())
+                .commentCnt(postRepository.countCommentsByPostId(post.getId()))
                 .mateRegionSi(post.getMateRegionSi())
                 .mateRegionGu(post.getMateRegionGu())
                 .latitude(post.getLatitude())
@@ -116,58 +119,50 @@ public class PostService {
         } else if ("OFF".equals(postDTO.getStatus())) {
             return handleOfflinePost(user, (OfflinePostDTO) postDTO);
         } else {
-            throw new IllegalArgumentException("유효하지 않은 상태입니다.");
+            throw new RestApiException(CommonExceptionCode.INVALID_PARAMETER);
         }
     }
 
     //게시글 수정
-    public PostResponseDTO updatePost(Long id, PostUpdateDTO postUpdateDTO) {
+    public PostResponseDTO updatePost(String username, Long id, PostUpdateDTO postUpdateDTO) {
 
-//        return postRepository.findById(id)
-//                .map(existingPost -> {
-//                    if (postUpdateDTO.getStatus().equals("ON")){
-//                        existingPost.updateOnlinePost(postUpdateDTO.getMateCnt(), postUpdateDTO.getMateContent());
-//                    }
-//                    if (postUpdateDTO.getStatus().equals("OFF")){
-//                        existingPost.updateOfflinePost(postUpdateDTO.getMateCnt(), postUpdateDTO.getMateContent(),
-//                                postUpdateDTO.getMateRegionSi(), postUpdateDTO.getMateResionGu(),
-//                                postUpdateDTO.getLatitude(), postUpdateDTO.getLongitude());
-//                    }
-//                    Post updatedPost = postRepository.save(existingPost);
-//                    return mapper.PostToOfflinePostResponse(updatedPost);
-//                })
-//                .orElseThrow(() -> new IllegalStateException("Post with id " + id + "does note exist"));
+        //게시글이 존재하지 않는 경우
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
 
-        if (postUpdateDTO.getStatus().equals("ON")){
 
-            return postRepository.findById(id)
-                    .map(existingPost -> {
+        //유저가 맞지 않는 경우
+        if(!post.getUser().getUsername().equals(username))
+            throw new RestApiException(CommonExceptionCode.USER_NOT_MATCH);
+
+        return postRepository.findById(id)
+                .map(existingPost -> {
+                    if (postUpdateDTO.getStatus().equals("ON")){
                         existingPost.updateOnlinePost(postUpdateDTO.getMateCnt(), postUpdateDTO.getMateContent());
-
-                        Post updatedPost = postRepository.save(existingPost);
-                        return mapper.PostToOfflinePostResponse(updatedPost);
-                    })
-                    .orElseThrow(() -> new IllegalStateException("Post with id " + id + "does note exist"));
-        } else if (postUpdateDTO.getStatus().equals("OFF")){
-            return postRepository.findById(id)
-                    .map(existingPost -> {
+                    }
+                    if (postUpdateDTO.getStatus().equals("OFF")){
                         existingPost.updateOfflinePost(postUpdateDTO.getMateCnt(), postUpdateDTO.getMateContent(),
                                 postUpdateDTO.getMateRegionSi(), postUpdateDTO.getMateResionGu(),
                                 postUpdateDTO.getLatitude(), postUpdateDTO.getLongitude());
-
-                        Post updatedPost = postRepository.save(existingPost);
-                        return mapper.PostToOfflinePostResponse(updatedPost);
-                    })
-                    .orElseThrow(() -> new IllegalStateException("Post with id " + id + "does note exist"));
-        } else throw new IllegalArgumentException("잘못된 접근");
-
-
+                    }
+                    Post updatedPost = postRepository.save(existingPost);
+                    return mapper.PostToOfflinePostResponse(updatedPost);
+                })
+                .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
 
     }
 
     //게시글 삭제
-    public void deletePost(Long id){
-        postRepository.hardDeleteComments(id);
+    public void deletePost(String username, Long id){
+
+        //게시글이 존재하지 않는 경우
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
+
+        //유저가 맞지 않는 경우
+        if(!post.getUser().getUsername().equals(username))
+            throw new RestApiException(CommonExceptionCode.USER_NOT_MATCH);
+
         postRepository.deleteById(id);
     }
 

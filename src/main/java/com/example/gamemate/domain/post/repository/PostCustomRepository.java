@@ -9,4 +9,8 @@ public interface PostCustomRepository {
 
     void hardDeleteComments(Long id);
 
+    void setCommentsToNull(Long id);
+
+    Long countCommentsByPostId(Long postId);
+
 }

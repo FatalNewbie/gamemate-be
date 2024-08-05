@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.objenesis.ObjenesisHelper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -55,14 +56,18 @@ public class PostController {
 
     //글 조회 api
     @GetMapping("/post/{id}")
-    public ResponseEntity<PostResponseDTO> getPostWithComments(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<PostResponseDTO> getPostWithComments(@PathVariable Long id,
+                                                               @AuthenticationPrincipal UserDetails userDetails){
+
         PostResponseDTO post = postService.readPost(userDetails.getUsername(), id);
+
         return ResponseEntity.ok(post);
     }
 
     //글 작성 api
     @PostMapping("/post")
-    public ResponseEntity<Object> registerPost(@Valid @RequestBody PostDTO postDTO, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<PostResponseDTO> registerPost(@Valid @RequestBody PostDTO postDTO,
+                                               @AuthenticationPrincipal UserDetails userDetails){
 
         postService.createPost(userDetails.getUsername(), postDTO);
 
@@ -71,20 +76,24 @@ public class PostController {
 
     //글 수정 api
     @PutMapping("/post/{id}")
-    public ResponseEntity<Object> editPost(@PathVariable Long id, @Valid @RequestBody PostUpdateDTO postUpdateDTO){
+    public ResponseEntity<PostResponseDTO> editPost(@PathVariable Long id,
+                                           @Valid @RequestBody PostUpdateDTO postUpdateDTO,
+                                           @AuthenticationPrincipal UserDetails userDetails){
 
-        postService.updatePost(id, postUpdateDTO);
+        PostResponseDTO postResponseDTO = postService.updatePost(userDetails.getUsername(), id, postUpdateDTO);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(postResponseDTO);
     }
 
     //글 삭제 api
+    @Transactional
     @DeleteMapping("post/{id}")
-    public ResponseEntity<Object> removePost(@PathVariable Long id){
+    public ResponseEntity<PostResponseDTO> removePost(@PathVariable Long id,
+                                             @AuthenticationPrincipal UserDetails userDetails){
 
-        postService.deletePost(id);
+        postService.deletePost(userDetails.getUsername(), id);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
 }
