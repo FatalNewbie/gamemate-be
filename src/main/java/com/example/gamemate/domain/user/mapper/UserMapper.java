@@ -1,6 +1,7 @@
 package com.example.gamemate.domain.user.mapper;
 
 import com.example.gamemate.domain.user.dto.MyPageResponseDTO;
+import com.example.gamemate.domain.user.dto.UpdateDTO;
 import com.example.gamemate.domain.user.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -9,5 +10,7 @@ import org.mapstruct.ReportingPolicy;
 public interface UserMapper {
 
     MyPageResponseDTO userToMyPageDto(User user);
+    UpdateDTO userToUpdateDto(User user);
+    User updateDtoToUser(UpdateDTO updateDTO);
 
 }
