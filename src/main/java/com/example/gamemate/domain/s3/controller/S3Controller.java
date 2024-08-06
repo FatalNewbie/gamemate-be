@@ -17,6 +17,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,36 +26,20 @@ public class S3Controller {
     private final S3Service s3Service;
     private final AccessLogService accessLogService;
 
-    // 페이지 accesstime, leavetime 추가할 예정
+
     @GetMapping("/uploadform")
-    public String showUploadForm() {
-        AccessLog log = accessLogService.logAccess("/uploadform");
-        RequestContextHolder.currentRequestAttributes().setAttribute("logId", log.getId(),
-                RequestAttributes.SCOPE_SESSION);
+    public String showUploadForm(@RequestParam String token) {
+        AccessLog log = accessLogService.logAccess("/uploadform", token);
+
         return "uploadForm";
     }
 
-    // 서버 시간은 의미 x. 프론트에서
-    @PostMapping("/upload")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model, SessionStatus sessionStatus) {
-        Long logId = (Long) model.getAttribute("logId");
-        AccessLog log = accessLogService.logAccess("/upload"); // 로그 기록
-        model.addAttribute("logId", log.getId()); // 로그 ID를 세션에 저장
-
-        try {
-            String fileUrl = s3Service.saveFile(file);
-            model.addAttribute("fileUrl", fileUrl);
-            accessLogService.logLeave(log.getId()); // 로그 종료
-            sessionStatus.setComplete();
-            return "redirect:/averageTime.html";
-        } catch (IOException e) {
-            e.printStackTrace();
-            model.addAttribute("error", "File upload failed");
-            accessLogService.logLeave(log.getId()); // 로그 종료
-            sessionStatus.setComplete();
-            return "redirect:/averageTime.html";
-        }
+    @PostMapping("/leave")
+    public void logLeave(@RequestBody Long logId) {
+        accessLogService.logLeave(logId);
     }
+
+
 
     @GetMapping("/presigned-url")
     public ResponseEntity<String> getPresignedUrl(@RequestParam String bucketName, @RequestParam String objectKey) {
@@ -65,5 +50,11 @@ public class S3Controller {
             e.printStackTrace();
             return new ResponseEntity<>("Failed to generate presigned URL", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/images")
+    public ResponseEntity<List<String>> getImages(@RequestParam(value = "continuationToken", required = false) String continuationToken) {
+        List<String> images = s3Service.listFiles(continuationToken);
+        return ResponseEntity.ok(images);
     }
 }

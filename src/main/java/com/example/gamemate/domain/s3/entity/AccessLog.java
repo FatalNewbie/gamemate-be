@@ -16,7 +16,7 @@ public class AccessLog {
     private Long id;
 
 
-    //private String userId;
+    private String userId;
 
     private String endpoint;
 
@@ -29,9 +29,9 @@ public class AccessLog {
 
 
     //userId 나중에 추가하기
-    public AccessLog(String endpoint, LocalDateTime accessTime) {
+    public AccessLog(String userId, String endpoint, LocalDateTime accessTime) {
 
-        //this.userId = userId;
+        this.userId = userId;
         this.endpoint = endpoint;
         this.accessTime = accessTime;
 
