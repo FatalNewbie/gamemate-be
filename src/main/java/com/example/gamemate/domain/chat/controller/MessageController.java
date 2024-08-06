@@ -11,6 +11,8 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,12 +38,14 @@ public class MessageController {
 
     @MessageMapping("/message/send/{roomId}") // "/app/message/send/"+roomId 클라이언트쪽에서 메시지를 보내오는 경로
     @SendTo("/topic/chat/{roomId}") // 특정 목적지를 설정. 메시지브로커는 이 경로에 해당하는 응답채널을 통해서 구독자에게 메시지를 전달할 수 있게 된다.
-    public OutputMessageModel sendMessage(@Payload MessageModel messageModel, @DestinationVariable String roomId) { // chatUuid 이 경로로부터 데이터를 추출할 수 있음. 그러기 위해서 @DestinationVariable 사용
+    public OutputMessageModel sendMessage(@Payload MessageModel messageModel,
+                                          @DestinationVariable String roomId,
+                                          @AuthenticationPrincipal UserDetails userDetails) { // chatUuid 이 경로로부터 데이터를 추출할 수 있음. 그러기 위해서 @DestinationVariable 사용
         final String time = new SimpleDateFormat("HH:mm").format(new Date());
 
         Message newMessage =messageService.saveMessage(messageModel.getChatRoomId(),
                 messageModel.getContent(),
-                messageModel.getWriter());
+               userDetails);
 
         return new OutputMessageModel(newMessage.getId(),
                 messageModel.getWriter(),

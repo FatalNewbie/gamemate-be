@@ -9,8 +9,11 @@ public class ChatRoomCreateRequest {
     private String chatTitle;
     private String user;
 
-    public ChatRoomCreateRequest(String chatTitle, String user) {
+    private Long memberCnt;
+
+    public ChatRoomCreateRequest(String chatTitle, String user, Long memberCnt) {
         this.chatTitle = chatTitle;
         this.user = user;
+        this.memberCnt = memberCnt;
     }
 }

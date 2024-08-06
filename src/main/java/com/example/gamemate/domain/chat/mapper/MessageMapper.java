@@ -11,7 +11,7 @@ public class MessageMapper {
         MessageDTO messageDTO = new MessageDTO();
 
         messageDTO.setContent(message.getContent());
-        messageDTO.setWriter(message.getWriter());
+        messageDTO.setWriter(message.getWriter().getNickname());
 
         // 필요한 다른 필드들도 설정
         return messageDTO;

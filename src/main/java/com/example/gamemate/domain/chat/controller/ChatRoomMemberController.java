@@ -6,6 +6,8 @@ import com.example.gamemate.domain.chat.model.chatroommember.AddMemberRequest;
 import com.example.gamemate.domain.chat.model.chatroommember.AddMemberResponse;
 import com.example.gamemate.domain.chat.service.ChatRoomMemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +21,10 @@ public class ChatRoomMemberController {
     private final ChatRoomMemberService chatRoomMemberService;
 
     @PostMapping("/addmember")
-    public AddMemberResponse addMember(@RequestBody AddMemberRequest request){
-        boolean isLeader = false;
-        return chatRoomMemberService.addMember(request.getChatRoomId(),request.getUser(),isLeader);
+    public AddMemberResponse addMember(@RequestBody AddMemberRequest request,
+                                       @AuthenticationPrincipal UserDetails userDetails){
+
+        return chatRoomMemberService.addMember(request,userDetails,false);
     }
 
 

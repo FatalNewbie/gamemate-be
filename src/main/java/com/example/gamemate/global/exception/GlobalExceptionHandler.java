@@ -55,6 +55,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 //        return handleExceptionInternal(errorCode);
 //    }
 
+    @ExceptionHandler(ChatRoomException.class)
+    public ResponseEntity<Object> handleChatRoomException(ChatRoomException e){
+        ExceptionCode exceptionCode = e.getExceptionCode();
+        return handleExceptionInternal(exceptionCode);
+    }
+
+
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleAllException(Exception ex) {

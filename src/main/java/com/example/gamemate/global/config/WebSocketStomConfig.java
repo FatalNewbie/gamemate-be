@@ -13,6 +13,7 @@ public class WebSocketStomConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")  // <-- 웹소켓 핸드쉐이크로 커넥션 형성. 웹소켓은 HTTP로 핸드쉐이크 한 후에 웹소켓 프로토콜로 변환. 커넥션 형성. 이 연결을 위한 엔드포인트.
                 .setAllowedOrigins("http://localhost:3000") // <-- /ws 엔드포인트에 대해 http://localhost:3000에서의 요청을 허용
+                .addInterceptors() //인증
                 .withSockJS(); // <- 웹소켓을 지원하지않는 브라우저에서 sockjs를 통해 실시간 통신을 지원.
     }
     // ws로 연결을 시도하면 이 서버에서는 커넥션을 쉷해주고 스톰프 프레임들을 해당 커넥션으로 전송하기 시작함.

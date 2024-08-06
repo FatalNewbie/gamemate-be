@@ -7,7 +7,11 @@ import lombok.Setter;
 @Setter
 public class AddMemberRequest {
     private Long chatRoomId;
-    private String user;
 
 
+    public AddMemberRequest(Long chatRoomId) {
+        this.chatRoomId = chatRoomId;
+    }
 }
+
+
