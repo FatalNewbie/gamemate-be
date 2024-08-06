@@ -1,5 +1,6 @@
 package com.example.gamemate.global.exception;
 
+import com.example.gamemate.global.apiRes.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.validation.BindException;
@@ -19,17 +20,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 //예외처리 Custom하는 부분
     @ExceptionHandler(RestApiException.class)
-    public ResponseEntity<Object> handleCustomException(RestApiException e) {
+    public ResponseEntity<ApiResponse<Object>> handleCustomException(RestApiException e) {
         ExceptionCode exceptionCode = e.getExceptionCode();
-        return handleExceptionInternal(exceptionCode);
+        ApiResponse<Object> response = ApiResponse.errorRes(exceptionCode.getHttpStatus(), exceptionCode.getMessage(), null);
+        return new ResponseEntity<>(response, exceptionCode.getHttpStatus());
+
     }
 
     //메소드에 전달된 인자가 유효하지 않을 때 발생하는 예외를 처리
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Object> handleIllegalArgument(IllegalArgumentException e) {
+    public ResponseEntity<ApiResponse<Object>> handleIllegalArgument(IllegalArgumentException e) {
         log.warn("handleIllegalArgument", e);
         ExceptionCode exceptionCode = CommonExceptionCode.INVALID_PARAMETER;
-        return handleExceptionInternal(exceptionCode, e.getMessage());
+        ApiResponse<Object> response = ApiResponse.errorRes(exceptionCode.getHttpStatus(), exceptionCode.getMessage(), null);
+        return new ResponseEntity<>(response, exceptionCode.getHttpStatus());
     }
 
     //@Valid 어노테이션을 사용한 유효성 검사에 실패했을 때 발생하는 예외 처리
@@ -41,7 +45,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             WebRequest request) {
         log.warn("handleIllegalArgument", e);
         ExceptionCode exceptionCode = CommonExceptionCode.INVALID_PARAMETER;
-        return handleExceptionInternal(e, exceptionCode);
+        ValidExceptionResponse exceptionResponse = makeErrorResponse(e, exceptionCode);
+        ApiResponse<Object> response = ApiResponse.errorRes(exceptionCode.getHttpStatus(), exceptionCode.getMessage(), exceptionResponse);
+        return new ResponseEntity<>(response, exceptionCode.getHttpStatus());
     }
 
     //
@@ -70,7 +76,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ExceptionResponse makeErrorResponse(ExceptionCode exceptionCode) {
         return ExceptionResponse.builder()
-                .code(exceptionCode.name())
+                .status(exceptionCode.getHttpStatus())
                 .message(exceptionCode.getMessage())
                 .build();
     }
@@ -82,7 +88,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ExceptionResponse makeErrorResponse(ExceptionCode exceptionCode, String message) {
         return ExceptionResponse.builder()
-                .code(exceptionCode.name())
+                .status(exceptionCode.getHttpStatus())
                 .message(message)
                 .build();
     }
@@ -92,16 +98,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(makeErrorResponse(e, exceptionCode));
     }
 
-    private ExceptionResponse makeErrorResponse(BindException e, ExceptionCode exceptionCode) {
-        List<ExceptionResponse.ValidationError> validationErrorList = e.getBindingResult()
+
+    //Valid 유효성 검사 에러 리스트 받아서 받환
+    private ValidExceptionResponse makeErrorResponse(BindException e, ExceptionCode exceptionCode) {
+        List<ValidExceptionResponse.ValidationError> validationErrorList = e.getBindingResult()
                 .getFieldErrors()
                 .stream()
-                .map(ExceptionResponse.ValidationError::of)
+                .map(ValidExceptionResponse.ValidationError::of)
                 .collect(Collectors.toList());
 
-        return ExceptionResponse.builder()
-                .code(exceptionCode.name())
-                .message(exceptionCode.getMessage())
+        return ValidExceptionResponse.builder()
                 .errors(validationErrorList)
                 .build();
     }

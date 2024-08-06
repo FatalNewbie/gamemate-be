@@ -8,6 +8,7 @@ import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.dto.PostResponseDTO;
 import com.example.gamemate.domain.post.entity.PostComment;
 import com.example.gamemate.domain.post.service.PostService;
+import com.example.gamemate.global.apiRes.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -36,76 +37,65 @@ public class PostController {
     }
 
 
-    //온라인 글 List 조회 api
+    //글 List 조회 api
     @GetMapping
-    public ResponseEntity<Page<PostResponseDTO>> getAllOnlinePosts(
+    public ApiResponse<Page<PostResponseDTO>> getAllOnlinePosts(
             @RequestParam String status,
             @PageableDefault(size = 10) Pageable pageable
     ){
 
         Page<PostResponseDTO> posts = postService.readPosts(status, pageable);
 
-        return ResponseEntity.ok(posts);
+        return ApiResponse.successRes(HttpStatus.OK,posts);
     }
-
-//    //오프라인 글 List 조회 api
-//    @GetMapping
-//    public ResponseEntity<Page<PostResponseDTO>> getAllOfflinePosts(
-//            @PageableDefault(size = 10) Pageable pageable
-//    ){
-//
-//        Page<PostResponseDTO> offlinePosts = postService.readPostsOffline(pageable);
-//
-//        return ResponseEntity.ok(offlinePosts);
-//    }
 
     //글 조회 api
     @GetMapping("/{id}")
-    public ResponseEntity<PostResponseDTO> getPostWithComments(
+    public ApiResponse<PostResponseDTO> getPostWithComments(
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails
     ){
 
         PostResponseDTO post = postService.readPost(userDetails.getUsername(), id);
 
-        return ResponseEntity.ok(post);
+        return ApiResponse.successRes(HttpStatus.OK,post);
     }
 
     //글 작성 api
     @PostMapping
-    public ResponseEntity<PostResponseDTO> registerPost(
+    public ApiResponse<PostResponseDTO> registerPost(
             @Valid @RequestBody PostDTO postDTO,
             @AuthenticationPrincipal UserDetails userDetails
     ){
 
-        postService.createPost(userDetails.getUsername(), postDTO);
+        PostResponseDTO post = postService.createPost(userDetails.getUsername(), postDTO);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ApiResponse.successRes(HttpStatus.OK,post);
     }
 
     //글 수정 api
     @PutMapping("/{id}")
-    public ResponseEntity<PostResponseDTO> editPost(
+    public ApiResponse<PostResponseDTO> editPost(
             @PathVariable Long id,
             @Valid @RequestBody PostUpdateDTO postUpdateDTO,
             @AuthenticationPrincipal UserDetails userDetails
     ){
 
-        PostResponseDTO postResponseDTO = postService.updatePost(userDetails.getUsername(), id, postUpdateDTO);
+        PostResponseDTO post = postService.updatePost(userDetails.getUsername(), id, postUpdateDTO);
 
-        return ResponseEntity.ok(postResponseDTO);
+        return ApiResponse.successRes(HttpStatus.OK,post);
     }
 
     //글 삭제 api
     @DeleteMapping("/{id}")
-    public ResponseEntity<PostResponseDTO> removePost(
+    public ApiResponse<Long> removePost(
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails
     ){
 
         postService.deletePost(userDetails.getUsername(), id);
 
-        return ResponseEntity.noContent().build();
+        return ApiResponse.successRes(HttpStatus.NO_CONTENT, id);
     }
 
 }

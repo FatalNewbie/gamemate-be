@@ -15,5 +15,5 @@ public interface PostMapper {
 
     Post OnlinePostRequestToPost(OnlinePostDTO onlinePostRequest);
 
-    PostResponseDTO PostToOfflinePostResponse(Post post);
+    PostResponseDTO PostToPostResponse(Post post);
 }

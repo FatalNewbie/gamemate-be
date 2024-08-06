@@ -14,10 +14,8 @@ import com.example.gamemate.global.exception.RestApiException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,7 +42,9 @@ public class PostService {
 
         if(status.toUpperCase().equals("ON")){
             postPage = postRepository.findByStatus(Post.OnOffStatus.ON, pageable);
-        }else {
+        }
+
+        if(status.toUpperCase().equals("OFF")){
             postPage = postRepository.findByStatus(Post.OnOffStatus.OFF, pageable);
         }
 
@@ -110,14 +110,20 @@ public class PostService {
 
     //게시글 생성
     //Status 값에 따라서 다른 로직 처리
-    public Post createPost(String username, PostDTO postDTO) {
+    public PostResponseDTO createPost(String username, PostDTO postDTO) {
 
         User user = userRepository.findByUsername(username);
 
         if ("ON".equals(postDTO.getStatus())) {
-            return handleOnlinePost(user, (OnlinePostDTO) postDTO);
+
+            Post post = handleOnlinePost(user, (OnlinePostDTO) postDTO);
+
+            return mapper.PostToPostResponse(post);
         } else if ("OFF".equals(postDTO.getStatus())) {
-            return handleOfflinePost(user, (OfflinePostDTO) postDTO);
+
+            Post post = handleOfflinePost(user, (OfflinePostDTO) postDTO);
+
+            return mapper.PostToPostResponse(post);
         } else {
             throw new RestApiException(CommonExceptionCode.INVALID_PARAMETER);
         }
@@ -146,7 +152,7 @@ public class PostService {
                                 postUpdateDTO.getLatitude(), postUpdateDTO.getLongitude());
                     }
                     Post updatedPost = postRepository.save(existingPost);
-                    return mapper.PostToOfflinePostResponse(updatedPost);
+                    return mapper.PostToPostResponse(updatedPost);
                 })
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
 

@@ -5,7 +5,6 @@ import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.entity.PostComment;
 import com.example.gamemate.domain.post.dto.PostCommentDTO;
 import com.example.gamemate.domain.post.mapper.PostCommentMapper;
-import com.example.gamemate.domain.post.mapper.PostMapper;
 import com.example.gamemate.domain.post.repository.PostCommentRepository;
 import com.example.gamemate.domain.post.repository.PostRepository;
 import com.example.gamemate.domain.user.entity.User;
@@ -13,12 +12,9 @@ import com.example.gamemate.domain.user.repository.UserRepository;
 import com.example.gamemate.global.exception.CommonExceptionCode;
 import com.example.gamemate.global.exception.PostExceptionCode;
 import com.example.gamemate.global.exception.RestApiException;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class PostCommentService {
