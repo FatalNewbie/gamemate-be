@@ -42,8 +42,6 @@ public class UserController {
         // 역할 확인 및 로깅
         log.info(role);
         log.info("Accessing mypage");
-//        System.out.println(role);
-//        System.out.println("mypage");
 
         MyPageResponseDTO myPageDto = userService.findByUsernameForMyPage(name);
 

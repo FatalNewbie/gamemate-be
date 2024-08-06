@@ -1,7 +1,7 @@
 package com.example.gamemate.domain.auth.controller;
 
 import com.example.gamemate.domain.auth.dto.JoinDTO;
-import com.example.gamemate.domain.auth.service.JoinService;
+import com.example.gamemate.domain.auth.service.AuthService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthController {
 
-    private final JoinService joinService;
+    private final AuthService authService;
 
-    public AuthController(JoinService joinService) {
+    public AuthController(AuthService authService) {
 
-        this.joinService = joinService;
+        this.authService = authService;
 
     }
 
@@ -21,7 +21,7 @@ public class AuthController {
     public String joinProcess(@RequestBody JoinDTO joinDTO) {
 
         System.out.println(joinDTO.getUsername());
-        joinService.joinProcess(joinDTO);
+        authService.joinProcess(joinDTO);
 
         return "ok";
 

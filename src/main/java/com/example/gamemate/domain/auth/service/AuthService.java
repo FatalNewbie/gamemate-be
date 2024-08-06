@@ -7,12 +7,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JoinService {
+public class AuthService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public JoinService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public AuthService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
 
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -21,11 +21,7 @@ public class JoinService {
 
     public void joinProcess(JoinDTO joinDTO) {
 
-        String username = joinDTO.getUsername();
-        String password = joinDTO.getPassword();
-        String nickname = joinDTO.getNickname();
-
-        Boolean isExist = userRepository.existsByUsername(username);
+        Boolean isExist = userRepository.existsByUsername(joinDTO.getUsername());
 
         if(isExist) {
 
@@ -35,9 +31,9 @@ public class JoinService {
 
         User data = new User();
 
-        data.setUsername(username);
-        data.setPassword(bCryptPasswordEncoder.encode(password));
-        data.setNickname(nickname);
+        data.setUsername(joinDTO.getUsername());
+        data.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
+        data.setNickname(joinDTO.getNickname());
 
         userRepository.save(data);
 
