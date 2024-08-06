@@ -1,9 +1,10 @@
 package com.example.gamemate.domain.friend.controller;
 
-import com.example.gamemate.domain.friend.dto.FriendPostDto;
-import com.example.gamemate.domain.friend.dto.FriendPutDto;
-import com.example.gamemate.domain.friend.dto.FriendResponseDto;
+import com.example.gamemate.domain.friend.dto.FriendPostDTO;
+import com.example.gamemate.domain.friend.dto.FriendPutDTO;
+import com.example.gamemate.domain.friend.dto.FriendResponseDTO;
 import com.example.gamemate.domain.friend.entity.Friend;
+import com.example.gamemate.domain.user.dto.UserDTO;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.friend.service.FriendService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,21 +25,27 @@ public class FriendController {
         this.friendService = friendService;
     }
 
-    @PostMapping("/request")
-    public ResponseEntity<FriendResponseDto> sendFriendRequest(@RequestBody FriendPostDto friendPostDto) {
-        FriendResponseDto response = friendService.sendFriendRequest(friendPostDto);
+    @PostMapping("/")
+    public ResponseEntity<FriendResponseDTO> sendFriendRequest(@RequestBody FriendPostDTO friendPostDto) {
+        FriendResponseDTO response = friendService.sendFriendRequest(friendPostDto);
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/respond")
-    public ResponseEntity<FriendResponseDto> respondToFriendRequest(@RequestBody FriendPutDto friendPutDto) {
-        FriendResponseDto response = friendService.respondToFriendRequest(friendPutDto);
+    @PutMapping("/")
+    public ResponseEntity<FriendResponseDTO> respondToFriendRequest(@RequestBody FriendPutDTO friendPutDto) {
+        FriendResponseDTO response = friendService.respondToFriendRequest(friendPutDto);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<User>> getFriends(@PathVariable Long userId) {
-        List<User> friends = friendService.getFriendsByStatus(userId, Friend.Status.ACCEPTED);
+    public ResponseEntity<List<UserDTO>> getFriends(@PathVariable Long userId) {
+        List<UserDTO> friends = friendService.getFriends(userId);
         return ResponseEntity.ok(friends);
+    }
+
+    @GetMapping("/requests/{receiverId}")
+    public ResponseEntity<List<Friend>> getPendingFriendRequests(@PathVariable Long receiverId) {
+        List<Friend> pendingRequests = friendService.getPendingFriendRequests(receiverId);
+        return ResponseEntity.ok(pendingRequests);
     }
 }

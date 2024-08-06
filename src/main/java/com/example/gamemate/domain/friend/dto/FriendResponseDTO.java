@@ -11,14 +11,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FriendResponseDto {
+public class FriendResponseDTO {
 
     private String message;
     private Friend.Status status;
     private User requester;
     private User receiver;
 
-    public FriendResponseDto(String message) {
+    public FriendResponseDTO(String message) {
         this.message = message;
     }
 }
