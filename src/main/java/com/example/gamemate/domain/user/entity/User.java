@@ -43,9 +43,19 @@ public class User extends BaseEntity {
     @Column(name = "deleted")
     private boolean deleted = false;
 
-    @Convert(converter = JsonConverter.class)
-    private List<Integer> preferredGenres;
+    @ManyToMany
+    @JoinTable(
+            name = "user_genres",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Genre> preferredGenres;
 
-    @Convert(converter = JsonConverter.class)
-    private List<Integer> playTimes;
+    @ManyToMany
+    @JoinTable(
+            name = "user_playtimes",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "playtime_id")
+    )
+    private List<PlayTime> playTimes;
 }
