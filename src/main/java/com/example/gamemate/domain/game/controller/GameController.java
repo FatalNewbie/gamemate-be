@@ -1,5 +1,6 @@
 package com.example.gamemate.domain.game.controller;
 
+import com.example.gamemate.domain.game.dto.CustomPage;
 import com.example.gamemate.domain.game.dto.GameDto;
 import com.example.gamemate.domain.game.service.GameApiClient;
 import com.example.gamemate.domain.game.service.GameService;
@@ -58,10 +59,12 @@ public class GameController {
 
     // 게임 리스트 조회
     @GetMapping("/games")
-    public ResponseEntity<Page<GameDto>> getAllGames(@PageableDefault(size = 10) Pageable pageable) {
+    public ResponseEntity<CustomPage<GameDto>> getAllGames(@PageableDefault(size = 10) Pageable pageable) {
         Page<GameDto> games = gameService.getAllGames(pageable);
-        return ResponseEntity.ok(games);
+        CustomPage<GameDto> customPage = new CustomPage<>(games);
+        return ResponseEntity.ok(customPage);
     }
+
 
     //게임상세 조회 api
     @GetMapping("/games/{id}")

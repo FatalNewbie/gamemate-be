@@ -1,5 +1,6 @@
 package com.example.gamemate.domain.game.controller;
 
+import com.example.gamemate.domain.game.dto.CustomPage;
 import com.example.gamemate.domain.game.dto.GameCommentDto;
 import com.example.gamemate.domain.game.service.GameCommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,10 +30,12 @@ public class GameCommentController {
 
     // page 그대로 리턴 x 리스트만 뱉어줄 수 있게끔 특정 클래스 만들어서 페이징   오브젝트 상속
     @GetMapping
-    public ResponseEntity<Page<GameCommentDto>> getAllComments(@PathVariable Long gameId, @PageableDefault(size = 10) Pageable pageable) {
+    public ResponseEntity<CustomPage<GameCommentDto>> getAllComments(@PathVariable Long gameId, @PageableDefault(size = 10) Pageable pageable) {
         Page<GameCommentDto> comments = gameCommentService.getAllComments(gameId, pageable);
-        return ResponseEntity.ok(comments);
+        CustomPage<GameCommentDto> customPage = new CustomPage<>(comments);
+        return ResponseEntity.ok(customPage);
     }
+
 
     // 특정 코멘트 조회
     @GetMapping("/{commentId}")

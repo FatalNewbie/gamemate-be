@@ -75,10 +75,22 @@ public class GameService {
     }
 
     public GameDto updateGame(Long id, GameDto gameDto) {
+        // 기존 엔티티를 DB에서 조회
         Game game = gameRepository.findByIdAndDeletedDateIsNull(id)
                 .orElseThrow(() -> new RestApiException(GameExceptionCode.GAME_NOT_FOUND));
-        gameMapper.updateEntityFromDto(gameDto, game);
+
+        // DTO의 ID를 제외한 나머지 필드들로 엔티티를 업데이트
+        game.setTitle(gameDto.getTitle());
+        game.setDeveloper(gameDto.getDeveloper());
+        game.setDescription(gameDto.getDescription());
+        game.setClasses(gameDto.getClasses());
+        game.setGenre(gameDto.getGenre());
+        game.setPlatform(gameDto.getPlatform());
+
+        // 업데이트된 엔티티를 저장
         Game updatedGame = gameRepository.save(game);
+
+        // 엔티티를 DTO로 변환하여 반환
         return gameMapper.toDto(updatedGame);
     }
 

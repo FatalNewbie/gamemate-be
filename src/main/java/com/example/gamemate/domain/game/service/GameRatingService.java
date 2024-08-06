@@ -10,8 +10,6 @@ import com.example.gamemate.domain.game.repository.GameRatingRepository;
 import com.example.gamemate.domain.game.repository.GameRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 public class GameRatingService {
 
@@ -26,7 +24,7 @@ public class GameRatingService {
     }
 
     public GameRatingDto getRatingById(Long gameId, Long ratingId) {
-        GameRating rating = gameRatingRepository.findByGameIdAndIdAndDeletedDateIsNull(gameId, ratingId)
+        GameRating rating = gameRatingRepository.findByGameIdAndId(gameId, ratingId)
                 .orElseThrow(() -> new RestApiException(GameExceptionCode.GAME_RATING_NOT_FOUND));
         return gameRatingMapper.toDto(rating);
     }
@@ -42,7 +40,7 @@ public class GameRatingService {
     }
 
     public GameRatingDto updateRating(Long gameId, Long ratingId, GameRatingDto ratingDto) {
-        GameRating rating = gameRatingRepository.findByGameIdAndIdAndDeletedDateIsNull(gameId, ratingId)
+        GameRating rating = gameRatingRepository.findByGameIdAndId(gameId, ratingId)
                 .orElseThrow(() -> new RestApiException(GameExceptionCode.GAME_RATING_NOT_FOUND));
         gameRatingMapper.updateEntityFromDto(ratingDto, rating);
         GameRating updatedRating = gameRatingRepository.save(rating);
@@ -50,9 +48,8 @@ public class GameRatingService {
     }
 
     public void deleteRating(Long gameId, Long ratingId) {
-        GameRating rating = gameRatingRepository.findByGameIdAndIdAndDeletedDateIsNull(gameId, ratingId)
+        GameRating rating = gameRatingRepository.findByGameIdAndId(gameId, ratingId)
                 .orElseThrow(() -> new RestApiException(GameExceptionCode.GAME_RATING_NOT_FOUND));
-        rating.setDeletedDate(LocalDateTime.now()); // Soft delete 처리
-        gameRatingRepository.save(rating);
+        gameRatingRepository.delete(rating); // 완전 삭제
     }
 }

@@ -12,6 +12,8 @@ public enum GameExceptionCode implements ExceptionCode {
     GAME_NOT_FOUND(HttpStatus.NOT_FOUND, "Game not found"),
     GAME_COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "Game comment not found"),
     GAME_RATING_NOT_FOUND(HttpStatus.NOT_FOUND, "Game rating not found"),
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User not found"),
+    INVALID_INPUT(HttpStatus.BAD_REQUEST, "Invalid input provided"),
     ;
 
     private final HttpStatus httpStatus;

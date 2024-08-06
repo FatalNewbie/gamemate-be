@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface GameRatingRepository extends JpaRepository<GameRating, Long> {
-    List<GameRating> findByGameIdAndDeletedDateIsNull(Long gameId);
-    Optional<GameRating> findByGameIdAndIdAndDeletedDateIsNull(Long gameId, Long ratingId);
+    List<GameRating> findByGameId(Long gameId);
+    Optional<GameRating> findByGameIdAndId(Long gameId, Long ratingId);
 }
