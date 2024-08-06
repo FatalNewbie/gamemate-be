@@ -17,7 +17,6 @@ public interface GameCommentMapper {
     @Mapping(source = "gameId", target = "game.id")
     GameComment toEntity(GameCommentDto commentDto);
 
-    @Mapping(source = "userId", target = "user.id")
-    @Mapping(source = "gameId", target = "game.id")
     void updateEntityFromDto(GameCommentDto commentDto, @MappingTarget GameComment comment);
 }
+

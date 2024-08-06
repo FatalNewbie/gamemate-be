@@ -1,23 +1,23 @@
 package com.example.gamemate.domain.game.mapper;
 
-import com.example.gamemate.domain.game.dto.GameListDto;
-import com.example.gamemate.domain.game.entity.GameList;
+import com.example.gamemate.domain.game.dto.MyGameDto;
+import com.example.gamemate.domain.game.entity.MyGame;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public interface GameListMapper {
+public interface MyGameMapper {
 
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "game.id", target = "gameId")
-    GameListDto toDto(GameList gameList);
+    MyGameDto toDto(MyGame myGame);
 
     @Mapping(source = "userId", target = "user.id")
     @Mapping(source = "gameId", target = "game.id")
-    GameList toEntity(GameListDto gameListDto);
+    MyGame toEntity(MyGameDto myGameDto);
 
     @Mapping(source = "userId", target = "user.id")
     @Mapping(source = "gameId", target = "game.id")
-    void updateEntityFromDto(GameListDto gameListDto, @MappingTarget GameList gameList);
+    void updateEntityFromDto(MyGameDto myGameDto, @MappingTarget MyGame myGame);
 }

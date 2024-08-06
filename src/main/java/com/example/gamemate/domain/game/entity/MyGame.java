@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "game_list", uniqueConstraints = {
+@Table(name = "my_game", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"user_id", "game_id"})
 })
 @Getter
@@ -13,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GameList extends BaseEntity {
+public class MyGame extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

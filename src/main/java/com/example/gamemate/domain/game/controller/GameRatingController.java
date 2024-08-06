@@ -2,24 +2,29 @@ package com.example.gamemate.domain.game.controller;
 
 import com.example.gamemate.domain.game.dto.GameRatingDto;
 import com.example.gamemate.domain.game.service.GameRatingService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Game Rating", description = "Game Rating API")
+@Slf4j
 @RestController
-@RequestMapping("/api/v1/games/{gameId}/ratings")
+@RequestMapping("/games/{gameId}/ratings")
 public class GameRatingController {
 
-    @Autowired
-    private GameRatingService gameRatingService;
+    private final GameRatingService gameRatingService;
 
-    @GetMapping
-    public List<GameRatingDto> getAllRatings(@PathVariable Long gameId) {
-        return gameRatingService.getAllRatings(gameId);
+    public GameRatingController(GameRatingService gameRatingService) {
+        this.gameRatingService = gameRatingService;
     }
+
 
     @GetMapping("/{ratingId}")
     public ResponseEntity<GameRatingDto> getRatingById(@PathVariable Long gameId, @PathVariable Long ratingId) {
@@ -43,6 +48,6 @@ public class GameRatingController {
     @DeleteMapping("/{ratingId}")
     public ResponseEntity<Void> deleteRating(@PathVariable Long gameId, @PathVariable Long ratingId) {
         gameRatingService.deleteRating(gameId, ratingId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 }
