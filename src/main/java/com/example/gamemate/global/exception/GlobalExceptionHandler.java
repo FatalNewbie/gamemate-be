@@ -63,6 +63,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(exceptionCode);
     }
 
+    // 올바른 유저 ID 입력이 아닌 경우의 예외처리
+    @ExceptionHandler(InvalidUserIdException.class)
+    public ResponseEntity<Object> handleInvalidUserIdException(InvalidUserIdException ex) {
+        log.warn("handleInvalidUserIdException", ex);
+        return handleExceptionInternal(ex.getExceptionCode(), ex.getMessage());
+    }
+
     private ResponseEntity<Object> handleExceptionInternal(ExceptionCode exceptionCode) {
         return ResponseEntity.status(exceptionCode.getHttpStatus())
                 .body(makeErrorResponse(exceptionCode));

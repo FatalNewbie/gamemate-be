@@ -1,19 +1,15 @@
 package com.example.gamemate.domain.user.entity;
 
 import com.example.gamemate.global.audit.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.gamemate.global.converter.JsonConverter;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Table(name = "user")
 @NoArgsConstructor
@@ -46,4 +42,10 @@ public class User extends BaseEntity {
 
     @Column(name = "deleted")
     private boolean deleted = false;
+
+    @Convert(converter = JsonConverter.class)
+    private List<Integer> preferredGenres;
+
+    @Convert(converter = JsonConverter.class)
+    private List<Integer> playTimes;
 }

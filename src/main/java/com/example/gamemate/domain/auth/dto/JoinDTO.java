@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 public class JoinDTO {
@@ -21,4 +23,7 @@ public class JoinDTO {
     @Size(max = 20, message = "닉네임은 최대 20자까지 입력 가능합니다.")
     private String nickname;
 
+
+    private List<Integer> preferredGenres;  // 이진 인코딩된 선호 장르
+    private List<Integer> playTimes;        // 이진 인코딩된 플레이 시간대
 }

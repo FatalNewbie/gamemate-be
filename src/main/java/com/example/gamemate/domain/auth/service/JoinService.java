@@ -6,6 +6,8 @@ import com.example.gamemate.domain.user.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class JoinService {
 
@@ -24,6 +26,8 @@ public class JoinService {
         String username = joinDTO.getUsername();
         String password = joinDTO.getPassword();
         String nickname = joinDTO.getNickname();
+        List<Integer> preferredGenres = joinDTO.getPreferredGenres();
+        List<Integer> playTimes = joinDTO.getPlayTimes();
 
         Boolean isExist = userRepository.existsByUsername(username);
 
@@ -34,11 +38,12 @@ public class JoinService {
         }
 
         User data = new User();
-
+        // builder 사용하는 것이 좋을 듯
         data.setUsername(username);
         data.setPassword(bCryptPasswordEncoder.encode(password));
         data.setNickname(nickname);
-
+        data.setPreferredGenres(preferredGenres);
+        data.setPlayTimes(playTimes);
         userRepository.save(data);
 
     }

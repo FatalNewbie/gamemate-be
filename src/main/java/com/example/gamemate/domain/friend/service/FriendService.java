@@ -8,6 +8,7 @@ import com.example.gamemate.domain.friend.entity.Friend;
 import com.example.gamemate.domain.friend.entity.FriendId;
 import com.example.gamemate.domain.friend.repository.FriendRepository;
 import com.example.gamemate.domain.user.repository.UserRepository;
+import com.example.gamemate.global.exception.InvalidUserIdException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,9 @@ public class FriendService {
 
     public FriendResponseDto sendFriendRequest(FriendPostDto friendPostDto) {
         User requester = userRepository.findById(friendPostDto.getRequesterId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid requester ID"));
+                .orElseThrow(() -> new InvalidUserIdException("Invalid requester ID"));
         User receiver = userRepository.findById(friendPostDto.getReceiverId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid receiver ID"));
+                .orElseThrow(() -> new InvalidUserIdException("Invalid receiver ID"));
 
         Optional<Friend> existingFriend = friendRepository.findFriendRelationship(requester.getId(), receiver.getId());
 
@@ -56,7 +57,7 @@ public class FriendService {
     public FriendResponseDto respondToFriendRequest(FriendPutDto friendPutDto) {
         FriendId friendId = new FriendId(friendPutDto.getRequesterId(), friendPutDto.getReceiverId());
         Friend friend = friendRepository.findById(friendId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid friend ID"));
+                .orElseThrow(() -> new InvalidUserIdException("Invalid receiver ID"));
 
         if (friendPutDto.getStatus() == Friend.Status.ACCEPTED) {
             friend.setStatus(Friend.Status.ACCEPTED);
@@ -77,7 +78,7 @@ public class FriendService {
     public String deleteFriend(Long requesterId, Long receiverId) {
         FriendId friendId = new FriendId(requesterId, receiverId);
         Friend friend = friendRepository.findById(friendId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid friend ID"));
+                .orElseThrow(() -> new InvalidUserIdException("Invalid receiver ID"));
 
         friendRepository.delete(friend);
         return "친구 삭제가 완료되었습니다.";
