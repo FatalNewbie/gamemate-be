@@ -1,0 +1,19 @@
+package com.example.gamemate.domain.user.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class RecommendResponseDTO {
+    private String username;
+    private List<Long> preferredGenres;
+    private List<Long> playTimes;
+
+}

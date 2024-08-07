@@ -2,6 +2,8 @@ package com.example.gamemate.domain.user.controller;
 
 import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
 import com.example.gamemate.domain.user.dto.MyPageResponseDTO;
+import com.example.gamemate.domain.user.dto.RecommendResponseDTO;
+import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.mapper.UserMapper;
 import com.example.gamemate.domain.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -44,4 +46,13 @@ public class UserController {
         return ResponseEntity.ok().header("Content-Type", "application/json").body(myPageDto);
     }
 
+    @GetMapping("/info")
+    public ResponseEntity<RecommendResponseDTO> getUserInfo(@AuthenticationPrincipal CustomUserDetailsDTO customUserDetailsDTO) {
+        String username = customUserDetailsDTO.getUsername();
+        RecommendResponseDTO user = userService.findByUsernameForRecommendation(username);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(user);
+    }
 }

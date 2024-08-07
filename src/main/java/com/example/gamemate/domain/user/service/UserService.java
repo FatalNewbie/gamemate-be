@@ -1,6 +1,7 @@
 package com.example.gamemate.domain.user.service;
 
 import com.example.gamemate.domain.user.dto.MyPageResponseDTO;
+import com.example.gamemate.domain.user.dto.RecommendResponseDTO;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.mapper.UserMapper;
 import com.example.gamemate.domain.user.repository.UserRepository;
@@ -32,6 +33,15 @@ public class UserService {
 
         return null;
 
+    }
+
+    public RecommendResponseDTO findByUsernameForRecommendation(String username) {
+        User user = userRepository.findByUsername(username);
+
+        if(!user.equals("")) {
+            return mapper.userToRecommendResponseDTO(user);
+        }
+        return null;
     }
 
 }
