@@ -40,6 +40,9 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private RoleType role = RoleType.ROLE_USER;
 
+    @Column(nullable = true, length = 100)
+    private String userprofile;
+
     public enum RoleType {
         ROLE_ADMIN, ROLE_USER
     }
