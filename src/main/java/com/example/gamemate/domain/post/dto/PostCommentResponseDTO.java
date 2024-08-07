@@ -1,19 +1,27 @@
 package com.example.gamemate.domain.post.dto;
 
+import lombok.Builder;
+import lombok.Getter;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Builder
+@Getter
 public class PostCommentResponseDTO {
 
-    String username;
+    private String username;
 
-    String nickname;
+    private String nickname;
 
-    String content;
+    private String content;
 
-    LocalDateTime createdDate;
+    private LocalDateTime createdDate;
 
-    LocalDate modifiedDate;
+    private LocalDate modifiedDate;
+
+    public void setCommentUsername(String username){
+        this.username = username;
+    }
 }

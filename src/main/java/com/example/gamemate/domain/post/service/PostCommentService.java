@@ -1,6 +1,7 @@
 package com.example.gamemate.domain.post.service;
 
 import com.example.gamemate.domain.post.dto.PostCommentResponseDTO;
+import com.example.gamemate.domain.post.dto.PostCommentsResponseDTO;
 import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.entity.PostComment;
 import com.example.gamemate.domain.post.dto.PostCommentDTO;
@@ -12,10 +13,12 @@ import com.example.gamemate.domain.user.repository.UserRepository;
 import com.example.gamemate.global.exception.CommonExceptionCode;
 import com.example.gamemate.global.exception.PostExceptionCode;
 import com.example.gamemate.global.exception.RestApiException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 public class PostCommentService {
 
@@ -58,14 +61,16 @@ public class PostCommentService {
 
         postCommentRepository.save(postComment);
 
-        return mapper.postCommentToPostCommentResponseDTO(postComment);
+        PostCommentResponseDTO postCommentResponseDTO = mapper.postCommentToPostCommentResponseDTO(postComment);
+        postCommentResponseDTO.setCommentUsername(username);
+
+        return postCommentResponseDTO;
     }
 
     //게시글 댓글 수정
     public PostCommentResponseDTO updateComment(String username, Long postId, Long commentId, PostCommentDTO postCommentDTO){
 
         //게시글이 존재하지 않는 경우
-        //** 게시글이 sofeDelete 된 경우도 작성 필요 **//
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
 
@@ -81,9 +86,12 @@ public class PostCommentService {
                     existingPostComment.updateComment(postCommentDTO.getContent());
 
                     PostComment updatedPostComment = postCommentRepository.save(existingPostComment);
+
                     return mapper.postCommentToPostCommentResponseDTO(updatedPostComment);
                 })
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
+
+        postCommentResponseDTO.setCommentUsername(username);
 
         return postCommentResponseDTO;
     }

@@ -45,7 +45,12 @@ public class PostComment extends BaseEntity {
     private List<PostComment> reComments;
 
     @Builder
-    public PostComment(User user, Post post, PostComment parentComment, String nickname, String content){
+    public PostComment(
+            User user, Post post,
+            PostComment parentComment,
+            String nickname, String content
+    ){
+
         this.user = user;
         this.post = post;
         this.parentComment = parentComment;
