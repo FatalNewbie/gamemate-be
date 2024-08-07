@@ -3,9 +3,11 @@ package com.example.gamemate.domain.post.mapper;
 
 import com.example.gamemate.domain.post.dto.OfflinePostDTO;
 import com.example.gamemate.domain.post.dto.OnlinePostDTO;
+import com.example.gamemate.domain.post.dto.PostUpdateResponseDTO;
 import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.dto.PostResponseDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -16,4 +18,6 @@ public interface PostMapper {
     Post OnlinePostRequestToPost(OnlinePostDTO onlinePostRequest);
 
     PostResponseDTO PostToPostResponse(Post post);
+
+    PostUpdateResponseDTO PostToPostUpdateResponseDTO(Post post);
 }

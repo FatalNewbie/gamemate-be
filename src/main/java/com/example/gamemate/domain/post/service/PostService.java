@@ -76,8 +76,6 @@ public class PostService {
                         .build())
                 .collect(Collectors.toList());
 
-        System.out.println(postCommentDto);
-
         return PostResponseDTO.builder()
                 .username(username)
                 .nickname(user.getNickname())
@@ -118,19 +116,28 @@ public class PostService {
 
             Post post = handleOnlinePost(user, (OnlinePostDTO) postDTO);
 
-            return mapper.PostToPostResponse(post);
+            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
+
+            postResponseDTO.setPostUsername(username);
+
+            return postResponseDTO;
+
         } else if ("OFF".equals(postDTO.getStatus())) {
 
             Post post = handleOfflinePost(user, (OfflinePostDTO) postDTO);
 
-            return mapper.PostToPostResponse(post);
+            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
+
+            postResponseDTO.setPostUsername(username);
+
+            return postResponseDTO;
         } else {
             throw new RestApiException(CommonExceptionCode.INVALID_PARAMETER);
         }
     }
 
     //게시글 수정
-    public PostResponseDTO updatePost(String username, Long id, PostUpdateDTO postUpdateDTO) {
+    public PostUpdateResponseDTO updatePost(String username, Long id, PostUpdateDTO postUpdateDTO) {
 
         //게시글이 존재하지 않는 경우
         Post post = postRepository.findById(id)
@@ -144,18 +151,29 @@ public class PostService {
         return postRepository.findById(id)
                 .map(existingPost -> {
                     if (postUpdateDTO.getStatus().equals("ON")){
-                        existingPost.updateOnlinePost(postUpdateDTO.getMateCnt(), postUpdateDTO.getMateContent());
+                        existingPost.updateOnlinePost(
+                                postUpdateDTO.getMateCnt(),
+                                postUpdateDTO.getMateContent());
                     }
                     if (postUpdateDTO.getStatus().equals("OFF")){
-                        existingPost.updateOfflinePost(postUpdateDTO.getMateCnt(), postUpdateDTO.getMateContent(),
-                                postUpdateDTO.getMateRegionSi(), postUpdateDTO.getMateResionGu(),
-                                postUpdateDTO.getLatitude(), postUpdateDTO.getLongitude());
+                        existingPost.updateOfflinePost(
+                                postUpdateDTO.getMateCnt(),
+                                postUpdateDTO.getMateContent(),
+                                postUpdateDTO.getMateRegionSi(),
+                                postUpdateDTO.getMateRegionGu(),
+                                postUpdateDTO.getLatitude(),
+                                postUpdateDTO.getLongitude());
                     }
                     Post updatedPost = postRepository.save(existingPost);
-                    return mapper.PostToPostResponse(updatedPost);
+
+                    PostUpdateResponseDTO postUpdateResponseDTO =
+                            mapper.PostToPostUpdateResponseDTO(updatedPost);
+
+                    postUpdateResponseDTO.setPostUsername(username);
+
+                    return postUpdateResponseDTO;
                 })
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
-
     }
 
     //게시글 삭제
@@ -191,7 +209,6 @@ public class PostService {
 
     //오프라인 포스트 처리 로직
     private Post handleOfflinePost(User user, OfflinePostDTO offlinePostDTO) {
-
 
         Post post = Post.builder()
                 .gameTitle(offlinePostDTO.getGameTitle())

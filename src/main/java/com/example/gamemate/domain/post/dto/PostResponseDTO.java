@@ -12,6 +12,8 @@ import java.util.SimpleTimeZone;
 @Getter
 public class PostResponseDTO {
 
+    private Long id;
+
     private String username;
 
     private String nickname;
@@ -43,8 +45,13 @@ public class PostResponseDTO {
 
     private List<PostCommentsResponseDTO> postComments;
 
+    public void setPostUsername(String username){
+        this.username = username;
+    }
+
 
     public PostResponseDTO(Post post) {
+        this.id = post.getId();
         this.status = post.getStatus().toString();
         this.gameTitle = post.getGameTitle();
         this.gameGenre = post.getGameGenre();
@@ -60,10 +67,13 @@ public class PostResponseDTO {
     }
 
     @Builder
-    public PostResponseDTO(String username, String nickname, String status, String gameTitle,
-                           String gameGenre, Integer mateCnt, String mateContent, Long commentCnt,
-                           String mateRegionSi, String mateRegionGu, BigDecimal latitude, BigDecimal longitude,
-                           List<PostCommentsResponseDTO> postComments){
+    public PostResponseDTO(
+            Long id, String username, String nickname, String status, String gameTitle,
+            String gameGenre, Integer mateCnt, String mateContent, Long commentCnt,
+            String mateRegionSi, String mateRegionGu, BigDecimal latitude, BigDecimal longitude,
+            List<PostCommentsResponseDTO> postComments
+    ){
+        this.id = id;
         this.username = username;
         this.nickname = nickname;
 

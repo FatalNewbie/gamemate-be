@@ -74,9 +74,11 @@ public class Post extends BaseEntity {
         this.mateContent = mateContent;
     }
 
-    public void updateOfflinePost(Integer mateCnt, String mateContent,
-                                  String mateRegionSi, String mateRegionGu,
-                                  BigDecimal latitude, BigDecimal longitude){
+    public void updateOfflinePost(
+            Integer mateCnt, String mateContent,
+            String mateRegionSi, String mateRegionGu,
+            BigDecimal latitude, BigDecimal longitude
+    ){
         this.mateCnt = mateCnt;
         this.mateContent = mateContent;
         this.mateRegionGu = mateRegionGu;
@@ -86,10 +88,13 @@ public class Post extends BaseEntity {
     }
 
     @Builder
-    public Post(User user, OnOffStatus status, String gameTitle, String gameGenre,
-                String nickname, Integer mateCnt, String mateContent,
-                String mateRegionSi, String mateRegionGu,
-                BigDecimal latitude, BigDecimal longitude) {
+    public Post(
+            User user, OnOffStatus status, String gameTitle, String gameGenre,
+            String nickname, Integer mateCnt, String mateContent,
+            String mateRegionSi, String mateRegionGu,
+            BigDecimal latitude, BigDecimal longitude
+    ) {
+
         this.user = user;
         this.status = status;
         this.gameTitle = gameTitle;
@@ -101,6 +106,7 @@ public class Post extends BaseEntity {
         this.mateRegionGu = mateRegionGu;
         this.latitude = latitude;
         this.longitude = longitude;
+
     }
 
 }

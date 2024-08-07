@@ -4,6 +4,7 @@ package com.example.gamemate.domain.post.controller;
 import com.amazonaws.services.ec2.model.UserData;
 import com.example.gamemate.domain.post.dto.PostDTO;
 import com.example.gamemate.domain.post.dto.PostUpdateDTO;
+import com.example.gamemate.domain.post.dto.PostUpdateResponseDTO;
 import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.dto.PostResponseDTO;
 import com.example.gamemate.domain.post.entity.PostComment;
@@ -75,13 +76,13 @@ public class PostController {
 
     //글 수정 api
     @PutMapping("/{id}")
-    public ApiResponse<PostResponseDTO> editPost(
+    public ApiResponse<PostUpdateResponseDTO> editPost(
             @PathVariable Long id,
             @Valid @RequestBody PostUpdateDTO postUpdateDTO,
             @AuthenticationPrincipal UserDetails userDetails
     ){
 
-        PostResponseDTO post = postService.updatePost(userDetails.getUsername(), id, postUpdateDTO);
+        PostUpdateResponseDTO post = postService.updatePost(userDetails.getUsername(), id, postUpdateDTO);
 
         return ApiResponse.successRes(HttpStatus.OK,post);
     }
