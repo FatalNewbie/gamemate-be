@@ -1,7 +1,9 @@
 package com.example.gamemate.domain.game.service;
 
+import com.example.gamemate.domain.game.dto.CommentDto;
 import com.example.gamemate.domain.game.dto.GameApiResponse;
 import com.example.gamemate.domain.game.dto.GameDto;
+import com.example.gamemate.domain.game.dto.RatingDto;
 import com.example.gamemate.global.exception.GameExceptionCode;
 import com.example.gamemate.global.exception.RestApiException;
 import com.example.gamemate.domain.game.mapper.GameMapper;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class GameService {
@@ -65,7 +68,17 @@ public class GameService {
     public GameDto getGameById(Long id) {
         Game game = gameRepository.findByIdAndDeletedDateIsNull(id)
                 .orElseThrow(() -> new RestApiException(GameExceptionCode.GAME_NOT_FOUND));
-        return gameMapper.toDto(game);
+        // comments와 ratings를 각각 매핑하여 GameDto로 변환
+        List<CommentDto> comments = gameMapper.toCommentDtoList(game.getComments());
+        List<RatingDto> ratings = gameMapper.toRatingDtoList(game.getRatings());
+
+        GameDto gameDto = gameMapper.toDto(game);
+
+        // GameDto에 comments와 ratings를 설정
+        gameDto.setComments(comments);
+        gameDto.setRatings(ratings);
+
+        return gameDto;
     }
 
     public GameDto createGame(GameDto gameDto) {
