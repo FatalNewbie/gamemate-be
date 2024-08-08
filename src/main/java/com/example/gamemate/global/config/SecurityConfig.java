@@ -3,6 +3,7 @@ package com.example.gamemate.global.config;
 import com.example.gamemate.domain.auth.jwt.JWTUtil;
 import com.example.gamemate.domain.auth.jwt.filter.JWTFilter;
 import com.example.gamemate.domain.auth.jwt.filter.LoginFilter;
+import com.example.gamemate.domain.auth.service.CustomOAuth2UserService;
 import com.example.gamemate.domain.user.service.CustomUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
@@ -32,12 +33,19 @@ public class SecurityConfig {
     //JWTUtil 주입
     private final JWTUtil jwtUtil;
     private final CustomUserDetailsService customUserDetailsService;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil, CustomUserDetailsService customUserDetailsService) {
+    public SecurityConfig(
+        AuthenticationConfiguration authenticationConfiguration,
+        JWTUtil jwtUtil,
+        CustomUserDetailsService customUserDetailsService,
+        CustomOAuth2UserService customOAuth2UserService
+    ) {
 
         this.authenticationConfiguration = authenticationConfiguration;
         this.jwtUtil = jwtUtil;
         this.customUserDetailsService = customUserDetailsService;
+        this.customOAuth2UserService = customOAuth2UserService;
 
     }
 
@@ -106,7 +114,9 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
             //oauth2
-//            .oauth2Login(Customizer.withDefaults())
+            .oauth2Login((oauth2) -> oauth2
+                .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
+                    .userService(customOAuth2UserService)))
 
             //cors 설정
             .cors((cors -> cors.configurationSource(new CorsConfigurationSource() {

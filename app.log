@@ -562,3 +562,880 @@ io.jsonwebtoken.ExpiredJwtException: JWT expired 5380497 milliseconds ago at 202
 2024-08-07T16:07:15.918+09:00  INFO 19024 --- [gamemate] [MessageBroker-4] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 14, active threads = 1, queued tasks = 0, completed tasks = 13]
 2024-08-07T16:37:15.930+09:00  INFO 19024 --- [gamemate] [MessageBroker-8] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 15, active threads = 1, queued tasks = 0, completed tasks = 14]
 2024-08-07T17:07:15.932+09:00  INFO 19024 --- [gamemate] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 16, active threads = 1, queued tasks = 0, completed tasks = 15]
+2024-08-07T17:14:52.526+09:00 ERROR 19024 --- [gamemate] [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+io.jsonwebtoken.ExpiredJwtException: JWT expired 8470525 milliseconds ago at 2024-08-07T05:53:42.000Z. Current time: 2024-08-07T08:14:52.525Z. Allowed clock skew: 0 milliseconds.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:682) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:362) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:94) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:36) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:29) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseSignedClaims(DefaultJwtParser.java:821) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at com.example.gamemate.domain.auth.jwt.JWTUtil.isExpired(JWTUtil.java:50) ~[main/:na]
+	at com.example.gamemate.domain.auth.jwt.filter.JWTFilter.doFilterInternal(JWTFilter.java:52) ~[main/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2024-08-07T17:14:52.526+09:00 ERROR 19024 --- [gamemate] [http-nio-8080-exec-10] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+io.jsonwebtoken.ExpiredJwtException: JWT expired 8470525 milliseconds ago at 2024-08-07T05:53:42.000Z. Current time: 2024-08-07T08:14:52.525Z. Allowed clock skew: 0 milliseconds.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:682) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:362) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:94) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:36) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:29) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseSignedClaims(DefaultJwtParser.java:821) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at com.example.gamemate.domain.auth.jwt.JWTUtil.isExpired(JWTUtil.java:50) ~[main/:na]
+	at com.example.gamemate.domain.auth.jwt.filter.JWTFilter.doFilterInternal(JWTFilter.java:52) ~[main/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2024-08-07T17:15:08.828+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:15:08.828+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:15:08.829+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:15:08.829+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:15:08.830+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-4] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:15:08.830+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-4] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:15:08.830+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-6] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:15:08.830+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-6] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:15:08.833+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:15:08.833+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:15:08.834+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@10cca782]
+2024-08-07T17:15:08.834+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@533000df]
+2024-08-07T17:15:08.835+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:08.835+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:11.303+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/chat/", parameters={}
+2024-08-07T17:15:11.304+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.chat.controller.ChatRoomController#getAllChatRooms()
+2024-08-07T17:15:11.359+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-07T17:15:11.360+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[]]
+2024-08-07T17:15:11.361+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:11.364+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/chat/", parameters={}
+2024-08-07T17:15:11.365+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.chat.controller.ChatRoomController#getAllChatRooms()
+2024-08-07T17:15:11.369+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/chat/", parameters={}
+2024-08-07T17:15:11.369+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.chat.controller.ChatRoomController#getAllChatRooms()
+2024-08-07T17:15:11.369+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-07T17:15:11.369+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[]]
+2024-08-07T17:15:11.370+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:11.371+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/chat/", parameters={}
+2024-08-07T17:15:11.371+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.chat.controller.ChatRoomController#getAllChatRooms()
+2024-08-07T17:15:11.374+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-07T17:15:11.375+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[]]
+2024-08-07T17:15:11.375+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:11.377+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-07T17:15:11.377+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[]]
+2024-08-07T17:15:11.378+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:17.027+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-07T17:15:17.028+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-08-07T17:15:17.032+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2024-08-07T17:15:17.036+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.example.gamemate.global.exception.GlobalExceptionHandler#handleException(Exception, WebRequest)
+2024-08-07T17:15:17.077+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/problem+json', given [application/json, text/plain, */*] and supported [application/problem+json, application/problem+xml]
+2024-08-07T17:15:17.095+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ProblemDetail[type='about:blank', title='Not Found', status=404, detail='No static resource games.', (truncated)...]
+2024-08-07T17:15:17.105+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-07T17:15:17.106+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-08-07T17:15:17.108+09:00  WARN 19024 --- [gamemate] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource games.]
+2024-08-07T17:15:17.108+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2024-08-07T17:15:17.108+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2024-08-07T17:15:17.109+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.example.gamemate.global.exception.GlobalExceptionHandler#handleException(Exception, WebRequest)
+2024-08-07T17:15:17.110+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/problem+json', given [application/json, text/plain, */*] and supported [application/problem+json, application/problem+xml]
+2024-08-07T17:15:17.110+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ProblemDetail[type='about:blank', title='Not Found', status=404, detail='No static resource games.', (truncated)...]
+2024-08-07T17:15:17.111+09:00  WARN 19024 --- [gamemate] [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource games.]
+2024-08-07T17:15:17.111+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2024-08-07T17:15:20.921+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:15:20.921+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:15:20.923+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:15:20.923+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:15:20.924+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-4] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:15:20.924+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-4] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:15:20.924+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-6] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:15:20.924+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-6] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:15:20.927+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:15:20.928+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@727e3899]
+2024-08-07T17:15:20.929+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:15:20.929+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:20.929+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@1fc857b3]
+2024-08-07T17:15:20.930+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:23.452+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:15:23.454+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:15:23.454+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-7] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:15:23.454+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-7] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:15:23.452+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:15:23.456+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:15:23.457+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-8] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:15:23.457+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-8] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:15:23.459+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:15:23.459+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@7fea798c]
+2024-08-07T17:15:23.460+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:23.461+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:15:23.462+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@59421389]
+2024-08-07T17:15:23.463+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:26.769+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:15:26.769+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:15:26.769+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:15:26.770+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:15:26.770+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-1] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:15:26.770+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-1] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:15:26.770+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-9] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:15:26.770+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-9] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:15:26.774+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:15:26.774+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:15:26.774+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@2b55f571]
+2024-08-07T17:15:26.774+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@2fb5d1e1]
+2024-08-07T17:15:26.776+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:26.776+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:27.674+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:15:27.674+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:15:27.675+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:15:27.675+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:15:27.675+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-5] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:15:27.675+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-5] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:15:27.675+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-3] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:15:27.676+09:00  INFO 19024 --- [gamemate] [http-nio-8080-exec-3] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:15:27.678+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:15:27.678+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@265788fb]
+2024-08-07T17:15:27.679+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:15:27.678+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:15:27.680+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@77e226c8]
+2024-08-07T17:15:27.680+09:00 DEBUG 19024 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:16:24.064+09:00 ERROR 19024 --- [gamemate] [http-nio-8080-exec-4] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+io.jsonwebtoken.ExpiredJwtException: JWT expired 46064 milliseconds ago at 2024-08-07T08:15:38.000Z. Current time: 2024-08-07T08:16:24.064Z. Allowed clock skew: 0 milliseconds.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:682) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:362) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:94) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:36) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:29) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseSignedClaims(DefaultJwtParser.java:821) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at com.example.gamemate.domain.auth.jwt.JWTUtil.isExpired(JWTUtil.java:50) ~[main/:na]
+	at com.example.gamemate.domain.auth.jwt.filter.JWTFilter.doFilterInternal(JWTFilter.java:52) ~[main/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2024-08-07T17:16:24.065+09:00 ERROR 19024 --- [gamemate] [http-nio-8080-exec-6] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+io.jsonwebtoken.ExpiredJwtException: JWT expired 46064 milliseconds ago at 2024-08-07T08:15:38.000Z. Current time: 2024-08-07T08:16:24.064Z. Allowed clock skew: 0 milliseconds.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:682) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:362) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:94) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:36) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:29) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseSignedClaims(DefaultJwtParser.java:821) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at com.example.gamemate.domain.auth.jwt.JWTUtil.isExpired(JWTUtil.java:50) ~[main/:na]
+	at com.example.gamemate.domain.auth.jwt.filter.JWTFilter.doFilterInternal(JWTFilter.java:52) ~[main/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2024-08-07T17:16:26.047+09:00 ERROR 19024 --- [gamemate] [http-nio-8080-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+io.jsonwebtoken.ExpiredJwtException: JWT expired 48046 milliseconds ago at 2024-08-07T08:15:38.000Z. Current time: 2024-08-07T08:16:26.046Z. Allowed clock skew: 0 milliseconds.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:682) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:362) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:94) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:36) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:29) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseSignedClaims(DefaultJwtParser.java:821) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at com.example.gamemate.domain.auth.jwt.JWTUtil.isExpired(JWTUtil.java:50) ~[main/:na]
+	at com.example.gamemate.domain.auth.jwt.filter.JWTFilter.doFilterInternal(JWTFilter.java:52) ~[main/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2024-08-07T17:16:26.047+09:00 ERROR 19024 --- [gamemate] [http-nio-8080-exec-8] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+io.jsonwebtoken.ExpiredJwtException: JWT expired 48047 milliseconds ago at 2024-08-07T08:15:38.000Z. Current time: 2024-08-07T08:16:26.047Z. Allowed clock skew: 0 milliseconds.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:682) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:362) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:94) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:36) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.io.AbstractParser.parse(AbstractParser.java:29) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseSignedClaims(DefaultJwtParser.java:821) ~[jjwt-impl-0.12.3.jar:0.12.3]
+	at com.example.gamemate.domain.auth.jwt.JWTUtil.isExpired(JWTUtil.java:50) ~[main/:na]
+	at com.example.gamemate.domain.auth.jwt.filter.JWTFilter.doFilterInternal(JWTFilter.java:52) ~[main/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.1.jar:6.3.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.11.jar:6.1.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.26.jar:10.1.26]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2024-08-07T17:16:41.601+09:00  INFO 2984 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Starting GamemateApplication using Java 17.0.10 with PID 2984 (C:\Users\USER\Desktop\3차프로젝트\gamemate\build\classes\java\main started by USER in C:\Users\USER\Desktop\3차프로젝트\gamemate)
+2024-08-07T17:16:41.605+09:00 DEBUG 2984 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-08-07T17:16:41.606+09:00  INFO 2984 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-08-07T17:16:41.678+09:00  INFO 2984 --- [gamemate] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-08-07T17:16:41.679+09:00  INFO 2984 --- [gamemate] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-08-07T17:16:43.016+09:00  INFO 2984 --- [gamemate] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-07T17:16:43.334+09:00  INFO 2984 --- [gamemate] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 305 ms. Found 12 JPA repository interfaces.
+2024-08-07T17:16:44.356+09:00  INFO 2984 --- [gamemate] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-08-07T17:16:44.380+09:00  INFO 2984 --- [gamemate] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-07T17:16:44.381+09:00  INFO 2984 --- [gamemate] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-07T17:16:44.498+09:00  INFO 2984 --- [gamemate] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-07T17:16:44.498+09:00  INFO 2984 --- [gamemate] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2818 ms
+2024-08-07T17:16:44.882+09:00  INFO 2984 --- [gamemate] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-07T17:16:45.094+09:00  INFO 2984 --- [gamemate] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-07T17:16:45.156+09:00  INFO 2984 --- [gamemate] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-08-07T17:16:45.588+09:00  INFO 2984 --- [gamemate] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-07T17:16:45.618+09:00  INFO 2984 --- [gamemate] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-08-07T17:16:45.869+09:00  INFO 2984 --- [gamemate] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@68e8babf
+2024-08-07T17:16:45.870+09:00  INFO 2984 --- [gamemate] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-08-07T17:16:45.907+09:00  WARN 2984 --- [gamemate] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-08-07T17:16:45.908+09:00  WARN 2984 --- [gamemate] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-08-07T17:16:47.043+09:00  INFO 2984 --- [gamemate] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-07T17:16:47.141+09:00  INFO 2984 --- [gamemate] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-07T17:16:49.289+09:00  WARN 2984 --- [gamemate] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-07T17:16:49.334+09:00  INFO 2984 --- [gamemate] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-08-07T17:16:49.626+09:00 DEBUG 2984 --- [gamemate] [restartedMain] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+2024-08-07T17:16:49.922+09:00 DEBUG 2984 --- [gamemate] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 53 mappings in 'requestMappingHandlerMapping'
+2024-08-07T17:16:49.930+09:00 DEBUG 2984 --- [gamemate] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/] in 'viewControllerHandlerMapping'
+2024-08-07T17:16:51.900+09:00 DEBUG 2984 --- [gamemate] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2024-08-07T17:16:52.240+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.a.c.AuthController:
+	
+2024-08-07T17:16:52.241+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.ChatRoomController:
+	
+2024-08-07T17:16:52.242+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.ChatRoomMemberController:
+	
+2024-08-07T17:16:52.250+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.MessageController:
+	{[MESSAGE],[/message/send/{roomId}]}: sendMessage(MessageModel,String)
+2024-08-07T17:16:52.251+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.f.c.FriendController:
+	
+2024-08-07T17:16:52.251+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameCommentController:
+	
+2024-08-07T17:16:52.251+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameController:
+	
+2024-08-07T17:16:52.251+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameListController:
+	
+2024-08-07T17:16:52.251+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameRatingController:
+	
+2024-08-07T17:16:52.252+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.p.c.PostCommentController:
+	
+2024-08-07T17:16:52.252+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.p.c.PostController:
+	
+2024-08-07T17:16:52.252+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.s.c.AccessLogController:
+	
+2024-08-07T17:16:52.253+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.s.c.S3Controller:
+	
+2024-08-07T17:16:52.253+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.u.c.UserController:
+	
+2024-08-07T17:16:52.254+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2024-08-07T17:16:52.256+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.a.OpenApiWebMvcResource:
+	
+2024-08-07T17:16:52.258+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	
+2024-08-07T17:16:52.258+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerConfigResource:
+	
+2024-08-07T17:16:52.445+09:00 DEBUG 2984 --- [gamemate] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-08-07T17:16:52.489+09:00 DEBUG 2984 --- [gamemate] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-08-07T17:16:52.847+09:00  INFO 2984 --- [gamemate] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-08-07T17:16:52.967+09:00  INFO 2984 --- [gamemate] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-08-07T17:16:52.969+09:00 DEBUG 2984 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2024-08-07T17:16:52.970+09:00 DEBUG 2984 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2024-08-07T17:16:52.970+09:00  INFO 2984 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2024-08-07T17:16:52.971+09:00 DEBUG 2984 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@53ac889a]
+2024-08-07T17:16:52.971+09:00 DEBUG 2984 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@53ac889a]
+2024-08-07T17:16:52.971+09:00  INFO 2984 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@53ac889a]]
+2024-08-07T17:16:52.972+09:00  INFO 2984 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2024-08-07T17:16:52.972+09:00 DEBUG 2984 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-07T17:16:52.972+09:00 DEBUG 2984 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-07T17:16:52.983+09:00  INFO 2984 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Started GamemateApplication in 11.932 seconds (process running for 12.519)
+2024-08-07T17:17:39.289+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-07T17:17:39.289+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-08-07T17:17:39.289+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2024-08-07T17:17:39.290+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2024-08-07T17:17:39.290+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2024-08-07T17:17:39.291+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@31a8d40e
+2024-08-07T17:17:39.291+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@535b3e84
+2024-08-07T17:17:39.291+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-08-07T17:17:39.291+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-08-07T17:17:41.437+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:17:41.437+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:17:41.439+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:17:41.439+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:17:41.462+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-1] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:17:41.463+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-1] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:17:41.465+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-3] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:17:41.465+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-3] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:17:41.472+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:17:41.473+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:17:41.486+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@2d05f2bc]
+2024-08-07T17:17:41.488+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@60515fc7]
+2024-08-07T17:17:41.495+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:17:41.496+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:17:44.580+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:17:44.580+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:17:44.581+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:17:44.581+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:17:44.581+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-5] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:17:44.582+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-5] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:17:44.582+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-4] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:17:44.582+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-4] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:17:44.586+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:17:44.586+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:17:44.586+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@4d763110]
+2024-08-07T17:17:44.586+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@5ca2dd08]
+2024-08-07T17:17:44.587+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:17:44.587+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:17:44.936+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:17:44.937+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:17:44.938+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-7] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:17:44.938+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-7] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:17:44.941+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:17:44.941+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:17:44.942+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-6] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:17:44.942+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-6] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:17:44.945+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:17:44.945+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@77aa4a7f]
+2024-08-07T17:17:44.945+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:17:44.945+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@2fa602a8]
+2024-08-07T17:17:44.946+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:17:44.946+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:17:52.906+09:00  INFO 2984 --- [gamemate] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2024-08-07T17:18:22.391+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:18:22.391+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:18:22.392+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-9] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:18:22.392+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-9] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:18:22.393+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:18:22.393+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:18:22.394+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-8] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:18:22.394+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-8] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:18:22.396+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:18:22.396+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@416aa239]
+2024-08-07T17:18:22.397+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:18:22.397+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:18:22.397+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@7b1c5573]
+2024-08-07T17:18:22.398+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:18:30.159+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-07T17:18:30.159+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-07T17:18:30.160+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-08-07T17:18:30.160+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2024-08-07T17:18:30.165+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2024-08-07T17:18:30.165+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2024-08-07T17:18:30.168+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.example.gamemate.global.exception.GlobalExceptionHandler#handleException(Exception, WebRequest)
+2024-08-07T17:18:30.170+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.example.gamemate.global.exception.GlobalExceptionHandler#handleException(Exception, WebRequest)
+2024-08-07T17:18:30.223+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/problem+json', given [application/json, text/plain, */*] and supported [application/problem+json, application/problem+xml]
+2024-08-07T17:18:30.225+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/problem+json', given [application/json, text/plain, */*] and supported [application/problem+json, application/problem+xml]
+2024-08-07T17:18:30.233+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ProblemDetail[type='about:blank', title='Not Found', status=404, detail='No static resource games.', (truncated)...]
+2024-08-07T17:18:30.234+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ProblemDetail[type='about:blank', title='Not Found', status=404, detail='No static resource games.', (truncated)...]
+2024-08-07T17:18:30.240+09:00  WARN 2984 --- [gamemate] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource games.]
+2024-08-07T17:18:30.241+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2024-08-07T17:18:30.243+09:00  WARN 2984 --- [gamemate] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource games.]
+2024-08-07T17:18:30.245+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2024-08-07T17:18:48.681+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:18:48.682+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:18:48.683+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-7] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:18:48.683+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-7] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:18:48.683+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:18:48.683+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:18:48.683+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-6] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:18:48.684+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-6] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:18:48.686+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:18:48.686+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:18:48.686+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@2df35820]
+2024-08-07T17:18:48.686+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@6418898c]
+2024-08-07T17:18:48.687+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:18:48.687+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:18:52.808+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/chat/", parameters={}
+2024-08-07T17:18:52.809+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.chat.controller.ChatRoomController#getAllChatRooms()
+2024-08-07T17:18:52.810+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/chat/", parameters={}
+2024-08-07T17:18:52.810+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.chat.controller.ChatRoomController#getAllChatRooms()
+2024-08-07T17:18:52.812+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/chat/", parameters={}
+2024-08-07T17:18:52.812+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.chat.controller.ChatRoomController#getAllChatRooms()
+2024-08-07T17:18:52.812+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/chat/", parameters={}
+2024-08-07T17:18:52.813+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.chat.controller.ChatRoomController#getAllChatRooms()
+2024-08-07T17:18:52.845+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-07T17:18:52.846+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[]]
+2024-08-07T17:18:52.846+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-07T17:18:52.846+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[]]
+2024-08-07T17:18:52.847+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-07T17:18:52.847+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[]]
+2024-08-07T17:18:52.848+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-07T17:18:52.848+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[]]
+2024-08-07T17:18:52.848+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:18:52.848+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:18:52.849+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:18:52.850+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:18:58.743+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:18:58.743+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:18:58.743+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:18:58.744+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:18:58.744+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-3] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:18:58.744+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-3] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:18:58.744+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-1] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:18:58.744+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-1] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:18:58.747+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:18:58.747+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:18:58.748+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@2d9c26c9]
+2024-08-07T17:18:58.748+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@7d545617]
+2024-08-07T17:18:58.749+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:18:58.751+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:19:03.020+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:19:03.021+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:19:03.022+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-5] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:19:03.022+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-5] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:19:03.023+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/mypage", parameters={}
+2024-08-07T17:19:03.023+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.user.controller.UserController#mypage(CustomUserDetailsDTO)
+2024-08-07T17:19:03.025+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-4] c.e.g.d.user.controller.UserController   : ROLE_USER
+2024-08-07T17:19:03.026+09:00  INFO 2984 --- [gamemate] [http-nio-8080-exec-4] c.e.g.d.user.controller.UserController   : Accessing mypage
+2024-08-07T17:19:03.028+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:19:03.028+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@306e5685]
+2024-08-07T17:19:03.029+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T17:19:03.032+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
+2024-08-07T17:19:03.033+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.domain.user.dto.MyPageResponseDTO@57543257]
+2024-08-07T17:19:03.034+09:00 DEBUG 2984 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-07T20:08:47.939+09:00  INFO 2040 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Starting GamemateApplication using Java 17.0.10 with PID 2040 (C:\Users\USER\Desktop\3차프로젝트\gamemate\build\classes\java\main started by USER in C:\Users\USER\Desktop\3차프로젝트\gamemate)
+2024-08-07T20:08:47.941+09:00 DEBUG 2040 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-08-07T20:08:47.944+09:00  INFO 2040 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-08-07T20:08:48.007+09:00  INFO 2040 --- [gamemate] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-08-07T20:08:48.007+09:00  INFO 2040 --- [gamemate] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-08-07T20:08:49.277+09:00  INFO 2040 --- [gamemate] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-07T20:08:49.550+09:00  INFO 2040 --- [gamemate] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 260 ms. Found 12 JPA repository interfaces.
+2024-08-07T20:08:50.645+09:00  INFO 2040 --- [gamemate] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-08-07T20:08:50.669+09:00  INFO 2040 --- [gamemate] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-07T20:08:50.670+09:00  INFO 2040 --- [gamemate] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-07T20:08:50.753+09:00  INFO 2040 --- [gamemate] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-07T20:08:50.753+09:00  INFO 2040 --- [gamemate] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2745 ms
+2024-08-07T20:08:51.053+09:00  INFO 2040 --- [gamemate] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-07T20:08:51.169+09:00  INFO 2040 --- [gamemate] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-07T20:08:51.227+09:00  INFO 2040 --- [gamemate] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-08-07T20:08:51.611+09:00  INFO 2040 --- [gamemate] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-07T20:08:51.641+09:00  INFO 2040 --- [gamemate] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-08-07T20:08:51.853+09:00  INFO 2040 --- [gamemate] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@675cab56
+2024-08-07T20:08:51.855+09:00  INFO 2040 --- [gamemate] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-08-07T20:08:51.911+09:00  WARN 2040 --- [gamemate] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-08-07T20:08:51.912+09:00  WARN 2040 --- [gamemate] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-08-07T20:08:53.041+09:00  INFO 2040 --- [gamemate] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-07T20:08:53.149+09:00  INFO 2040 --- [gamemate] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-07T20:08:54.671+09:00  WARN 2040 --- [gamemate] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-07T20:08:54.737+09:00  INFO 2040 --- [gamemate] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-08-07T20:08:54.936+09:00 DEBUG 2040 --- [gamemate] [restartedMain] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+2024-08-07T20:08:55.078+09:00 DEBUG 2040 --- [gamemate] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 53 mappings in 'requestMappingHandlerMapping'
+2024-08-07T20:08:55.087+09:00 DEBUG 2040 --- [gamemate] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/] in 'viewControllerHandlerMapping'
+2024-08-07T20:08:55.876+09:00 DEBUG 2040 --- [gamemate] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2024-08-07T20:08:56.033+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.a.c.AuthController:
+	
+2024-08-07T20:08:56.034+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.ChatRoomController:
+	
+2024-08-07T20:08:56.034+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.ChatRoomMemberController:
+	
+2024-08-07T20:08:56.043+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.MessageController:
+	{[MESSAGE],[/message/send/{roomId}]}: sendMessage(MessageModel,String)
+2024-08-07T20:08:56.044+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.f.c.FriendController:
+	
+2024-08-07T20:08:56.045+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameCommentController:
+	
+2024-08-07T20:08:56.045+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameController:
+	
+2024-08-07T20:08:56.045+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameListController:
+	
+2024-08-07T20:08:56.045+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameRatingController:
+	
+2024-08-07T20:08:56.046+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.p.c.PostCommentController:
+	
+2024-08-07T20:08:56.046+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.p.c.PostController:
+	
+2024-08-07T20:08:56.046+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.s.c.AccessLogController:
+	
+2024-08-07T20:08:56.046+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.s.c.S3Controller:
+	
+2024-08-07T20:08:56.047+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.u.c.UserController:
+	
+2024-08-07T20:08:56.047+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2024-08-07T20:08:56.049+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.a.OpenApiWebMvcResource:
+	
+2024-08-07T20:08:56.049+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	
+2024-08-07T20:08:56.049+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerConfigResource:
+	
+2024-08-07T20:08:56.145+09:00 DEBUG 2040 --- [gamemate] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-08-07T20:08:56.201+09:00 DEBUG 2040 --- [gamemate] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-08-07T20:08:56.486+09:00  INFO 2040 --- [gamemate] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-08-07T20:08:56.557+09:00  INFO 2040 --- [gamemate] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-08-07T20:08:56.559+09:00 DEBUG 2040 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2024-08-07T20:08:56.559+09:00 DEBUG 2040 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2024-08-07T20:08:56.559+09:00  INFO 2040 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2024-08-07T20:08:56.559+09:00 DEBUG 2040 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6c87a2fd]
+2024-08-07T20:08:56.560+09:00 DEBUG 2040 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6c87a2fd]
+2024-08-07T20:08:56.560+09:00  INFO 2040 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6c87a2fd]]
+2024-08-07T20:08:56.560+09:00  INFO 2040 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2024-08-07T20:08:56.560+09:00 DEBUG 2040 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-07T20:08:56.560+09:00 DEBUG 2040 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-07T20:08:56.565+09:00  INFO 2040 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Started GamemateApplication in 9.087 seconds (process running for 9.625)
+2024-08-07T20:09:56.546+09:00  INFO 2040 --- [gamemate] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
