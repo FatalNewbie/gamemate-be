@@ -6,6 +6,7 @@ import com.example.gamemate.domain.user.dto.RecommendResponseDTO;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.mapper.UserMapper;
 import com.example.gamemate.domain.user.service.UserService;
+import com.example.gamemate.global.apiRes.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,13 +49,12 @@ public class UserController {
     }
 
     @GetMapping("/info")
-    public ResponseEntity<RecommendResponseDTO> getUserInfo(
-            @AuthenticationPrincipal UserDetails userDetails) {
+    public ApiResponse<RecommendResponseDTO> getUserInfo(@AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
         RecommendResponseDTO user = userService.findByUsernameForRecommendation(username);
         if (user == null) {
-            return ResponseEntity.notFound().build();
+            return ApiResponse.failureRes(HttpStatus.NOT_FOUND, "User not found", null);
         }
-        return ResponseEntity.ok(user);
+        return ApiResponse.successRes(HttpStatus.OK, user);
     }
 }

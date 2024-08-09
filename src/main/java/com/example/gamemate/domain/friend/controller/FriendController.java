@@ -4,48 +4,76 @@ import com.example.gamemate.domain.friend.dto.FriendPostDTO;
 import com.example.gamemate.domain.friend.dto.FriendPutDTO;
 import com.example.gamemate.domain.friend.dto.FriendResponseDTO;
 import com.example.gamemate.domain.friend.entity.Friend;
+import com.example.gamemate.domain.friend.repository.FriendRepository;
 import com.example.gamemate.domain.user.dto.UserDTO;
-import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.friend.service.FriendService;
+import com.example.gamemate.domain.user.entity.User;
+import com.example.gamemate.domain.user.repository.UserRepository;
+import com.example.gamemate.global.apiRes.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/friend")
 @Tag(name = "Friend", description = "친구 관리 API")
 public class FriendController {
 
     private final FriendService friendService;
+    private final UserRepository userRepository;
 
-
-    public FriendController(FriendService friendService) {
+    public FriendController(FriendService friendService, UserRepository userRepository) {
         this.friendService = friendService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/")
-    public ResponseEntity<FriendResponseDTO> sendFriendRequest(@RequestBody FriendPostDTO friendPostDto) {
-        FriendResponseDTO response = friendService.sendFriendRequest(friendPostDto);
-        return ResponseEntity.ok(response);
+    public ApiResponse<FriendResponseDTO> sendFriendRequest(
+            @RequestBody FriendPostDTO friendPostDto,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        User requester = userRepository.findByUsername(userDetails.getUsername());
+        friendPostDto.setRequesterId(requester.getId());
+        FriendResponseDTO response = friendService.sendFriendRequest(userDetails.getUsername(), friendPostDto);
+        return ApiResponse.successRes(HttpStatus.OK, response);
     }
 
-    @PutMapping("/")
-    public ResponseEntity<FriendResponseDTO> respondToFriendRequest(@RequestBody FriendPutDTO friendPutDto) {
-        FriendResponseDTO response = friendService.respondToFriendRequest(friendPutDto);
-        return ResponseEntity.ok(response);
+    @PutMapping("/respond")
+    public ApiResponse<FriendResponseDTO> respondToFriendRequest(
+            @RequestBody FriendPutDTO friendPutDto,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        User receiver = userRepository.findByUsername(userDetails.getUsername());
+        friendPutDto.setReceiverId(receiver.getId());
+        FriendResponseDTO response = friendService.respondToFriendRequest(userDetails.getUsername(), friendPutDto);
+        return ApiResponse.successRes(HttpStatus.OK, response);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<UserDTO>> getFriends(@PathVariable Long userId) {
-        List<UserDTO> friends = friendService.getFriends(userId);
-        return ResponseEntity.ok(friends);
+    @PutMapping("/cancel")
+    public ApiResponse<String> cancelFriendRequest(
+            @RequestBody FriendPutDTO friendPutDto,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        User requester = userRepository.findByUsername(userDetails.getUsername());
+        friendPutDto.setRequesterId(requester.getId());
+        String response = friendService.cancelFriendRequest(userDetails.getUsername(), friendPutDto);
+        return ApiResponse.successRes(HttpStatus.OK, response);
     }
 
-    @GetMapping("/requests/{receiverId}")
-    public ResponseEntity<List<Friend>> getPendingFriendRequests(@PathVariable Long receiverId) {
-        List<Friend> pendingRequests = friendService.getPendingFriendRequests(receiverId);
-        return ResponseEntity.ok(pendingRequests);
+    @GetMapping("/")
+    public ApiResponse<List<UserDTO>> getFriends(@AuthenticationPrincipal UserDetails userDetails) {
+        List<UserDTO> friends = friendService.getFriends(userDetails.getUsername());
+        return ApiResponse.successRes(HttpStatus.OK, friends);
+    }
+
+    @GetMapping("/requests")
+    public ApiResponse<List<FriendResponseDTO>> getPendingFriendRequests(@AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername();
+        List<FriendResponseDTO> pendingRequests = friendService.getPendingFriendRequests(username);
+        return ApiResponse.successRes(HttpStatus.OK, pendingRequests);
     }
 }
+

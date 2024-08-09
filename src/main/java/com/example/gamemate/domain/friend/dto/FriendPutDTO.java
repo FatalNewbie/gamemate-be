@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,6 +23,9 @@ public class FriendPutDTO {
 
     @Schema(description = "친구 요청 상태", example = "ACCEPTED or REJECTED")
     private Friend.Status status;
+
+    @Schema(description = "친구가 된 시점", example = "2023-01-01T00:00:00")
+    private LocalDateTime acceptedDate;
 }
 
 

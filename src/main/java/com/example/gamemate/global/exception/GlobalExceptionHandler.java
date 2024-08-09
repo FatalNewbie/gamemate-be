@@ -20,6 +20,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 //예외처리 Custom하는 부분
     @ExceptionHandler(RestApiException.class)
     public ResponseEntity<Object> handleCustomException(RestApiException e) {
+        log.info(
+                "에러{}" , e
+        );
         ExceptionCode exceptionCode = e.getExceptionCode();
         return handleExceptionInternal(exceptionCode);
     }
