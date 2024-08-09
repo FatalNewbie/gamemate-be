@@ -8,6 +8,7 @@ import com.example.gamemate.domain.auth.jwt.JWTUtil;
 import com.example.gamemate.global.apiRes.ApiResponse;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -49,6 +50,25 @@ public class JWTFilter extends OncePerRequestFilter {
 
         //Bearer 부분 제거 후 순수 토큰만 획득
         String token = authorization.split(" ")[1];
+
+        //토큰에서 쿠키 획득
+//        String token = null;
+//        Cookie[] cookies = request.getCookies();
+//
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if ("jwt".equals(cookie.getName())) {
+//                    token = cookie.getValue();
+//                    break;
+//                }
+//            }
+//        }
+
+//        if (token == null) {
+//            System.out.println("token null");
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
 
         //토큰 소멸 시간 검증
         //유효기간이 만료한 경우

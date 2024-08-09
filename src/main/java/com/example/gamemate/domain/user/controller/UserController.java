@@ -132,4 +132,11 @@ public class UserController {
         return ResponseEntity.ok(imageUrls); // 이미지 URL 리스트 반환
     }
 
+    // 겟 요청시 닉네임 반환, 이삭 추가
+    @GetMapping("/user")
+    public ResponseEntity<String> getUserNickname(@AuthenticationPrincipal UserDetails userDetails){
+        String nickname = userService.findByUsername(userDetails.getUsername()).getNickname();
+        return ResponseEntity.ok().body(nickname);
+    }
+
 }

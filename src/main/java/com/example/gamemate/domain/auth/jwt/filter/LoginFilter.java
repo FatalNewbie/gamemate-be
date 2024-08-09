@@ -7,11 +7,16 @@ import com.example.gamemate.domain.auth.jwt.JWTUtil;
 import com.example.gamemate.domain.user.service.CustomUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.TimeZone;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -120,9 +125,34 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String token = jwtUtil.createJwt(id, username, role, 60*60*10L);
 
+//        //추가한 로직
+//        Cookie cookie = new Cookie("jwt",token);
+//        //cookie.setHttpOnly(true);
+//        cookie.setHttpOnly(false);
+//        //cookie.setSecure(true); // HTTPS에서만 작동
+//        cookie.setSecure(false);
+//        cookie.setPath("/");
+//        cookie.setMaxAge(60 * 60); // 쿠키 유효 기간 설정 (예: 1시간)
+//        response.addCookie(cookie);
+//
+//        String cookieHeader = String.format("%s=%s; Max-Age=%d; Expires=%s; Path=%s; Secure; HttpOnly; SameSite=None",
+//                cookie.getName(), cookie.getValue(), cookie.getMaxAge(), getExpiryDate(cookie), cookie.getPath());
+//
+//        response.setHeader("Set-Cookie", cookieHeader);
+//        //
+
         response.addHeader("Authorization", "Bearer " + token);
 
+        // System.out.println("JWT cokkie : name=" + cookie.getName() + ", value=" + cookie.getValue());
+
     }
+
+    // 이거도 추가함
+//    private String getExpiryDate(Cookie cookie) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
+//        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+//        return sdf.format(new Date(System.currentTimeMillis() + cookie.getMaxAge() * 1000L));
+//    }
 
     //로그인 실패 시 실행하는 메소드
     @Override
