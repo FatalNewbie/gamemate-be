@@ -3,6 +3,7 @@ package com.example.gamemate.global.config;
 import com.example.gamemate.domain.auth.jwt.JWTUtil;
 import com.example.gamemate.domain.auth.jwt.filter.JWTFilter;
 import com.example.gamemate.domain.auth.jwt.filter.LoginFilter;
+import com.example.gamemate.domain.auth.oauth2.CustomSuccessHandler;
 import com.example.gamemate.domain.auth.service.CustomOAuth2UserService;
 import com.example.gamemate.domain.user.service.CustomUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,18 +35,21 @@ public class SecurityConfig {
     private final JWTUtil jwtUtil;
     private final CustomUserDetailsService customUserDetailsService;
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final CustomSuccessHandler customSuccessHandler;
 
     public SecurityConfig(
         AuthenticationConfiguration authenticationConfiguration,
         JWTUtil jwtUtil,
         CustomUserDetailsService customUserDetailsService,
-        CustomOAuth2UserService customOAuth2UserService
+        CustomOAuth2UserService customOAuth2UserService,
+        CustomSuccessHandler customSuccessHandler
     ) {
 
         this.authenticationConfiguration = authenticationConfiguration;
         this.jwtUtil = jwtUtil;
         this.customUserDetailsService = customUserDetailsService;
         this.customOAuth2UserService = customOAuth2UserService;
+        this.customSuccessHandler = customSuccessHandler;
 
     }
 
@@ -116,7 +120,8 @@ public class SecurityConfig {
             //oauth2
             .oauth2Login((oauth2) -> oauth2
                 .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
-                    .userService(customOAuth2UserService)))
+                    .userService(customOAuth2UserService))
+                .successHandler(customSuccessHandler))
 
             //cors 설정
             .cors((cors -> cors.configurationSource(new CorsConfigurationSource() {
@@ -140,5 +145,6 @@ public class SecurityConfig {
         return http.build();
 
     }
+
 }
 

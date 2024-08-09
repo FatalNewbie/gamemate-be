@@ -33,7 +33,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         log.info(String.valueOf(oAuth2User));
 
-        String registrationId = userRequest.getClientRegistration().getRegistrationId();
+        String registrationId = userRequest.getClientRegistration()
+                                            .getRegistrationId();
         OAuth2Response oAuth2Response = null;
 
         if(registrationId.equals("naver")) {
@@ -80,7 +81,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             userRepository.save(existData);
 
             OAuth2DTO oAuth2DTO = new OAuth2DTO();
-            oAuth2DTO.setUsername(username);
+            oAuth2DTO.setUsername(existData.getUsername());
             oAuth2DTO.setNickname(oAuth2Response.getName());
             oAuth2DTO.setRole("ROLE_USER");
 

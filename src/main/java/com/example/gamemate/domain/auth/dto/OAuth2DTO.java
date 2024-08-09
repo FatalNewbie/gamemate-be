@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class OAuth2DTO {
 
+    private Long id;
     private String username;
     private String nickname;
     private String role;

@@ -7,11 +7,13 @@ import com.example.gamemate.domain.auth.jwt.JWTUtil;
 import com.example.gamemate.domain.user.service.CustomUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +27,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@Slf4j
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
@@ -32,6 +35,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     private final JWTUtil jwtUtil;
     private final CustomUserDetailsService customUserDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final long expirationTime; // 만료 시간 상수
 
     public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, CustomUserDetailsService customUserDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
 
@@ -39,6 +43,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         this.jwtUtil = jwtUtil;
         this.customUserDetailsService = customUserDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.expirationTime = 60 * 60 * 1000 * 10L;
 
     }
 
@@ -90,21 +95,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             throw new DisabledException("삭제된 계정입니다. 다시 확인해주세요.");
         }
 
-//        //클라이언트 요청에서 email, password 추출
-//        String username = obtainUsername(request);
-//        String password = obtainPassword(request);
-//
-//        //스프링 시큐리티에서 email과 password를 검증하기 위해서는 token에 담아야 함
-//        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password, null);
-//
-//        //token에 담은 검증을 위한 AuthenticationManager로 전달
-//        return authenticationManager.authenticate(authToken);
-
     }
 
     //로그인 성공 시 실행하는 메소드(여기서 JWT 발급)
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication)
+        throws IOException {
 
         //UserDetails
         CustomUserDetailsDTO customUserDetails = (CustomUserDetailsDTO) authentication.getPrincipal();
@@ -118,10 +114,29 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String role = auth.getAuthority();
 
-        String token = jwtUtil.createJwt(id, username, role, 60*60*1000*10L);
+        // JWT 생성
+        String token = jwtUtil.createJwt(id, username, role, expirationTime);
 
-        response.addHeader("Authorization", "Bearer " + token);
+        log.info(token);
 
+        // 쿠키로 JWT를 응답에 추가
+        Cookie cookie = createCookie("Authorization", "Bearer " + token);
+        log.info("쿠키 설정: 이름={}, 값={}", cookie.getName(), cookie.getValue());
+
+        response.addCookie(cookie);
+
+    }
+
+    // 쿠키 생성 메소드
+    private Cookie createCookie(String key, String value) {
+
+        Cookie cookie = new Cookie(key, value);
+        cookie.setMaxAge((int) (expirationTime / 1000)); // 10시간 만료시간 설정 (초 단위)
+        // cookie.setSecure(true); // HTTPS 사용 시 활성화
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+
+        return cookie;
     }
 
     //로그인 실패 시 실행하는 메소드

@@ -41,6 +41,12 @@ public class CustomOAuth2UserDTO implements OAuth2User {
 
     }
 
+    public Long getId() {
+
+        return oAuth2DTO.getId();
+
+    }
+
     public String getUsername() {
 
         return oAuth2DTO.getUsername();
