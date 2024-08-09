@@ -1,5 +1,6 @@
 package com.example.gamemate.domain.post.entity;
 
+import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.global.audit.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -20,9 +21,12 @@ public class PostComment extends BaseEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
-    private Post post;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "post_id", nullable = true)
+    private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "p_comment_id")
@@ -37,11 +41,17 @@ public class PostComment extends BaseEntity {
     @Column
     private LocalDateTime deletedDate;
 
-    @OneToMany(mappedBy = "parentComment", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parentComment", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<PostComment> reComments;
 
     @Builder
-    public PostComment(Post post, PostComment parentComment, String nickname, String content){
+    public PostComment(
+            User user, Post post,
+            PostComment parentComment,
+            String nickname, String content
+    ){
+
+        this.user = user;
         this.post = post;
         this.parentComment = parentComment;
         this.nickname = nickname;

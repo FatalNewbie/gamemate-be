@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -25,9 +26,6 @@ public abstract class PostDTO {
     @JsonProperty("status")
     @NotNull
     private String status;
-
-    @NotNull
-    private Long userId;
 
     @NotNull
     private String gameGenre;
