@@ -13,12 +13,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GameService {
@@ -60,9 +62,21 @@ public class GameService {
         }
     }
 
+    public List<GameDto> findGamesByTitleAndDeveloper(String title, String developer) {
+        List<Game> games = gameRepository.findGamesByTitleAndDeveloper(title, developer);
+        return games.stream()
+                .map(gameMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
     public Page<GameDto> getAllGames(Pageable pageable) {
-        return gameRepository.findAllByDeletedDateIsNull(pageable)
-                .map(gameMapper::toDto);
+        if (pageable.isUnpaged()) {
+            List<Game> games = gameRepository.findAllByDeletedDateIsNull(); // 페이징 없이 모든 데이터 가져오기
+            return new PageImpl<>(games.stream().map(gameMapper::toDto).collect(Collectors.toList()));
+        } else {
+            return gameRepository.findAllByDeletedDateIsNull(pageable)
+                    .map(gameMapper::toDto);
+        }
     }
 
     public GameDto getGameById(Long id) {

@@ -1,18 +1,20 @@
 package com.example.gamemate.domain.game.controller;
 
-import com.example.gamemate.domain.game.dto.CustomPage;
+import com.example.gamemate.global.common.CustomPage;
 import com.example.gamemate.domain.game.dto.GameDto;
 import com.example.gamemate.domain.game.service.GameApiClient;
 import com.example.gamemate.domain.game.service.GameService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Tag(name = "Game", description = "Game API")
 @Slf4j
@@ -57,13 +59,27 @@ public class GameController {
         return "게임 정보가 성공적으로 저장되었습니다.";
     }
 
+    @GetMapping("/games/search")
+    public ResponseEntity<List<GameDto>> searchGames(
+            @RequestParam String title,
+            @RequestParam String developer) {
+        List<GameDto> games = gameService.findGamesByTitleAndDeveloper(title, developer);
+        return ResponseEntity.ok(games);
+    }
+
     // 게임 리스트 조회
     @GetMapping("/games")
-    public ResponseEntity<CustomPage<GameDto>> getAllGames(@PageableDefault(size = 10) Pageable pageable) {
+    public ResponseEntity<CustomPage<GameDto>> getAllGames(@RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size) {
+        Pageable pageable = Pageable.unpaged(); // 기본적으로 모든 데이터를 가져오는 설정
+        if (page.isPresent() && size.isPresent()) {
+            pageable = PageRequest.of(page.get(), size.get());
+        }
+
         Page<GameDto> games = gameService.getAllGames(pageable);
         CustomPage<GameDto> customPage = new CustomPage<>(games);
         return ResponseEntity.ok(customPage);
     }
+
 
 
     //게임상세 조회 api

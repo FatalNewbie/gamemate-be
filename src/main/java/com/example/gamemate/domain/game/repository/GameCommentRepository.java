@@ -12,5 +12,6 @@ import java.util.Optional;
 @Repository
 public interface GameCommentRepository extends JpaRepository<GameComment, Long> {
     Page<GameComment> findByGameIdAndDeletedDateIsNull(Long gameId, Pageable pageable);
+    List<GameComment> findByGameIdAndDeletedDateIsNull(Long gameId);
     Optional<GameComment> findByGameIdAndIdAndDeletedDateIsNull(Long gameId, Long commentId);
 }

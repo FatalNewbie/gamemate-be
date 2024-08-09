@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface GameRepository extends JpaRepository<Game, Long> {
+public interface GameRepository extends JpaRepository<Game, Long>, GameRepositoryCustom {
     Page<Game> findAllByDeletedDateIsNull(Pageable pageable);
+    List<Game> findAllByDeletedDateIsNull(); // 새로운 메서드 추가
     Optional<Game> findByIdAndDeletedDateIsNull(Long id);
 }

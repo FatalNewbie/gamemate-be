@@ -1,7 +1,7 @@
 package com.example.gamemate.domain.game.controller;
 
 import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
-import com.example.gamemate.domain.game.dto.CustomPage;
+import com.example.gamemate.global.common.CustomPage;
 import com.example.gamemate.domain.game.dto.MyGameDto;
 import com.example.gamemate.domain.game.service.MyGameService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,8 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tag(name = "My Game", description = "My Game API")
 @Slf4j

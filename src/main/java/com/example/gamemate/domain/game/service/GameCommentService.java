@@ -9,10 +9,13 @@ import com.example.gamemate.domain.game.entity.GameComment;
 import com.example.gamemate.domain.game.repository.GameCommentRepository;
 import com.example.gamemate.domain.game.repository.GameRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GameCommentService {
@@ -28,9 +31,15 @@ public class GameCommentService {
     }
 
     public Page<GameCommentDto> getAllComments(Long gameId, Pageable pageable) {
-        Page<GameComment> comments = gameCommentRepository.findByGameIdAndDeletedDateIsNull(gameId, pageable);
-        return comments.map(gameCommentMapper::toDto);
+        if (pageable.isUnpaged()) {
+            List<GameComment> comments = gameCommentRepository.findByGameIdAndDeletedDateIsNull(gameId);
+            return new PageImpl<>(comments.stream().map(gameCommentMapper::toDto).collect(Collectors.toList()));
+        } else {
+            Page<GameComment> comments = gameCommentRepository.findByGameIdAndDeletedDateIsNull(gameId, pageable);
+            return comments.map(gameCommentMapper::toDto);
+        }
     }
+
 
     public GameCommentDto getCommentById(Long gameId, Long commentId) {
         GameComment comment = gameCommentRepository.findByGameIdAndIdAndDeletedDateIsNull(gameId, commentId)
