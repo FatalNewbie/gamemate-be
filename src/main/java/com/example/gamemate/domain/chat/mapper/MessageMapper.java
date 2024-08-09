@@ -8,10 +8,14 @@ public class MessageMapper {
         if (message == null) {
             return null;
         }
-        MessageDTO messageDTO = new MessageDTO();
-
-        messageDTO.setContent(message.getContent());
-        messageDTO.setWriter(message.getWriter().getNickname());
+        MessageDTO messageDTO =MessageDTO.builder()
+                .id(message.getId())
+                .content(message.getContent())
+                .writer(message.getWriter().getNickname())
+                .chatRoomId(message.getChatRoom().getId())
+                .time(message.getTime())
+                .type(message.getType())
+                .build();
 
         // 필요한 다른 필드들도 설정
         return messageDTO;

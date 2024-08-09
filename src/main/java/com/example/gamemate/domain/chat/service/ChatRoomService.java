@@ -10,6 +10,8 @@ import com.example.gamemate.domain.chat.model.chatroommember.AddMemberRequest;
 import com.example.gamemate.domain.chat.repository.ChatRoomRepository;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.repository.UserRepository;
+import com.example.gamemate.global.exception.ChatExceptionCode;
+import com.example.gamemate.global.exception.ChatRoomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -38,8 +41,7 @@ public class ChatRoomService {
         // 채팅방 생성
         ChatRoom newChatRoom = chatRoomRepository.save(chatRoom);
         // 생성요청을 보낸 유저를 채팅방멤버의 방장으로 추가함.
-        AddMemberRequest memberRequest = new AddMemberRequest(newChatRoom.getId());
-        chatRoomMemberService.addMember(memberRequest, userDetails,true);
+        chatRoomMemberService.addMember(newChatRoom.getId(), leader.getUsername(),true);
 
         return ChatRoomCreateResponse.from(true, "채팅방을 생성하였습니다.");
     }
@@ -60,5 +62,14 @@ public class ChatRoomService {
         } else {
             return Pair.of(HttpStatus.NOT_FOUND, roomId + " not found");
         }
+    }
+
+    public Long getChatRoomMemberCnt(Long roomId){
+        ChatRoom chatRoom = chatRoomRepository.findById(roomId).orElseThrow(()
+                -> new ChatRoomException(ChatExceptionCode.CHATROOM_NOT_FOUND));
+
+
+            return chatRoomRepository.countByChatRoom(chatRoom);
+
     }
 }

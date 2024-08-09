@@ -34,6 +34,13 @@ public class ChatRoomController {
         return ResponseEntity.ok(chatRoomService.getAllChatRoomsByUser(userDetails));
     }
 
+    @GetMapping("/{roomId}")
+    public ResponseEntity<Long> getChatRoomMemberCnt(@PathVariable Long roomId){
+
+        Long result = chatRoomService.getChatRoomMemberCnt(roomId);
+        return ResponseEntity.ok(result);
+    }
+
     @DeleteMapping("/{roomId}")
     public ResponseEntity<String> deleteChatRoom(@PathVariable Long roomId){
         Pair<HttpStatus, String> result = chatRoomService.deleteChatRoom(roomId);

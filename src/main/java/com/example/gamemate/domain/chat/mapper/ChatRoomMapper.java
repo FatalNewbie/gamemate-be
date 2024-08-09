@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChatRoomMapper {
     public ChatRoomDTO convertoToChatRoomDTO(ChatRoom chatRoom){
-        return new ChatRoomDTO(chatRoom.getId(),chatRoom.getTitle(), chatRoom.getLeader().getNickname());
+        return new ChatRoomDTO(chatRoom.getId(),chatRoom.getTitle(), chatRoom.getLeader().getNickname(), chatRoom.getMemberCnt());
     }
 }

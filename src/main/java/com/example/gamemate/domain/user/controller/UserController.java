@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,13 @@ public class UserController {
         MyPageResponseDTO myPageDto = userService.findByUsername(name);
 
         return ResponseEntity.ok().header("Content-Type", "application/json").body(myPageDto);
+    }
+
+    // 겟 요청시 닉네임 반환, 이삭 추가
+    @GetMapping("/user")
+    public ResponseEntity<String> getUserNickname(@AuthenticationPrincipal UserDetails userDetails){
+        String nickname = userService.findByUsername(userDetails.getUsername()).getNickname();
+        return ResponseEntity.ok().body(nickname);
     }
 
 }

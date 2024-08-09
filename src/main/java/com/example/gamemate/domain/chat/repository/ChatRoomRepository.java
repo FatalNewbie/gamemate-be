@@ -12,4 +12,7 @@ import java.util.List;
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
     @Query("SELECT c FROM ChatRoom c JOIN c.memberList m WHERE m.member = :user")
     List<ChatRoom> findAllByUser(@Param("user") User user);
+
+    @Query("SELECT COUNT(c) FROM ChatRoomMember c WHERE c.chatRoom = :chatRoom")
+    long countByChatRoom(@Param("chatRoom") ChatRoom chatRoom);
 }

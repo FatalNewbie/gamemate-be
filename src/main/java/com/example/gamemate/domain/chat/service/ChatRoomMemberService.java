@@ -24,20 +24,20 @@ public class ChatRoomMemberService {
     private final ChatRoomRepository chatRoomRepository;
     private final UserRepository userRepository;
 
-    public AddMemberResponse addMember(AddMemberRequest request,
-                                       UserDetails userDetails,
+    public AddMemberResponse addMember(Long roomId,
+                                       String username,
                                        boolean isLeader) {
         // 이미 리더가 존재하는 방에 리더 멤버가 추가되는 경우가 발생할때의 예외 처리
 
 
         //채팅방 서비스에서 chatRoomId로 채팅 객체 찾아오기.
         //예외처리
-        ChatRoom chatRoom = chatRoomRepository.findById(request.getChatRoomId())
+        ChatRoom chatRoom = chatRoomRepository.findById(roomId)
                 .orElseThrow(() -> new ChatRoomException(ChatExceptionCode.CHATROOM_NOT_FOUND));
 
-        User member = userRepository.findByUsername(userDetails.getUsername());
+        User member = userRepository.findByUsername(username);
 
-        ChatRoomMember chatRoomMember = new ChatRoomMember(chatRoom, member, false);
+        ChatRoomMember chatRoomMember = new ChatRoomMember(chatRoom, member, isLeader);
         chatRoomMemberRepository.save(chatRoomMember);
 
         return AddMemberResponse.from(true, "멤버를 추가하였습니다.");

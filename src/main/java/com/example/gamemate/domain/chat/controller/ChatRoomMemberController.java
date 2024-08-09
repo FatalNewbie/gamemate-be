@@ -15,16 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/chat")
+@RequestMapping("/chat")
 public class ChatRoomMemberController {
 
     private final ChatRoomMemberService chatRoomMemberService;
 
     @PostMapping("/addmember")
-    public AddMemberResponse addMember(@RequestBody AddMemberRequest request,
-                                       @AuthenticationPrincipal UserDetails userDetails){
+    public AddMemberResponse addMember(@RequestBody AddMemberRequest request){
 
-        return chatRoomMemberService.addMember(request,userDetails,false);
+        return chatRoomMemberService.addMember(request.getChatRoomId(),request.getAddMemberUsername(),false);
     }
 
 

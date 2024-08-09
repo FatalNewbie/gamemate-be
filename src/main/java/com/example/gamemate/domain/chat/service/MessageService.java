@@ -23,13 +23,13 @@ public class MessageService {
     private final ChatRoomRepository chatRoomRepository;
     private final UserRepository userRepository;
 
-    public Message saveMessage(Long chatRoomId, String content, UserDetails userDetails){
+    public Message saveMessage(Long chatRoomId, String content, String username, String time ,String type){
 
 
         ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId).orElse(null);
-        User writer =  userRepository.findByUsername(userDetails.getUsername());
+        User writer =  userRepository.findByUsername(username);
 
-        Message message = new Message(content,chatRoom,writer);
+        Message message = new Message(content,chatRoom,writer,time,type);
 
         return messageRepository.save(message);
     }
