@@ -12,7 +12,6 @@ public interface GameCommentMapper {
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.nickname", target = "nickname")
     @Mapping(source = "game.id", target = "gameId")
-    @Mapping(source = "createdDate", target = "createdDate")
     GameCommentDto toDto(GameComment comment);
 
     @Mapping(source = "userId", target = "user.id")

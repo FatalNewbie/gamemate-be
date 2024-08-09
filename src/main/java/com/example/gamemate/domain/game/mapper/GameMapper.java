@@ -16,10 +16,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface GameMapper {
 
-    GameDto toDto(Game game);
-
-    Game toEntity(GameDto gameDto);
-
     @Mapping(source = "gametitle", target = "title")
     @Mapping(source = "entname", target = "developer")
     @Mapping(source = "genre", target = "genre")
@@ -27,6 +23,10 @@ public interface GameMapper {
     @Mapping(source = "givenrate", target = "classes")
     @Mapping(source = "summary", target = "description")
     Game toEntity(GameApiResponse.GameItem gameItem);
+
+    GameDto toDto(Game game);
+
+    Game toEntity(GameDto gameDto);
 
     void updateEntityFromDto(GameDto gameDto, @MappingTarget Game game);
 

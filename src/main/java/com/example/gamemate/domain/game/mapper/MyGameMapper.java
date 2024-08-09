@@ -17,7 +17,5 @@ public interface MyGameMapper {
     @Mapping(source = "gameId", target = "game.id")
     MyGame toEntity(MyGameDto myGameDto);
 
-    @Mapping(source = "userId", target = "user.id")
-    @Mapping(source = "gameId", target = "game.id")
     void updateEntityFromDto(MyGameDto myGameDto, @MappingTarget MyGame myGame);
 }
