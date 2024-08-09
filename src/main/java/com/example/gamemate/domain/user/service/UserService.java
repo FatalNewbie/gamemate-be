@@ -6,6 +6,7 @@ package com.example.gamemate.domain.user.service;
 import com.amazonaws.services.s3.model.*;
 import com.example.gamemate.domain.user.dto.MyPageResponseDTO;
 import com.example.gamemate.domain.user.dto.UpdateDTO;
+import com.example.gamemate.domain.user.dto.RecommendResponseDTO;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.mapper.UserMapper;
 import com.example.gamemate.domain.user.repository.UserRepository;
@@ -43,7 +44,7 @@ public class UserService {
 
 
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, 
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
                        UserMapper mapper, AmazonS3 s3Client){
 
         this.userRepository = userRepository;
@@ -63,6 +64,15 @@ public class UserService {
 
         return null;
 
+    }
+
+    public RecommendResponseDTO findByUsernameForRecommendation(String username) {
+        User user = userRepository.findByUsername(username);
+
+        if(!user.equals("")) {
+            return mapper.userToRecommendResponseDTO(user);
+        }
+        return null;
     }
 
     public UpdateDTO findByUsernameForUpdate(String username){

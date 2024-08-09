@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FriendPostDto {
+public class FriendPostDTO {
 
     @Schema(description = "친구 요청을 보낸 사용자 ID", example = "1")
     private Long requesterId;

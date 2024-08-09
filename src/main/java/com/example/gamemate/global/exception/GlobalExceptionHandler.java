@@ -69,6 +69,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(exceptionCode);
     }
 
+    @ExceptionHandler(InvalidUserIdException.class)
+    public ResponseEntity<Object> handleInvalidUserIdException(InvalidUserIdException ex) {
+        log.warn("handleInvalidUserIdException", ex);
+        return handleExceptionInternal(ex.getExceptionCode(), ex.getMessage());
+    }
+
     private ResponseEntity<Object> handleExceptionInternal(ExceptionCode exceptionCode) {
         return ResponseEntity.status(exceptionCode.getHttpStatus())
                 .body(makeErrorResponse(exceptionCode));

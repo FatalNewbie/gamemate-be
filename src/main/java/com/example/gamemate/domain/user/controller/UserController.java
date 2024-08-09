@@ -4,15 +4,19 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
 import com.example.gamemate.domain.user.dto.MyPageResponseDTO;
+import com.example.gamemate.domain.user.dto.RecommendResponseDTO;
+import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.dto.UpdateDTO;
 import com.example.gamemate.domain.user.mapper.UserMapper;
 import com.example.gamemate.domain.user.service.UserService;
+import com.example.gamemate.global.apiRes.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,6 +60,15 @@ public class UserController {
         return ResponseEntity.ok().header("Content-Type", "application/json").body(myPageDto);
     }
 
+    @GetMapping("/info")
+    public ApiResponse<RecommendResponseDTO> getUserInfo(@AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername();
+        RecommendResponseDTO user = userService.findByUsernameForRecommendation(username);
+        if (user == null) {
+            return ApiResponse.failureRes(HttpStatus.NOT_FOUND, "User not found", null);
+        }
+        return ApiResponse.successRes(HttpStatus.OK, user);
+    }
     @PutMapping("/update")
     public String updateUser(@RequestBody UpdateDTO updateDTO, @AuthenticationPrincipal UserDetails userDetails) {
         String name = userDetails.getUsername();
