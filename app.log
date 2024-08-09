@@ -17153,3 +17153,505 @@ Caused by: org.hibernate.TransientPropertyValueException: Not-null property refe
 2024-08-09T19:34:39.618+09:00  INFO 16976 --- [gamemate] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-08-09T19:34:39.661+09:00  INFO 16976 --- [gamemate] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-08-09T19:34:39.680+09:00  INFO 16976 --- [gamemate] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-08-09T19:36:08.089+09:00  INFO 27512 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Starting GamemateApplication using Java 17.0.10 with PID 27512 (C:\Users\user\gamemate\gamemate\build\classes\java\main started by user in C:\Users\user\gamemate\gamemate)
+2024-08-09T19:36:08.091+09:00 DEBUG 27512 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-08-09T19:36:08.091+09:00  INFO 27512 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-08-09T19:36:08.150+09:00  INFO 27512 --- [gamemate] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-08-09T19:36:08.150+09:00  INFO 27512 --- [gamemate] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-08-09T19:36:09.420+09:00  INFO 27512 --- [gamemate] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-09T19:36:09.675+09:00  INFO 27512 --- [gamemate] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 243 ms. Found 12 JPA repository interfaces.
+2024-08-09T19:36:10.613+09:00  INFO 27512 --- [gamemate] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-08-09T19:36:10.626+09:00  INFO 27512 --- [gamemate] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-09T19:36:10.627+09:00  INFO 27512 --- [gamemate] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-09T19:36:10.694+09:00  INFO 27512 --- [gamemate] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-09T19:36:10.694+09:00  INFO 27512 --- [gamemate] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2544 ms
+2024-08-09T19:36:10.908+09:00  INFO 27512 --- [gamemate] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-09T19:36:10.980+09:00  INFO 27512 --- [gamemate] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-09T19:36:11.025+09:00  INFO 27512 --- [gamemate] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-08-09T19:36:11.402+09:00  INFO 27512 --- [gamemate] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-09T19:36:11.433+09:00  INFO 27512 --- [gamemate] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-08-09T19:36:11.780+09:00  INFO 27512 --- [gamemate] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@f15b5a3
+2024-08-09T19:36:11.783+09:00  INFO 27512 --- [gamemate] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-08-09T19:36:11.850+09:00  WARN 27512 --- [gamemate] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-08-09T19:36:11.851+09:00  WARN 27512 --- [gamemate] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-08-09T19:36:13.284+09:00  INFO 27512 --- [gamemate] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-09T19:36:13.446+09:00  INFO 27512 --- [gamemate] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-09T19:36:14.892+09:00  WARN 27512 --- [gamemate] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-09T19:36:14.915+09:00  INFO 27512 --- [gamemate] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-08-09T19:36:15.092+09:00 DEBUG 27512 --- [gamemate] [restartedMain] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+2024-08-09T19:36:15.208+09:00 DEBUG 27512 --- [gamemate] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 50 mappings in 'requestMappingHandlerMapping'
+2024-08-09T19:36:15.215+09:00 DEBUG 27512 --- [gamemate] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/] in 'viewControllerHandlerMapping'
+2024-08-09T19:36:15.834+09:00 DEBUG 27512 --- [gamemate] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2024-08-09T19:36:15.961+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.a.c.JoinController:
+	
+2024-08-09T19:36:15.961+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.ChatRoomController:
+	
+2024-08-09T19:36:15.962+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.ChatRoomMemberController:
+	
+2024-08-09T19:36:15.968+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.MessageController:
+	{[MESSAGE],[/message/send/{roomId}]}: sendMessage(MessageModel,String)
+2024-08-09T19:36:15.968+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.f.c.FriendController:
+	
+2024-08-09T19:36:15.968+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameCommentController:
+	
+2024-08-09T19:36:15.968+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameController:
+	
+2024-08-09T19:36:15.968+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameRatingController:
+	
+2024-08-09T19:36:15.968+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.MyGameController:
+	
+2024-08-09T19:36:15.968+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.p.c.PostCommentController:
+	
+2024-08-09T19:36:15.970+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.p.c.PostController:
+	
+2024-08-09T19:36:15.970+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.s.c.AccessLogController:
+	
+2024-08-09T19:36:15.970+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.s.c.S3Controller:
+	
+2024-08-09T19:36:15.970+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.u.c.UserController:
+	
+2024-08-09T19:36:15.971+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2024-08-09T19:36:15.972+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.a.OpenApiWebMvcResource:
+	
+2024-08-09T19:36:15.973+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	
+2024-08-09T19:36:15.973+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerConfigResource:
+	
+2024-08-09T19:36:16.044+09:00 DEBUG 27512 --- [gamemate] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-08-09T19:36:16.093+09:00 DEBUG 27512 --- [gamemate] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-08-09T19:36:16.297+09:00  INFO 27512 --- [gamemate] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-08-09T19:36:16.365+09:00  INFO 27512 --- [gamemate] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-08-09T19:36:16.368+09:00 DEBUG 27512 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2024-08-09T19:36:16.368+09:00 DEBUG 27512 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2024-08-09T19:36:16.369+09:00  INFO 27512 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2024-08-09T19:36:16.369+09:00 DEBUG 27512 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@d6c0f62]
+2024-08-09T19:36:16.369+09:00 DEBUG 27512 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@d6c0f62]
+2024-08-09T19:36:16.369+09:00  INFO 27512 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@d6c0f62]]
+2024-08-09T19:36:16.369+09:00  INFO 27512 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2024-08-09T19:36:16.370+09:00 DEBUG 27512 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-09T19:36:16.370+09:00 DEBUG 27512 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-09T19:36:16.378+09:00  INFO 27512 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Started GamemateApplication in 8.748 seconds (process running for 9.639)
+2024-08-09T19:37:16.322+09:00  INFO 27512 --- [gamemate] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2024-08-09T19:39:54.292+09:00  INFO 27512 --- [gamemate] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-09T19:39:54.294+09:00  INFO 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-08-09T19:39:54.295+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2024-08-09T19:39:54.295+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2024-08-09T19:39:54.296+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2024-08-09T19:39:54.301+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@7f1cdf84
+2024-08-09T19:39:54.303+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@4b75b19b
+2024-08-09T19:39:54.303+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-08-09T19:39:54.303+09:00  INFO 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2024-08-09T19:39:54.351+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-09T19:39:54.354+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:39:54.674+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:39:54.678+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@5e2fbe63]
+2024-08-09T19:39:54.700+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:39:54.705+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-09T19:39:54.705+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:39:54.773+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:39:54.775+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@45d41ead]
+2024-08-09T19:39:54.784+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:39:57.910+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/games?page=1&size=10", parameters={masked}
+2024-08-09T19:39:57.910+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:39:58.043+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:39:58.043+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@689924c2]
+2024-08-09T19:39:58.043+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:01.294+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/games?page=2&size=10", parameters={masked}
+2024-08-09T19:40:01.294+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:01.365+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:01.365+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@1e48a7a2]
+2024-08-09T19:40:01.365+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:02.861+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/games?page=3&size=10", parameters={masked}
+2024-08-09T19:40:02.863+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:02.930+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:02.930+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@517782e2]
+2024-08-09T19:40:02.930+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:07.880+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/games?page=4&size=10", parameters={masked}
+2024-08-09T19:40:07.880+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:07.953+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:07.954+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@53b058e3]
+2024-08-09T19:40:07.954+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:08.010+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/games?page=5&size=10", parameters={masked}
+2024-08-09T19:40:08.014+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:08.081+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:08.084+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@1380d08a]
+2024-08-09T19:40:08.086+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:08.136+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/games?page=6&size=10", parameters={masked}
+2024-08-09T19:40:08.136+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:08.199+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:08.199+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@8415401]
+2024-08-09T19:40:08.207+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:08.281+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/games?page=7&size=10", parameters={masked}
+2024-08-09T19:40:08.281+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:08.353+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:08.356+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@5ddad5cd]
+2024-08-09T19:40:08.356+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:08.405+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/games?page=8&size=10", parameters={masked}
+2024-08-09T19:40:08.409+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:08.472+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:08.472+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@703b86db]
+2024-08-09T19:40:08.479+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:08.531+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/games?page=9&size=10", parameters={masked}
+2024-08-09T19:40:08.531+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:08.603+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:08.603+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@465c35d7]
+2024-08-09T19:40:08.603+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:08.669+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/games?page=10&size=10", parameters={masked}
+2024-08-09T19:40:08.669+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:08.735+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:08.735+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@56862833]
+2024-08-09T19:40:08.739+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:17.203+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/games?page=11&size=10", parameters={masked}
+2024-08-09T19:40:17.203+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:17.261+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:17.261+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@6ce3cbec]
+2024-08-09T19:40:17.266+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:17.349+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/games?page=12&size=10", parameters={masked}
+2024-08-09T19:40:17.349+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:17.401+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:17.401+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@6f654088]
+2024-08-09T19:40:17.409+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:17.700+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/games?page=13&size=10", parameters={masked}
+2024-08-09T19:40:17.700+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:17.751+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:17.751+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@9e4fa2b]
+2024-08-09T19:40:17.754+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:40:17.859+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/games?page=14&size=10", parameters={masked}
+2024-08-09T19:40:17.859+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:40:17.915+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:40:17.915+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@35d8840f]
+2024-08-09T19:40:17.923+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:45:57.834+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-09T19:45:57.836+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:45:57.887+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:45:57.887+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@249ae5bc]
+2024-08-09T19:45:57.887+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T19:45:57.893+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-09T19:45:57.893+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T19:45:57.952+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T19:45:57.952+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@766907a9]
+2024-08-09T19:45:57.957+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:01:17.234+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/games?page=1&size=10", parameters={masked}
+2024-08-09T20:01:17.237+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:01:17.294+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:01:17.294+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@3d780eaf]
+2024-08-09T20:01:17.296+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:01:19.460+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/games?page=2&size=10", parameters={masked}
+2024-08-09T20:01:19.460+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:01:19.494+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:01:19.494+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@dda2d7c]
+2024-08-09T20:01:19.497+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:00.250+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/games?page=3&size=10", parameters={masked}
+2024-08-09T20:04:00.250+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:00.305+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:00.305+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@68c61cf]
+2024-08-09T20:04:00.313+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:00.645+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/games?page=4&size=10", parameters={masked}
+2024-08-09T20:04:00.645+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:00.695+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:00.695+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@1d19ea86]
+2024-08-09T20:04:00.695+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:07.307+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/games?page=5&size=10", parameters={masked}
+2024-08-09T20:04:07.307+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:07.381+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:07.381+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@64a76884]
+2024-08-09T20:04:07.381+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:08.540+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/games?page=6&size=10", parameters={masked}
+2024-08-09T20:04:08.540+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:08.589+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:08.589+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@47410a5b]
+2024-08-09T20:04:08.589+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:08.879+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/games?page=7&size=10", parameters={masked}
+2024-08-09T20:04:08.879+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:08.933+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:08.933+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@2ebef8d6]
+2024-08-09T20:04:08.936+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:09.851+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/games?page=8&size=10", parameters={masked}
+2024-08-09T20:04:09.851+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:09.916+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:09.916+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@32ec99f1]
+2024-08-09T20:04:09.916+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:11.136+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/games?page=9&size=10", parameters={masked}
+2024-08-09T20:04:11.144+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:11.186+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:11.193+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@d508b2]
+2024-08-09T20:04:11.193+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:12.096+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/games?page=10&size=10", parameters={masked}
+2024-08-09T20:04:12.098+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:12.146+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:12.146+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@718f7a1c]
+2024-08-09T20:04:12.148+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:13.176+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/games?page=11&size=10", parameters={masked}
+2024-08-09T20:04:13.176+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:13.226+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:13.226+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@7bdd4b6e]
+2024-08-09T20:04:13.228+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:13.567+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/games?page=12&size=10", parameters={masked}
+2024-08-09T20:04:13.567+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:13.616+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:13.616+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@9361999]
+2024-08-09T20:04:13.621+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:16.734+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/games?page=13&size=10", parameters={masked}
+2024-08-09T20:04:16.734+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:16.792+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:16.792+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@10d0e444]
+2024-08-09T20:04:16.792+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:41.043+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/games?page=14&size=10", parameters={masked}
+2024-08-09T20:04:41.043+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:41.098+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:41.098+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@503736d9]
+2024-08-09T20:04:41.098+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:41.857+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/games?page=15&size=10", parameters={masked}
+2024-08-09T20:04:41.857+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:41.928+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:41.928+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@743003c1]
+2024-08-09T20:04:41.933+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:04:44.323+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/games?page=16&size=10", parameters={masked}
+2024-08-09T20:04:44.323+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:04:44.374+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:04:44.374+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@70bba82b]
+2024-08-09T20:04:44.379+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:05:08.650+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/games?page=17&size=10", parameters={masked}
+2024-08-09T20:05:08.650+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:05:08.735+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:05:08.735+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@276ba601]
+2024-08-09T20:05:08.735+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:05:17.924+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/games?page=18&size=10", parameters={masked}
+2024-08-09T20:05:17.925+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:05:18.001+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:05:18.001+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@176473cf]
+2024-08-09T20:05:18.001+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:06:58.108+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/games/5/comments?page=0&size=10", parameters={masked}
+2024-08-09T20:06:58.113+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameCommentController#getAllComments(Long, Optional, Optional)
+2024-08-09T20:06:58.348+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:06:58.348+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@459ce5fd]
+2024-08-09T20:06:58.348+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:06:58.360+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/games/5/comments?page=0&size=10", parameters={masked}
+2024-08-09T20:06:58.360+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameCommentController#getAllComments(Long, Optional, Optional)
+2024-08-09T20:06:58.369+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:06:58.369+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@17ddd31d]
+2024-08-09T20:06:58.369+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:06:58.984+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/games/5", parameters={}
+2024-08-09T20:06:58.986+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getGameById(Long)
+2024-08-09T20:06:59.088+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:06:59.112+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [GameDto(id=5, title=FUNNY JUMP, developer=대승인터컴, description=조이스틱과 버튼을 이용하여 집게로 경품을 획득하는 1인용 크레인 방식의 (truncated)...]
+2024-08-09T20:06:59.118+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:06:59.128+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/games/5", parameters={}
+2024-08-09T20:06:59.129+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getGameById(Long)
+2024-08-09T20:06:59.292+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:06:59.292+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [GameDto(id=5, title=FUNNY JUMP, developer=대승인터컴, description=조이스틱과 버튼을 이용하여 집게로 경품을 획득하는 1인용 크레인 방식의 (truncated)...]
+2024-08-09T20:06:59.298+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:07:03.048+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-09T20:07:03.050+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:07:03.150+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:07:03.150+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@47185b65]
+2024-08-09T20:07:03.158+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:07:03.168+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-09T20:07:03.168+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:07:03.298+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:07:03.298+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@775b8dfb]
+2024-08-09T20:07:03.308+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:07:08.090+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/games/11/comments?page=0&size=10", parameters={masked}
+2024-08-09T20:07:08.090+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameCommentController#getAllComments(Long, Optional, Optional)
+2024-08-09T20:07:08.098+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/games/11", parameters={}
+2024-08-09T20:07:08.098+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getGameById(Long)
+2024-08-09T20:07:08.123+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:07:08.128+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [GameDto(id=11, title=신화:소녀 어드벤처, developer=귀위안 주식회사, description=전국시대 배경으로 미소녀를 육성하는 내용을 다룬 RPG게임물,  (truncated)...]
+2024-08-09T20:07:08.131+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:07:08.149+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:07:08.149+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@7410df1a]
+2024-08-09T20:07:08.149+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/games/11", parameters={}
+2024-08-09T20:07:08.158+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getGameById(Long)
+2024-08-09T20:07:08.164+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:07:08.178+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:07:08.182+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [GameDto(id=11, title=신화:소녀 어드벤처, developer=귀위안 주식회사, description=전국시대 배경으로 미소녀를 육성하는 내용을 다룬 RPG게임물,  (truncated)...]
+2024-08-09T20:07:08.185+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:07:08.190+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/games/11/comments?page=0&size=10", parameters={masked}
+2024-08-09T20:07:08.190+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameCommentController#getAllComments(Long, Optional, Optional)
+2024-08-09T20:07:08.232+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:07:08.232+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@7a11617e]
+2024-08-09T20:07:08.240+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:07:16.449+09:00  INFO 27512 --- [gamemate] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 1]
+2024-08-09T20:07:46.464+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/games/11/comments?page=1&size=10", parameters={masked}
+2024-08-09T20:07:46.464+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameCommentController#getAllComments(Long, Optional, Optional)
+2024-08-09T20:07:46.531+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:07:46.531+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@6e32242]
+2024-08-09T20:07:46.531+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:10:08.591+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-09T20:10:08.591+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:10:08.671+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:10:08.674+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@6abad781]
+2024-08-09T20:10:08.674+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:10:08.681+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/games?page=0&size=10", parameters={masked}
+2024-08-09T20:10:08.681+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getAllGames(Optional, Optional)
+2024-08-09T20:10:08.753+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:10:08.753+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@477c04bb]
+2024-08-09T20:10:08.756+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:10:14.155+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/games/11/comments?page=0&size=10", parameters={masked}
+2024-08-09T20:10:14.155+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameCommentController#getAllComments(Long, Optional, Optional)
+2024-08-09T20:10:14.161+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/games/11", parameters={}
+2024-08-09T20:10:14.162+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getGameById(Long)
+2024-08-09T20:10:14.181+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:10:14.181+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [GameDto(id=11, title=신화:소녀 어드벤처, developer=귀위안 주식회사, description=전국시대 배경으로 미소녀를 육성하는 내용을 다룬 RPG게임물,  (truncated)...]
+2024-08-09T20:10:14.181+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:10:14.186+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:10:14.190+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@21ff8153]
+2024-08-09T20:10:14.191+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:10:14.222+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/games/11/comments?page=0&size=10", parameters={masked}
+2024-08-09T20:10:14.222+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/games/11", parameters={}
+2024-08-09T20:10:14.226+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameController#getGameById(Long)
+2024-08-09T20:10:14.226+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameCommentController#getAllComments(Long, Optional, Optional)
+2024-08-09T20:10:14.261+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:10:14.264+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [GameDto(id=11, title=신화:소녀 어드벤처, developer=귀위안 주식회사, description=전국시대 배경으로 미소녀를 육성하는 내용을 다룬 RPG게임물,  (truncated)...]
+2024-08-09T20:10:14.264+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:10:14.277+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:10:14.277+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@749fbb67]
+2024-08-09T20:10:14.282+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:10:16.752+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/games/11/comments?page=1&size=10", parameters={masked}
+2024-08-09T20:10:16.757+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.gamemate.domain.game.controller.GameCommentController#getAllComments(Long, Optional, Optional)
+2024-08-09T20:10:16.839+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/cbor, application/xml;charset=UTF-8, text/xml;charset=UTF-8, application/*+xml;charset=UTF-8]
+2024-08-09T20:10:16.839+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.gamemate.global.common.CustomPage@64f96a05]
+2024-08-09T20:10:16.843+09:00 DEBUG 27512 --- [gamemate] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-08-09T20:37:16.571+09:00  INFO 27512 --- [gamemate] [MessageBroker-2] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 3, active threads = 1, queued tasks = 0, completed tasks = 2]
+2024-08-09T21:07:16.644+09:00  INFO 27512 --- [gamemate] [MessageBroker-2] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 4, active threads = 1, queued tasks = 0, completed tasks = 3]
+2024-08-09T21:37:16.694+09:00  INFO 27512 --- [gamemate] [MessageBroker-3] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 5, active threads = 1, queued tasks = 0, completed tasks = 4]
+2024-08-09T21:37:25.401+09:00 DEBUG 27512 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2024-08-09T21:37:25.402+09:00 DEBUG 27512 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2024-08-09T21:37:25.402+09:00  INFO 27512 --- [gamemate] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2024-08-09T21:37:25.403+09:00  INFO 27512 --- [gamemate] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@d6c0f62]]
+2024-08-09T21:37:25.403+09:00 DEBUG 27512 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@d6c0f62]
+2024-08-09T21:37:25.403+09:00 DEBUG 27512 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@d6c0f62]
+2024-08-09T21:37:25.403+09:00  INFO 27512 --- [gamemate] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2024-08-09T21:37:25.403+09:00 DEBUG 27512 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-09T21:37:25.403+09:00 DEBUG 27512 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-09T21:37:25.782+09:00  INFO 27512 --- [gamemate] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-09T21:37:25.793+09:00  INFO 27512 --- [gamemate] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-08-09T21:37:25.802+09:00  INFO 27512 --- [gamemate] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-08-09T21:37:29.476+09:00  INFO 27460 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Starting GamemateApplication using Java 17.0.10 with PID 27460 (C:\Users\user\gamemate\gamemate\build\classes\java\main started by user in C:\Users\user\gamemate\gamemate)
+2024-08-09T21:37:29.478+09:00 DEBUG 27460 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-08-09T21:37:29.478+09:00  INFO 27460 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-08-09T21:37:29.537+09:00  INFO 27460 --- [gamemate] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-08-09T21:37:29.538+09:00  INFO 27460 --- [gamemate] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-08-09T21:37:30.543+09:00  INFO 27460 --- [gamemate] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-09T21:37:30.736+09:00  INFO 27460 --- [gamemate] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 182 ms. Found 12 JPA repository interfaces.
+2024-08-09T21:37:31.543+09:00  INFO 27460 --- [gamemate] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-08-09T21:37:31.557+09:00  INFO 27460 --- [gamemate] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-09T21:37:31.557+09:00  INFO 27460 --- [gamemate] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-09T21:37:31.617+09:00  INFO 27460 --- [gamemate] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-09T21:37:31.618+09:00  INFO 27460 --- [gamemate] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2080 ms
+2024-08-09T21:37:31.783+09:00  INFO 27460 --- [gamemate] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-09T21:37:31.854+09:00  INFO 27460 --- [gamemate] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-09T21:37:31.892+09:00  INFO 27460 --- [gamemate] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-08-09T21:37:32.235+09:00  INFO 27460 --- [gamemate] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-09T21:37:32.269+09:00  INFO 27460 --- [gamemate] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-08-09T21:37:32.576+09:00  INFO 27460 --- [gamemate] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@71883dec
+2024-08-09T21:37:32.578+09:00  INFO 27460 --- [gamemate] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-08-09T21:37:32.637+09:00  WARN 27460 --- [gamemate] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-08-09T21:37:32.638+09:00  WARN 27460 --- [gamemate] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-08-09T21:37:33.916+09:00  INFO 27460 --- [gamemate] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-09T21:37:34.076+09:00  INFO 27460 --- [gamemate] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-09T21:37:35.265+09:00  WARN 27460 --- [gamemate] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-09T21:37:35.290+09:00  INFO 27460 --- [gamemate] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-08-09T21:37:35.404+09:00 DEBUG 27460 --- [gamemate] [restartedMain] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+2024-08-09T21:37:35.511+09:00 DEBUG 27460 --- [gamemate] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 50 mappings in 'requestMappingHandlerMapping'
+2024-08-09T21:37:35.517+09:00 DEBUG 27460 --- [gamemate] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/] in 'viewControllerHandlerMapping'
+2024-08-09T21:37:36.054+09:00 DEBUG 27460 --- [gamemate] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2024-08-09T21:37:36.162+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.a.c.JoinController:
+	
+2024-08-09T21:37:36.162+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.ChatRoomController:
+	
+2024-08-09T21:37:36.163+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.ChatRoomMemberController:
+	
+2024-08-09T21:37:36.166+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.c.c.MessageController:
+	{[MESSAGE],[/message/send/{roomId}]}: sendMessage(MessageModel,String)
+2024-08-09T21:37:36.167+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.f.c.FriendController:
+	
+2024-08-09T21:37:36.167+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameCommentController:
+	
+2024-08-09T21:37:36.167+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameController:
+	
+2024-08-09T21:37:36.167+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.GameRatingController:
+	
+2024-08-09T21:37:36.167+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.g.c.MyGameController:
+	
+2024-08-09T21:37:36.167+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.p.c.PostCommentController:
+	
+2024-08-09T21:37:36.167+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.p.c.PostController:
+	
+2024-08-09T21:37:36.167+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.s.c.AccessLogController:
+	
+2024-08-09T21:37:36.167+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.s.c.S3Controller:
+	
+2024-08-09T21:37:36.167+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.e.g.d.u.c.UserController:
+	
+2024-08-09T21:37:36.168+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2024-08-09T21:37:36.169+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.a.OpenApiWebMvcResource:
+	
+2024-08-09T21:37:36.170+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	
+2024-08-09T21:37:36.170+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerConfigResource:
+	
+2024-08-09T21:37:36.229+09:00 DEBUG 27460 --- [gamemate] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-08-09T21:37:36.260+09:00 DEBUG 27460 --- [gamemate] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-08-09T21:37:36.442+09:00  INFO 27460 --- [gamemate] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-08-09T21:37:36.501+09:00  INFO 27460 --- [gamemate] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-08-09T21:37:36.502+09:00 DEBUG 27460 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2024-08-09T21:37:36.503+09:00 DEBUG 27460 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2024-08-09T21:37:36.503+09:00  INFO 27460 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2024-08-09T21:37:36.503+09:00 DEBUG 27460 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@45c429cf]
+2024-08-09T21:37:36.503+09:00 DEBUG 27460 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@45c429cf]
+2024-08-09T21:37:36.503+09:00  INFO 27460 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@45c429cf]]
+2024-08-09T21:37:36.504+09:00  INFO 27460 --- [gamemate] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2024-08-09T21:37:36.504+09:00 DEBUG 27460 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-09T21:37:36.504+09:00 DEBUG 27460 --- [gamemate] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-09T21:37:36.512+09:00  INFO 27460 --- [gamemate] [restartedMain] c.example.gamemate.GamemateApplication   : Started GamemateApplication in 7.421 seconds (process running for 8.067)
+2024-08-09T21:37:39.664+09:00 DEBUG 27460 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2024-08-09T21:37:39.665+09:00 DEBUG 27460 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2024-08-09T21:37:39.665+09:00  INFO 27460 --- [gamemate] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2024-08-09T21:37:39.665+09:00  INFO 27460 --- [gamemate] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@45c429cf]]
+2024-08-09T21:37:39.665+09:00 DEBUG 27460 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@45c429cf]
+2024-08-09T21:37:39.665+09:00 DEBUG 27460 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@45c429cf]
+2024-08-09T21:37:39.665+09:00  INFO 27460 --- [gamemate] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2024-08-09T21:37:39.665+09:00 DEBUG 27460 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-09T21:37:39.665+09:00 DEBUG 27460 --- [gamemate] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-08-09T21:37:39.882+09:00  INFO 27460 --- [gamemate] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-09T21:37:39.887+09:00  INFO 27460 --- [gamemate] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-08-09T21:37:39.894+09:00  INFO 27460 --- [gamemate] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
