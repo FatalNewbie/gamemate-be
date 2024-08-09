@@ -63,6 +63,16 @@ public class FriendController {
         return ApiResponse.successRes(HttpStatus.OK, response);
     }
 
+    @DeleteMapping("/{friendId}")
+    public ApiResponse<FriendResponseDTO> deleteFriend(
+            @PathVariable Long friendId,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        FriendResponseDTO response = friendService.deleteFriend(userDetails.getUsername(), friendId);
+        return ApiResponse.successRes(HttpStatus.OK, response);
+    }
+
+
     @GetMapping("/")
     public ApiResponse<List<UserDTO>> getFriends(@AuthenticationPrincipal UserDetails userDetails) {
         List<UserDTO> friends = friendService.getFriends(userDetails.getUsername());

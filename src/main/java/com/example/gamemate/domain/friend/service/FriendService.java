@@ -131,6 +131,30 @@ public class FriendService {
         }
     }
 
+    @Transactional
+    public FriendResponseDTO deleteFriend(String username, Long friendId) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new RestApiException(FriendExceptionCode.INVALID_USER_ID);
+        }
+
+        // user가 requester이거나 receiver인 친구 관계를 찾습니다.
+        Optional<Friend> optionalFriend = friendRepository.findFriendRelationship(user.getId(), friendId);
+
+        if (optionalFriend.isEmpty() || optionalFriend.get().getStatus() != Friend.Status.ACCEPTED) {
+            throw new RestApiException(FriendExceptionCode.INVALID_FRIEND_RELATIONSHIP);
+        }
+
+        Friend friend = optionalFriend.get();
+        friendRepository.delete(friend);
+
+        return new FriendResponseDTO("친구 관계가 삭제되었습니다.",
+                Friend.Status.REJECTED,
+                new UserDTO(friend.getRequester()),
+                new UserDTO(friend.getReceiver()),
+                null);
+    }
+
     public List<UserDTO> getFriends(String username) {
         User user = userRepository.findByUsername(username);
         if (user == null) {
