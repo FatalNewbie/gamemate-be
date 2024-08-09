@@ -88,7 +88,7 @@ public class SecurityConfig {
 
             //경로별 인가 작업
             .authorizeHttpRequests((auth) -> auth
-                .requestMatchers("/login", "/", "/join","/friend/**").permitAll()
+                .requestMatchers("/login", "/", "/join","/friend/**", "/games/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**").permitAll() // Swagger 경로 허용
                 .requestMatchers("/ws/**").permitAll() // WebSocket 핸드셰이크 경로 허용
                 .anyRequest().permitAll())

@@ -1,24 +1,36 @@
 package com.example.gamemate.domain.game.controller;
 
+import com.example.gamemate.global.common.CustomPage;
 import com.example.gamemate.domain.game.dto.GameDto;
 import com.example.gamemate.domain.game.service.GameApiClient;
 import com.example.gamemate.domain.game.service.GameService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
+@Tag(name = "Game", description = "Game API")
+@Slf4j
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping
 public class GameController {
 
-    @Autowired
-    private GameService gameService;
+    private final GameService gameService;
+    private final GameApiClient gameApiClient;
 
-    @Autowired
-    private GameApiClient gameApiClient;
+    public GameController(GameService gameService, GameApiClient gameApiClient) {
+        this.gameService = gameService;
+        this.gameApiClient = gameApiClient;
+    }
 
+    //게임 api fetch 확인 api
     @GetMapping("/fetch-and-convert-games")
     public String fetchAndConvertGames(
             @RequestParam(required = false) String gametitle,
@@ -32,7 +44,8 @@ public class GameController {
         return gameApiClient.fetchGames(gametitle, entname, rateno, startdate, enddate, display, pageno);
     }
 
-    @GetMapping("/fetch-games") //dto 만들어서 걔만 받아주면 됨
+    //게임 api 데이터베이스 추가 api
+    @GetMapping("/fetch-games")
     public String fetchAndSaveGames(
             @RequestParam(required = false) String gametitle,
             @RequestParam(required = false) String entname,
@@ -43,40 +56,57 @@ public class GameController {
             @RequestParam int pageno) {
 
         gameService.fetchAndSaveGames(gametitle, entname, rateno, startdate, enddate, display, pageno);
-        return "Games fetched and saved successfully";
+        return "게임 정보가 성공적으로 저장되었습니다.";
     }
 
-    //게임리스트 페이지(유저), 관리자 페이지
+    @GetMapping("/games/search")
+    public ResponseEntity<List<GameDto>> searchGames(
+            @RequestParam String title,
+            @RequestParam String developer) {
+        List<GameDto> games = gameService.findGamesByTitleAndDeveloper(title, developer);
+        return ResponseEntity.ok(games);
+    }
+
+    // 게임 리스트 조회
     @GetMapping("/games")
-    public List<GameDto> getAllGames() {
-        return gameService.getAllGames();
+    public ResponseEntity<CustomPage<GameDto>> getAllGames(@RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size) {
+        Pageable pageable = Pageable.unpaged(); // 기본적으로 모든 데이터를 가져오는 설정
+        if (page.isPresent() && size.isPresent()) {
+            pageable = PageRequest.of(page.get(), size.get());
+        }
+
+        Page<GameDto> games = gameService.getAllGames(pageable);
+        CustomPage<GameDto> customPage = new CustomPage<>(games);
+        return ResponseEntity.ok(customPage);
     }
 
-    //게임 상세 페이지
+
+
+    //게임상세 조회 api
     @GetMapping("/games/{id}")
     public ResponseEntity<GameDto> getGameById(@PathVariable Long id) {
         GameDto gameDto = gameService.getGameById(id);
         return ResponseEntity.ok(gameDto);
     }
 
-    //관리자 페이지
+    //게임상세 추가 api (관리자)
     @PostMapping("/games")
     public ResponseEntity<GameDto> createGame(@RequestBody GameDto gameDto) {
         GameDto newGame = gameService.createGame(gameDto);
         return ResponseEntity.ok(newGame);
     }
 
-    //관리자 페이지
+    //게임상세 수정 api (관리자)
     @PutMapping("/games/{id}")
     public ResponseEntity<GameDto> updateGame(@PathVariable Long id, @RequestBody GameDto gameDto) {
         GameDto updatedGame = gameService.updateGame(id, gameDto);
         return ResponseEntity.ok(updatedGame);
     }
 
-    //관리자 페이지
+    // 게임상세 삭제 api (관리자)
     @DeleteMapping("/games/{id}")
     public ResponseEntity<Void> deleteGame(@PathVariable Long id) {
         gameService.deleteGame(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 }

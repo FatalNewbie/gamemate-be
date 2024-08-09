@@ -6,9 +6,9 @@ import lombok.Getter;
 
 @Data
 @Getter
-public class GameRatingDto {
+@Builder
+public class RatingDto {
     private Long id;
-    private Long userId;
-    private Long gameId;
     private int rating;
+    private String username;  // Assuming you'd want to display the username
 }
