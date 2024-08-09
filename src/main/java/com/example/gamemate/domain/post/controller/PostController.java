@@ -9,6 +9,7 @@ import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.dto.PostResponseDTO;
 import com.example.gamemate.domain.post.entity.PostComment;
 import com.example.gamemate.domain.post.service.PostService;
+import com.example.gamemate.global.CustomPage;
 import com.example.gamemate.global.apiRes.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -40,12 +41,12 @@ public class PostController {
 
     //글 List 조회 api
     @GetMapping
-    public ApiResponse<Page<PostResponseDTO>> getAllOnlinePosts(
-            @RequestParam String status,
+    public ApiResponse<CustomPage<PostResponseDTO>> getAllPosts(
+            @RequestParam(name = "status") String status,
             @PageableDefault(size = 10) Pageable pageable
     ){
 
-        Page<PostResponseDTO> posts = postService.readPosts(status, pageable);
+        CustomPage<PostResponseDTO> posts = postService.readPosts(status, pageable);
 
         return ApiResponse.successRes(HttpStatus.OK,posts);
     }

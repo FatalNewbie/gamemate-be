@@ -8,6 +8,7 @@ import com.example.gamemate.domain.post.repository.PostCommentRepository;
 import com.example.gamemate.domain.post.repository.PostRepository;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.repository.UserRepository;
+import com.example.gamemate.global.CustomPage;
 import com.example.gamemate.global.exception.CommonExceptionCode;
 import com.example.gamemate.global.exception.PostExceptionCode;
 import com.example.gamemate.global.exception.RestApiException;
@@ -36,7 +37,7 @@ public class PostService {
     }
 
     //게시글 리스트 조회
-    public Page<PostResponseDTO> readPosts(String status, Pageable pageable){
+    public CustomPage<PostResponseDTO> readPosts(String status, Pageable pageable){
 
         Page<Post> postPage = null;
 
@@ -48,7 +49,9 @@ public class PostService {
             postPage = postRepository.findByStatus(Post.OnOffStatus.OFF, pageable);
         }
 
-        return postPage.map(PostResponseDTO::new);
+        assert postPage != null;
+
+        return new CustomPage<>(postPage.map(PostResponseDTO::new));
     }
 
     //게시글 조회
@@ -60,23 +63,8 @@ public class PostService {
 
         User user = userRepository.findByUsername(username);
 
-        //부모 댓글 필터링해서 가져오기
-        List<PostComment> parentComments = post.getPostComments().stream()
-                .filter(postComment -> postComment.getParentComment() == null)
-                .collect(Collectors.toList());
-
-        //댓글 응답 DTO로 변환
-        List<PostCommentsResponseDTO> postCommentDto = parentComments.stream()
-                .map(postComment -> PostCommentsResponseDTO.builder()
-                        .id(postComment.getId())
-                        .username(postCommentRepository.findUsernameByCommentId(postComment.getId()))
-                        .nickname(postComment.getNickname())
-                        .content(postComment.getContent())
-                        .recomments(getRecomments(postComment))
-                        .build())
-                .collect(Collectors.toList());
-
         return PostResponseDTO.builder()
+                .id(post.getId())
                 .username(username)
                 .nickname(user.getNickname())
                 .gameTitle(post.getGameTitle())
@@ -89,20 +77,7 @@ public class PostService {
                 .mateRegionGu(post.getMateRegionGu())
                 .latitude(post.getLatitude())
                 .longitude(post.getLongitude())
-                .postComments(postCommentDto)
                 .build();
-    }
-
-    //게시글 댓글 조회
-    private List<RecommentsResponseDTO> getRecomments(PostComment parentComment){
-        return parentComment.getReComments().stream()
-                .map(recomment -> RecommentsResponseDTO.builder()
-                        .id(recomment.getId())
-                        .username(postCommentRepository.findUsernameByCommentId(recomment.getId()))
-                        .nickname(recomment.getNickname())
-                        .content(recomment.getContent())
-                        .build())
-                .collect(Collectors.toList());
     }
 
 

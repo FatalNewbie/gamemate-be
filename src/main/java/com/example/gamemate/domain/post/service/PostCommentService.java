@@ -2,6 +2,7 @@ package com.example.gamemate.domain.post.service;
 
 import com.example.gamemate.domain.post.dto.PostCommentResponseDTO;
 import com.example.gamemate.domain.post.dto.PostCommentsResponseDTO;
+import com.example.gamemate.domain.post.dto.RecommentsResponseDTO;
 import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.entity.PostComment;
 import com.example.gamemate.domain.post.dto.PostCommentDTO;
@@ -10,13 +11,19 @@ import com.example.gamemate.domain.post.repository.PostCommentRepository;
 import com.example.gamemate.domain.post.repository.PostRepository;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.repository.UserRepository;
+import com.example.gamemate.global.CustomPage;
 import com.example.gamemate.global.exception.CommonExceptionCode;
 import com.example.gamemate.global.exception.PostExceptionCode;
 import com.example.gamemate.global.exception.RestApiException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -32,6 +39,51 @@ public class PostCommentService {
         this.postCommentRepository = postCommentRepository;
         this.postRepository = postRepository;
         this.mapper = mapper;
+    }
+
+    public CustomPage<PostCommentsResponseDTO> readPostComments(Long id, Pageable pageable){
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
+
+        // 부모 댓글 필터링해서 가져오기
+        List<PostComment> parentComments = post.getPostComments().stream()
+                .filter(postComment -> postComment.getParentComment() == null)
+                .collect(Collectors.toList());
+
+        // 페이징 처리
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), parentComments.size());
+        List<PostComment> filteredComments = parentComments.subList(start, end);
+
+        // 댓글 DTO로 변환
+        List<PostCommentsResponseDTO> commentsDTO = filteredComments.stream()
+                .map(postComment -> PostCommentsResponseDTO.builder()
+                        .id(postComment.getId())
+                        .username(postCommentRepository.findUsernameByCommentId(postComment.getId()))
+                        .nickname(postComment.getNickname())
+                        .content(postComment.getContent())
+                        .recomments(getRecomments(postComment))
+                        .build())
+                .collect(Collectors.toList());
+
+        CustomPage<PostCommentsResponseDTO> customComments =
+                new CustomPage<>(new PageImpl<>(commentsDTO, pageable, parentComments.size()));
+
+
+        // 댓글 DTO로 변환
+        return customComments;
+    }
+
+    //게시글 댓글 조회
+    private List<RecommentsResponseDTO> getRecomments(PostComment parentComment){
+        return parentComment.getReComments().stream()
+                .map(recomment -> RecommentsResponseDTO.builder()
+                        .id(recomment.getId())
+                        .username(postCommentRepository.findUsernameByCommentId(recomment.getId()))
+                        .nickname(recomment.getNickname())
+                        .content(recomment.getContent())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     //게시글 댓글 생성

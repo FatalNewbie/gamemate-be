@@ -41,10 +41,6 @@ public class PostResponseDTO {
 
     private BigDecimal longitude;
 
-
-
-    private List<PostCommentsResponseDTO> postComments;
-
     public void setPostUsername(String username){
         this.username = username;
     }
@@ -70,8 +66,7 @@ public class PostResponseDTO {
     public PostResponseDTO(
             Long id, String username, String nickname, String status, String gameTitle,
             String gameGenre, Integer mateCnt, String mateContent, Long commentCnt,
-            String mateRegionSi, String mateRegionGu, BigDecimal latitude, BigDecimal longitude,
-            List<PostCommentsResponseDTO> postComments
+            String mateRegionSi, String mateRegionGu, BigDecimal latitude, BigDecimal longitude
     ){
         this.id = id;
         this.username = username;
@@ -88,8 +83,6 @@ public class PostResponseDTO {
         this.mateRegionGu = mateRegionGu;
         this.latitude = latitude;
         this.longitude = longitude;
-
-        this.postComments = postComments; // 필요시 초기화 로직 추가
     }
 
 }
