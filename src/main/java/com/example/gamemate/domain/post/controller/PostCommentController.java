@@ -3,21 +3,17 @@ package com.example.gamemate.domain.post.controller;
 import com.example.gamemate.domain.post.dto.PostCommentDTO;
 import com.example.gamemate.domain.post.dto.PostCommentResponseDTO;
 import com.example.gamemate.domain.post.dto.PostCommentsResponseDTO;
-import com.example.gamemate.domain.post.entity.PostComment;
 import com.example.gamemate.domain.post.service.PostCommentService;
-import com.example.gamemate.global.CustomPage;
 import com.example.gamemate.global.apiRes.ApiResponse;
+import com.example.gamemate.global.common.CustomPage;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tag(name = "Post Comment", description = "Post Comment API")
 @RequestMapping("/post")

@@ -1,28 +1,21 @@
 package com.example.gamemate.domain.post.controller;
 
 
-import com.amazonaws.services.ec2.model.UserData;
 import com.example.gamemate.domain.post.dto.PostDTO;
 import com.example.gamemate.domain.post.dto.PostUpdateDTO;
 import com.example.gamemate.domain.post.dto.PostUpdateResponseDTO;
-import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.dto.PostResponseDTO;
-import com.example.gamemate.domain.post.entity.PostComment;
 import com.example.gamemate.domain.post.service.PostService;
-import com.example.gamemate.global.CustomPage;
 import com.example.gamemate.global.apiRes.ApiResponse;
+import com.example.gamemate.global.common.CustomPage;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.objenesis.ObjenesisHelper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
