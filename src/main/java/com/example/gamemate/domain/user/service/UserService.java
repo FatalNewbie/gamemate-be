@@ -3,17 +3,20 @@ package com.example.gamemate.domain.user.service;
 
 
 
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.*;
 import com.example.gamemate.domain.user.dto.MyPageResponseDTO;
 import com.example.gamemate.domain.user.dto.UpdateDTO;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.mapper.UserMapper;
 import com.example.gamemate.domain.user.repository.UserRepository;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +26,6 @@ import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.HttpMethod;
-import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -127,6 +129,7 @@ public class UserService {
         return s3Client.generatePresignedUrl(generatePresignedUrlRequest);
     }
 
+
     public String getProfileImageUrl(String username) {
         String objectKey = username + "_profile_image";
 
@@ -139,10 +142,39 @@ public class UserService {
         }
     }
 
-    public void uploadProfileImage(String username, MultipartFile file) throws IOException {
+
+    public String uploadProfileImage(String username, MultipartFile file) throws IOException {
         String objectKey = username + "_profile_image";
-        s3Client.putObject(new PutObjectRequest(bucketName, objectKey, file.getInputStream(), null)
-                .withCannedAcl(CannedAccessControlList.PublicRead));
+
+        // S3에 파일 업로드
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(file.getSize());
+        s3Client.putObject(new PutObjectRequest(bucketName, objectKey, file.getInputStream(), metadata));
+
+        // 업로드된 이미지 URL 생성
+        return s3Client.getUrl(bucketName, objectKey).toString(); // 이미지 URL 반환
+    }
+
+    public void updateUserProfileImage(String username, String imageUrl) {
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            user.setUserProfile(imageUrl); // userProfile 필드에 이미지 URL 저장
+            userRepository.save(user); // 변경사항 저장
+            System.out.println("프로필 이미지 업데이트 완료: " + imageUrl);
+        } else {
+            System.out.println("사용자를 찾을 수 없습니다: " + username);
+        }
+    }
+    public List<String> listImages() {
+        List<String> imageUrls = new ArrayList<>();
+
+        ObjectListing objectListing = s3Client.listObjects(bucketName);
+        for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
+            String imageUrl = s3Client.getUrl(bucketName, objectSummary.getKey()).toString();
+            imageUrls.add(imageUrl); // 이미지 URL 리스트에 추가
+        }
+
+        return imageUrls; // 이미지 URL 리스트 반환
     }
 
 

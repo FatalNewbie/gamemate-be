@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -88,30 +89,34 @@ public class UserController {
         return "복구완료"; // 복구 성공 메시지 반환
     }
 
-    @GetMapping("/profile/presigned-url")
+    @GetMapping("/presigned-url")
     public ResponseEntity<String> getPresignedUrl(@AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
         URL presignedUrl = userService.generatePresignedUrl(username);
         return ResponseEntity.ok(presignedUrl.toString());
     }
-    @GetMapping("/profile/image")
+    @GetMapping("/profile")
     public ResponseEntity<String> getProfileImage(@AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
         String imageUrl = userService.getProfileImageUrl(username);
         return ResponseEntity.ok(imageUrl);
     }
 
-    @PostMapping("/profile/image")
-    public ResponseEntity<String> uploadProfileImage(@AuthenticationPrincipal UserDetails userDetails, @RequestParam("file") MultipartFile file) {
-        String username = userDetails.getUsername();
-
+    @PostMapping("/profile/update")
+    public ResponseEntity<Void> updateProfileImage(@RequestBody UpdateDTO updateDTO) {
         try {
-            // UserService의 메소드를 호출하여 파일 업로드
-            userService.uploadProfileImage(username, file);
-            return ResponseEntity.ok("파일 업로드 완료");
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 업로드 실패: " + e.getMessage());
+            // 사용자 이름과 이미지 URL을 사용하여 프로필 업데이트
+           userService.updateUserProfileImage(updateDTO.getUsername(), updateDTO.getUserProfile());
+            return ResponseEntity.ok().build(); // 성공적으로 업데이트
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build(); // 오류 발생 시 500 반환
         }
+    }
+
+    @GetMapping("s3/images")
+    public ResponseEntity<List<String>> getImages() {
+        List<String> imageUrls = userService.listImages();
+        return ResponseEntity.ok(imageUrls); // 이미지 URL 리스트 반환
     }
 
 }
