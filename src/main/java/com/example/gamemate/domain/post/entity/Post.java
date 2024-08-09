@@ -1,7 +1,7 @@
 package com.example.gamemate.domain.post.entity;
 
+import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.global.audit.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,15 +17,15 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "post")
 @Entity
-
 public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Enumerated(EnumType.STRING) // Enum을 문자열로 저장
     @Column(nullable = false)
@@ -36,6 +36,9 @@ public class Post extends BaseEntity {
 
     @Column(length = 50)
     private String gameGenre;
+
+    @Column(length = 20)
+    private String nickname;
 
     @Column
     private Integer mateCnt;
@@ -58,7 +61,7 @@ public class Post extends BaseEntity {
     @Column
     private LocalDateTime deletedDate;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<PostComment> postComments = new ArrayList<>();
 
     public enum OnOffStatus {
@@ -71,7 +74,11 @@ public class Post extends BaseEntity {
         this.mateContent = mateContent;
     }
 
-    public void updateOfflinePost(Integer mateCnt, String mateContent, String mateRegionSi, String mateRegionGu, BigDecimal latitude, BigDecimal longitude){
+    public void updateOfflinePost(
+            Integer mateCnt, String mateContent,
+            String mateRegionSi, String mateRegionGu,
+            BigDecimal latitude, BigDecimal longitude
+    ){
         this.mateCnt = mateCnt;
         this.mateContent = mateContent;
         this.mateRegionGu = mateRegionGu;
@@ -81,18 +88,25 @@ public class Post extends BaseEntity {
     }
 
     @Builder
-    public Post(Long userId, OnOffStatus status, String gameTitle, String gameGenre, Integer mateCnt, String mateContent,
-                String mateRegionSi, String mateRegionGu, BigDecimal latitude, BigDecimal longitude) {
-        this.userId = userId;
+    public Post(
+            User user, OnOffStatus status, String gameTitle, String gameGenre,
+            String nickname, Integer mateCnt, String mateContent,
+            String mateRegionSi, String mateRegionGu,
+            BigDecimal latitude, BigDecimal longitude
+    ) {
+
+        this.user = user;
         this.status = status;
         this.gameTitle = gameTitle;
         this.gameGenre = gameGenre;
+        this.nickname = nickname;
         this.mateCnt = mateCnt;
         this.mateContent = mateContent;
         this.mateRegionSi = mateRegionSi;
         this.mateRegionGu = mateRegionGu;
         this.latitude = latitude;
         this.longitude = longitude;
+
     }
 
 }

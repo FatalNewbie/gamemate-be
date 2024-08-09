@@ -1,21 +1,31 @@
 package com.example.gamemate.domain.post.dto;
 
-import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.math.BigDecimal;
 
+@AllArgsConstructor
 @Getter
-public class PostUpdateDTO {
+public class PostUpdateResponseDTO {
 
-    @NotNull
+    private String username;
+
+    private String nickname;
+
+
     private String status;
 
-    @NotNull
+    private String gameTitle;
+
+    private String gameGenre;
+
     private Integer mateCnt;
 
-    @NotNull
     private String mateContent;
+
+    private Long commentCnt;
+
 
 
     private String mateRegionSi;
@@ -26,4 +36,7 @@ public class PostUpdateDTO {
 
     private BigDecimal longitude;
 
+    public void setPostUsername(String username){
+        this.username = username;
+    }
 }

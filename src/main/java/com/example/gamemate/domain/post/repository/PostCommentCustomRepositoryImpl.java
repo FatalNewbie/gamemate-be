@@ -1,6 +1,8 @@
 package com.example.gamemate.domain.post.repository;
 
 import com.example.gamemate.domain.post.entity.PostComment;
+import com.example.gamemate.domain.post.entity.QPostComment;
+import com.example.gamemate.domain.user.entity.QUser;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.cglib.core.Local;
 
@@ -8,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.example.gamemate.domain.post.entity.QPostComment.postComment;
+import static com.example.gamemate.domain.user.entity.QUser.user;
 
 public class PostCommentCustomRepositoryImpl implements PostCommentCustomRepository{
 
@@ -76,6 +79,17 @@ public class PostCommentCustomRepositoryImpl implements PostCommentCustomReposit
                 .select(postComment.parentComment.id)
                 .from(postComment)
                 .where(postComment.id.eq(recommentId))
+                .fetchOne();
+    }
+
+    @Override
+    public String findUsernameByCommentId(Long commentId) {
+
+        return jpaQueryFactory
+                .select(user.username)
+                .from(postComment)
+                .join(postComment.user, user)
+                .where(postComment.id.eq(commentId))
                 .fetchOne();
     }
 

@@ -8,7 +8,6 @@ public interface PostCommentCustomRepository {
 
     List<PostComment> findPostCommentsById(Long id);
 
-
     boolean isRecomment(Long commentId);
 
     Long hasRecomments(Long commentId);
@@ -16,5 +15,7 @@ public interface PostCommentCustomRepository {
     boolean isParentCommentDeleted(Long recommentId);
 
     Long getPCommentId(Long recommentId);
+
+    String findUsernameByCommentId(Long userId);
 
 }

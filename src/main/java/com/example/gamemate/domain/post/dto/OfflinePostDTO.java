@@ -12,8 +12,11 @@ public class OfflinePostDTO extends PostDTO {
     }
 
     private String mateRegionSi;
+
     private String mateRegionGu;
+
     private BigDecimal latitude;
+
     private BigDecimal longitude;
 
 }
