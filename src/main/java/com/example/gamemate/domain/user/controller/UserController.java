@@ -85,7 +85,7 @@ public class UserController {
         return "수정완료";
     }
 
-    @GetMapping("/api/v1/delete")
+    @GetMapping("/delete")
     public String deleteByName(@RequestParam("username") String username) {
         // 로그 추가
         log.info("deleteCheck");
@@ -95,7 +95,7 @@ public class UserController {
     }
 
 
-    @PutMapping("/api/v1/restoreUser/{username}")
+    @PutMapping("/restoreUser/{username}")
     @PreAuthorize("hasRole('ADMIN')")
     public String restoreUser(@PathVariable String username) {
         userService.restorationByUsername(username); // userService에서 회원 복구 작업을 처리
