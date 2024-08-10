@@ -54,12 +54,12 @@ public class FriendController {
     }
 
     @PutMapping("/cancel")
-    public ApiResponse<String> cancelFriendRequest(
+    public ApiResponse<FriendResponseDTO> cancelFriendRequest(
             @RequestBody FriendPutDTO friendPutDto,
             @AuthenticationPrincipal UserDetails userDetails) {
         User requester = userRepository.findByUsername(userDetails.getUsername());
         friendPutDto.setRequesterId(requester.getId());
-        String response = friendService.cancelFriendRequest(userDetails.getUsername(), friendPutDto);
+        FriendResponseDTO response = friendService.cancelFriendRequest(userDetails.getUsername(), friendPutDto);
         return ApiResponse.successRes(HttpStatus.OK, response);
     }
 

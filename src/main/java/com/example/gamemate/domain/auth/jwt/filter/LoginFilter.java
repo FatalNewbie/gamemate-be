@@ -104,7 +104,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     //로그인 성공 시 실행하는 메소드(여기서 JWT 발급)
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication)
-        throws IOException {
+            throws IOException {
 
         //UserDetails
         CustomUserDetailsDTO customUserDetails = (CustomUserDetailsDTO) authentication.getPrincipal();

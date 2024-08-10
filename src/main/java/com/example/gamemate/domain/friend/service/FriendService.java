@@ -54,7 +54,7 @@ public class FriendService {
             }
 
             if (friend.getStatus() == Friend.Status.PENDING) {
-                return new FriendResponseDTO("친구 요청이 와있는 대상입니다.",
+                return new FriendResponseDTO("친구 요청이 진행 중인 유저입니다.",
                         Friend.Status.PENDING,
                         new UserDTO(requester),
                         new UserDTO(receiver),
@@ -112,7 +112,7 @@ public class FriendService {
     }
 
     @Transactional
-    public String cancelFriendRequest(String username, FriendPutDTO friendPutDTO) {
+    public FriendResponseDTO cancelFriendRequest(String username, FriendPutDTO friendPutDTO) {
         User requester = userRepository.findByUsername(username);
 
         User receiver = userRepository.findById(friendPutDTO.getReceiverId())
@@ -124,8 +124,13 @@ public class FriendService {
                 .orElseThrow(() -> new RestApiException(FriendExceptionCode.INVALID_FRIEND_RELATIONSHIP));
 
         if (friend.getStatus() == Friend.Status.PENDING) {
+            FriendResponseDTO response = new FriendResponseDTO("친구 요청이 취소되었습니다.",
+                    Friend.Status.CANCELED,
+                    new UserDTO(friend.getRequester()),
+                    new UserDTO(friend.getReceiver()),
+                    null);
             friendRepository.delete(friend);
-            return "친구 요청이 취소되었습니다.";
+            return response;
         } else {
             throw new RestApiException(FriendExceptionCode.INVALID_FRIEND_STATUS);
         }

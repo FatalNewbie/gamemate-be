@@ -32,9 +32,9 @@ public class JWTFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(
-        HttpServletRequest request,
-        HttpServletResponse response,
-        FilterChain filterChain
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
     ) throws ServletException, IOException {
 
         boolean isOAuth2User = isOAuth2User();
@@ -85,9 +85,9 @@ public class JWTFilter extends OncePerRequestFilter {
             CustomOAuth2UserDTO customOAuth2UserDTO = new CustomOAuth2UserDTO(oAuth2DTO);
 
             authToken = new UsernamePasswordAuthenticationToken(
-                customOAuth2UserDTO,
-                null,
-                customOAuth2UserDTO.getAuthorities()
+                    customOAuth2UserDTO,
+                    null,
+                    customOAuth2UserDTO.getAuthorities()
             );
 
         } else {
@@ -103,9 +103,9 @@ public class JWTFilter extends OncePerRequestFilter {
 
             //스프링 시큐리티 인증 토큰 생성
             authToken = new UsernamePasswordAuthenticationToken(
-                customUserDetails,
-                null,
-                customUserDetails.getAuthorities()
+                    customUserDetails,
+                    null,
+                    customUserDetails.getAuthorities()
             );
         }
 
@@ -118,7 +118,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
     private boolean isOAuth2User() {
         return SecurityContextHolder.getContext().getAuthentication() != null &&
-            SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof CustomOAuth2UserDTO;
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof CustomOAuth2UserDTO;
     }
 
 }
