@@ -1,5 +1,6 @@
 package com.example.gamemate.domain.chat.model.message;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,11 +19,16 @@ public class OutputMessageModel {
 
 
     public enum MessageType {
-        CHAT, JOIN, LEAVE
+        CHAT, JOIN, LEAVE, INVITE
     }
 
 
-    public OutputMessageModel(Long id,String writer, Long chatRoomId, String content, String time, MessageType type) {
+    public OutputMessageModel( Long id,
+                               String writer,
+                              Long chatRoomId,
+                              String content,
+                              String time,
+                               MessageType type) {
         this.id=id;
         this.writer = writer;
         this.chatRoomId = chatRoomId;

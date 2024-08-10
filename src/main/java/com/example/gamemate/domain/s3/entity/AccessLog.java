@@ -1,7 +1,10 @@
 package com.example.gamemate.domain.s3.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -9,32 +12,29 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class AccessLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    //private String userId;
+    @Email(message = "이메일 형식이 유효하지 않습니다.")
+    private String userName;
 
     private String endpoint;
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime accessTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime leaveTime;
 
-    // 로그 설명 추가(페이지 접속, 기능 실행 등)
-    public AccessLog() {}
-
-
-    //userId 나중에 추가하기
-    public AccessLog(String endpoint, LocalDateTime accessTime) {
-
-        //this.userId = userId;
+    public AccessLog(String userName, String endpoint, LocalDateTime accessTime, LocalDateTime leaveTime) {
+        this.userName = userName;
         this.endpoint = endpoint;
         this.accessTime = accessTime;
-
+        this.leaveTime = leaveTime;
     }
 
 

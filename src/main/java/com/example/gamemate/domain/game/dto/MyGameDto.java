@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GameListDto {
+public class MyGameDto {
     private Long id;
     private Long userId;
     private Long gameId;

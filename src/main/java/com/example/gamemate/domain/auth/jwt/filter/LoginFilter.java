@@ -11,9 +11,13 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import lombok.extern.slf4j.Slf4j;
+import java.util.TimeZone;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -117,28 +121,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         // JWT 생성
         String token = jwtUtil.createJwt(id, username, role, expirationTime);
 
-        log.info(token);
         response.addHeader("Authorization", "Bearer " + token);
 
-        // 쿠키로 JWT를 응답에 추가
-//        Cookie cookie = createCookie("Authorization", "Bearer " + token);
-//        log.info("cookie: name={}, value={}", cookie.getName(), cookie.getValue());
-//
-//        response.addCookie(cookie);
-
     }
-
-    // 쿠키 생성 메소드
-//    private Cookie createCookie(String key, String value) {
-//
-//        Cookie cookie = new Cookie(key, value);
-//        cookie.setMaxAge((int) (expirationTime / 1000)); // 10시간 만료시간 설정 (초 단위)
-//        // cookie.setSecure(true); // HTTPS 사용 시 활성화
-//        cookie.setPath("/");
-//        cookie.setHttpOnly(true);
-//
-//        return cookie;
-//    }
 
     //로그인 실패 시 실행하는 메소드
     @Override

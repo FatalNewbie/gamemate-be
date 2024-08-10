@@ -10,6 +10,7 @@ import org.mapstruct.MappingTarget;
 public interface GameCommentMapper {
 
     @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user.nickname", target = "nickname")
     @Mapping(source = "game.id", target = "gameId")
     GameCommentDto toDto(GameComment comment);
 
@@ -17,7 +18,5 @@ public interface GameCommentMapper {
     @Mapping(source = "gameId", target = "game.id")
     GameComment toEntity(GameCommentDto commentDto);
 
-    @Mapping(source = "userId", target = "user.id")
-    @Mapping(source = "gameId", target = "game.id")
     void updateEntityFromDto(GameCommentDto commentDto, @MappingTarget GameComment comment);
 }

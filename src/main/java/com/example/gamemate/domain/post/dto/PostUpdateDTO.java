@@ -9,17 +9,21 @@ import java.math.BigDecimal;
 public class PostUpdateDTO {
 
     @NotNull
-    String status;
+    private String status;
 
     @NotNull
-    Integer mateCnt;
+    private Integer mateCnt;
 
     @NotNull
-    String mateContent;
+    private String mateContent;
 
-    String mateRegionSi;
-    String mateResionGu;
-    BigDecimal latitude;
-    BigDecimal longitude;
+
+    private String mateRegionSi;
+
+    private String mateRegionGu;
+
+    private BigDecimal latitude;
+
+    private BigDecimal longitude;
 
 }

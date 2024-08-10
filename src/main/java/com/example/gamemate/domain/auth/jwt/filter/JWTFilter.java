@@ -1,6 +1,5 @@
 package com.example.gamemate.domain.auth.jwt.filter;
 
-import com.example.gamemate.domain.auth.dto.CustomOAuth2UserDTO;
 import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
 import com.example.gamemate.domain.auth.dto.OAuth2DTO;
 import com.example.gamemate.domain.user.entity.User;
@@ -41,30 +40,6 @@ public class JWTFilter extends OncePerRequestFilter {
 
         //request에서 Authorization 헤더를 찾음
         String authorization = request.getHeader("Authorization");
-
-
-        //cookie들을 불러온 뒤 Authorization Key에 담긴 쿠키를 찾음
-//        String authorization = null;
-//        Cookie[] cookies = request.getCookies();
-//
-//        log.info("check cookie" + cookies);
-//
-//        if(cookies != null) {
-//            for (Cookie cookie : cookies) {
-//
-//                log.info("cookie name" + cookie.getName());
-//                if (cookie.getName().equals("Authorization")) {
-////                if ("Authorization".equals(cookie.getName())) {
-//
-//                    authorization = cookie.getValue();
-//                    log.info("token check" + authorization);
-//                    break;
-//
-//                }
-//            }
-//        }
-
-        log.info("check2" + authorization);
 
         //Authorization 헤더 검증
         if(authorization == null || !authorization.startsWith("Bearer ")) {
