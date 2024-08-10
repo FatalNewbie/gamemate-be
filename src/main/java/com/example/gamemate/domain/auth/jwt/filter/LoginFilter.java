@@ -118,26 +118,27 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = jwtUtil.createJwt(id, username, role, expirationTime);
 
         log.info(token);
+        response.addHeader("Authorization", "Bearer " + token);
 
         // 쿠키로 JWT를 응답에 추가
-        Cookie cookie = createCookie("Authorization", "Bearer " + token);
-        log.info("쿠키 설정: 이름={}, 값={}", cookie.getName(), cookie.getValue());
-
-        response.addCookie(cookie);
+//        Cookie cookie = createCookie("Authorization", "Bearer " + token);
+//        log.info("cookie: name={}, value={}", cookie.getName(), cookie.getValue());
+//
+//        response.addCookie(cookie);
 
     }
 
     // 쿠키 생성 메소드
-    private Cookie createCookie(String key, String value) {
-
-        Cookie cookie = new Cookie(key, value);
-        cookie.setMaxAge((int) (expirationTime / 1000)); // 10시간 만료시간 설정 (초 단위)
-        // cookie.setSecure(true); // HTTPS 사용 시 활성화
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-
-        return cookie;
-    }
+//    private Cookie createCookie(String key, String value) {
+//
+//        Cookie cookie = new Cookie(key, value);
+//        cookie.setMaxAge((int) (expirationTime / 1000)); // 10시간 만료시간 설정 (초 단위)
+//        // cookie.setSecure(true); // HTTPS 사용 시 활성화
+//        cookie.setPath("/");
+//        cookie.setHttpOnly(true);
+//
+//        return cookie;
+//    }
 
     //로그인 실패 시 실행하는 메소드
     @Override

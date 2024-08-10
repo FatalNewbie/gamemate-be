@@ -39,28 +39,37 @@ public class JWTFilter extends OncePerRequestFilter {
 
         boolean isOAuth2User = isOAuth2User();
 
+        //request에서 Authorization 헤더를 찾음
+        String authorization = request.getHeader("Authorization");
+
+
         //cookie들을 불러온 뒤 Authorization Key에 담긴 쿠키를 찾음
-        String authorization = null;
-        Cookie[] cookies = request.getCookies();
-
-        if(cookies != null) {
-            for (Cookie cookie : cookies) {
-
-                log.info(cookie.getName());
+//        String authorization = null;
+//        Cookie[] cookies = request.getCookies();
+//
+//        log.info("check cookie" + cookies);
+//
+//        if(cookies != null) {
+//            for (Cookie cookie : cookies) {
+//
+//                log.info("cookie name" + cookie.getName());
 //                if (cookie.getName().equals("Authorization")) {
-                if ("Authorization".equals(cookie.getName())) {
+////                if ("Authorization".equals(cookie.getName())) {
+//
+//                    authorization = cookie.getValue();
+//                    log.info("token check" + authorization);
+//                    break;
+//
+//                }
+//            }
+//        }
 
-                    authorization = cookie.getValue();
-                    break;
-
-                }
-            }
-        }
+        log.info("check2" + authorization);
 
         //Authorization 헤더 검증
         if(authorization == null || !authorization.startsWith("Bearer ")) {
 
-            log.info("token null");
+            log.info("token null or not Bearer");
             filterChain.doFilter(request, response);
 
             //조건에 해당되면 메소드 종료
