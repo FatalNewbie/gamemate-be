@@ -1,5 +1,6 @@
 package com.example.gamemate.domain.auth.jwt.filter;
 
+import com.example.gamemate.domain.auth.dto.CustomOAuth2UserDTO;
 import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
 import com.example.gamemate.domain.auth.dto.OAuth2DTO;
 import com.example.gamemate.domain.user.entity.User;
