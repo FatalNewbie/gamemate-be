@@ -22,11 +22,11 @@ public class ChatRoomController {
 
     private final ChatRoomService chatRoomService;
 
-    @PostMapping("/")
-    public ChatRoomCreateResponse createChatRoom(@RequestBody ChatRoomCreateRequest request,
-                                                 @AuthenticationPrincipal UserDetails userDetails){
-        return chatRoomService.createChatRoom(request,userDetails);
-    }
+//    @PostMapping("/")
+//    public ChatRoomCreateResponse createChatRoom(@RequestBody ChatRoomCreateRequest request,
+//                                                 @AuthenticationPrincipal UserDetails userDetails){
+//        return chatRoomService.createChatRoom(request,userDetails);
+//    }
 
     @GetMapping("/")
     public ResponseEntity<List<ChatRoomDTO>> getAllChatRooms(@AuthenticationPrincipal UserDetails userDetails){

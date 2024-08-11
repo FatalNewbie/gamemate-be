@@ -94,6 +94,17 @@ public class Post extends BaseEntity {
         this.longitude = longitude;
     }
 
+    public void createOfflinePost(
+            String mateRegionSi, String mateRegionGu, String mateLocation,
+            BigDecimal latitude, BigDecimal longitude
+    ){
+        this.mateRegionGu = mateRegionGu;
+        this.mateRegionSi = mateRegionSi;
+        this.mateLocation = mateLocation;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     @Builder
     public Post(
             User user, OnOffStatus status, String gameTitle, String gameGenre,

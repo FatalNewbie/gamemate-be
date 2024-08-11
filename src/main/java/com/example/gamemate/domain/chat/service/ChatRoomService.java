@@ -31,20 +31,20 @@ public class ChatRoomService {
     private final ChatRoomMapper chatRoomMapper;
     private final UserRepository userRepository;
 
-    public ChatRoomCreateResponse createChatRoom(ChatRoomCreateRequest request, UserDetails userDetails){
-
-        String chatTitle = request.getChatTitle();
-        Long memberCnt = request.getMemberCnt();
-        User leader = userRepository.findByUsername(userDetails.getUsername());
-
-        ChatRoom chatRoom = new ChatRoom(chatTitle, leader, memberCnt);
-        // 채팅방 생성
-        ChatRoom newChatRoom = chatRoomRepository.save(chatRoom);
-        // 생성요청을 보낸 유저를 채팅방멤버의 방장으로 추가함.
-        chatRoomMemberService.addMember(newChatRoom.getId(), leader.getUsername(),true);
-
-        return ChatRoomCreateResponse.from(true, "채팅방을 생성하였습니다.");
-    }
+//    public ChatRoomCreateResponse createChatRoom(ChatRoomCreateRequest request, UserDetails userDetails){
+//
+//        String chatTitle = request.getChatTitle();
+//        Long memberCnt = request.getMemberCnt();
+//        User leader = userRepository.findByUsername(userDetails.getUsername());
+//
+//        ChatRoom chatRoom = new ChatRoom(chatTitle, leader, memberCnt);
+//        // 채팅방 생성
+//        ChatRoom newChatRoom = chatRoomRepository.save(chatRoom);
+//        // 생성요청을 보낸 유저를 채팅방멤버의 방장으로 추가함.
+//        chatRoomMemberService.addMember(newChatRoom.getId(), leader.getUsername(),true);
+//
+//        return ChatRoomCreateResponse.from(true, "채팅방을 생성하였습니다.");
+//    }
 
     public List<ChatRoomDTO> getAllChatRoomsByUser(UserDetails userDetails) {
         User user = userRepository.findByUsername(userDetails.getUsername());

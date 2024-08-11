@@ -43,10 +43,11 @@ public class ChatRoom extends BaseEntity {
     private Post post;
 
 
-    public ChatRoom(String title, User leader, Long memberCnt) {
+    public ChatRoom(String title, User leader, Long memberCnt, Post post) {
 
         this.title = title;
         this.leader = leader;
         this.memberCnt = memberCnt;
+        this.post = post;
     }
 }

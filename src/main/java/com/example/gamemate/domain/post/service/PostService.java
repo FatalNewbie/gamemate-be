@@ -96,37 +96,56 @@ public class PostService {
 
     //게시글 생성
     //Status 값에 따라서 다른 로직 처리
+//    @Transactional
+//    public PostResponseDTO createPost(String username, PostDTO postDTO) {
+//
+//        User user = userRepository.findByUsername(username);
+//
+//        if ("ON".equals(postDTO.getStatus())) {
+//
+//            Post post = handleOnlinePost(user, (OnlinePostDTO) postDTO);
+//
+//            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
+//
+//            postResponseDTO.setPostUsername(username);
+//
+//            ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt(), post));
+//
+//            chatRoomMemberService.addMember(chatRoom.getId(), username, true);
+//
+//            return postResponseDTO;
+//
+//        } else if ("OFF".equals(postDTO.getStatus())) {
+//
+//            Post post = handleOfflinePost(user, (OfflinePostDTO) postDTO);
+//
+//            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
+//
+//            postResponseDTO.setPostUsername(username);
+//
+//            ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt(), post));
+//
+//            chatRoomMemberService.addMember(chatRoom.getId(), username, true);
+//
+//            return postResponseDTO;
+//        } else {
+//            throw new RestApiException(CommonExceptionCode.INVALID_PARAMETER);
+//        }
+//    }
+
     @Transactional
     public PostResponseDTO createPost(String username, PostDTO postDTO) {
-
         User user = userRepository.findByUsername(username);
+        Post.OnOffStatus status = "ON".equals(postDTO.getStatus()) ? Post.OnOffStatus.ON : Post.OnOffStatus.OFF;
 
-        ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt()));
+        Post post = createPost(user, postDTO, status);
+        PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
+        postResponseDTO.setPostUsername(username);
 
+        ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt(), post));
         chatRoomMemberService.addMember(chatRoom.getId(), username, true);
 
-        if ("ON".equals(postDTO.getStatus())) {
-
-            Post post = handleOnlinePost(user, (OnlinePostDTO) postDTO);
-
-            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
-
-            postResponseDTO.setPostUsername(username);
-
-            return postResponseDTO;
-
-        } else if ("OFF".equals(postDTO.getStatus())) {
-
-            Post post = handleOfflinePost(user, (OfflinePostDTO) postDTO);
-
-            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
-
-            postResponseDTO.setPostUsername(username);
-
-            return postResponseDTO;
-        } else {
-            throw new RestApiException(CommonExceptionCode.INVALID_PARAMETER);
-        }
+        return postResponseDTO;
     }
 
     //게시글 수정
@@ -217,6 +236,33 @@ public class PostService {
                 .latitude(offlinePostDTO.getLatitude())
                 .longitude(offlinePostDTO.getLongitude())
                 .build();
+
+        return postRepository.save(post);
+    }
+
+
+    //포스트 공통으로 처리하는 로직
+    private Post createPost(User user, PostDTO postDTO, Post.OnOffStatus status) {
+        Post post = Post.builder()
+                .gameTitle(postDTO.getGameTitle())
+                .gameGenre(postDTO.getGameGenre())
+                .status(status)
+                .user(user)
+                .nickname(user.getNickname())
+                .mateCnt(postDTO.getMateCnt())
+                .mateContent(postDTO.getMateContent())
+                .build();
+
+        if (postDTO instanceof OfflinePostDTO) {
+            OfflinePostDTO offlinePost = (OfflinePostDTO) postDTO;
+            post.createOfflinePost(
+                    offlinePost.getMateRegionSi(),
+                    offlinePost.getMateRegionGu(),
+                    offlinePost.getMateLocation(),
+                    offlinePost.getLatitude(),
+                    offlinePost.getLongitude()
+                    );
+        }
 
         return postRepository.save(post);
     }
