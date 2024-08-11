@@ -35,7 +35,7 @@ public class Game extends BaseEntity {
     @Column(length = 100)
     private String classes;
 
-    @Column(length = 254)
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

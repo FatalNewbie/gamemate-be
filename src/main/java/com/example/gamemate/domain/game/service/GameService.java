@@ -62,11 +62,9 @@ public class GameService {
         }
     }
 
-    public List<GameDto> findGamesByTitleAndDeveloper(String title, String developer) {
-        List<Game> games = gameRepository.findGamesByTitleAndDeveloper(title, developer);
-        return games.stream()
-                .map(gameMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<GameDto> findGamesByTitleAndDeveloper(String title, String developer, Pageable pageable) {
+        Page<Game> games = gameRepository.findGamesByTitleAndDeveloper(title, developer, pageable);
+        return games.map(gameMapper::toDto);
     }
 
     public Page<GameDto> getAllGames(Pageable pageable) {

@@ -39,7 +39,7 @@ public class S3Service {
     public URL generatePresignedUrl(String bucketName, String objectKey) {
         Date expiration = new Date();
         long expTimeMillis = expiration.getTime();
-        expTimeMillis += 1000 * 60 * 60; // 1시간
+        expTimeMillis += 1000 * 600 * 600; // 1시간
         expiration.setTime(expTimeMillis);
 
         // Presigned URL 요청 생성

@@ -9,6 +9,7 @@ import org.mapstruct.MappingTarget;
 public interface GameRatingMapper {
 
     @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user.username", target = "username")
     @Mapping(source = "game.id", target = "gameId")
     GameRatingDto toDto(GameRating rating);
 

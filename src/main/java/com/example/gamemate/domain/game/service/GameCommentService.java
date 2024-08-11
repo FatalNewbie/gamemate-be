@@ -65,10 +65,18 @@ public class GameCommentService {
         return gameCommentMapper.toDto(updatedComment);
     }
 
-    public void deleteComment(Long gameId, Long commentId) {
+    public void deleteComment(Long gameId, Long commentId, String username) {
         GameComment comment = gameCommentRepository.findByGameIdAndIdAndDeletedDateIsNull(gameId, commentId)
                 .orElseThrow(() -> new RestApiException(GameExceptionCode.GAME_COMMENT_NOT_FOUND));
-        comment.setDeletedDate(LocalDateTime.now()); // Soft delete 처리
+
+        // 댓글이 현재 사용자의 것인지 확인
+        if (!comment.getUser().getUsername().equals(username)) {
+            throw new RestApiException(GameExceptionCode.UNAUTHORIZED_ACTION);
+        }
+
+        // Soft delete 처리
+        comment.setDeletedDate(LocalDateTime.now());
         gameCommentRepository.save(comment);
     }
+
 }
