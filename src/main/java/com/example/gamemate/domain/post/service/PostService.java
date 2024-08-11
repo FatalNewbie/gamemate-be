@@ -1,5 +1,9 @@
 package com.example.gamemate.domain.post.service;
 
+import com.example.gamemate.domain.chat.domain.ChatRoom;
+import com.example.gamemate.domain.chat.repository.ChatRoomRepository;
+import com.example.gamemate.domain.chat.service.ChatRoomMemberService;
+import com.example.gamemate.domain.chat.service.ChatRoomService;
 import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.dto.*;
 import com.example.gamemate.domain.post.mapper.PostMapper;
@@ -14,21 +18,32 @@ import com.example.gamemate.global.exception.RestApiException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PostService {
 
+
+
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final PostCommentRepository postCommentRepository;
+    private final ChatRoomRepository chatRoomRepository;
+
+    private final ChatRoomMemberService chatRoomMemberService;
     private final PostMapper mapper;
 
 
 
-    public PostService(PostRepository postRepository, UserRepository userRepository, PostCommentRepository postCommentRepository, PostMapper mapper) {
+    public PostService(
+            PostRepository postRepository,
+            UserRepository userRepository,
+            ChatRoomRepository chatRoomRepository, ChatRoomMemberService chatRoomMemberService,
+            PostMapper mapper
+    ) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
-        this.postCommentRepository = postCommentRepository;
+        this.chatRoomRepository = chatRoomRepository;
+        this.chatRoomMemberService = chatRoomMemberService;
         this.mapper = mapper;
     }
 
@@ -38,11 +53,11 @@ public class PostService {
         Page<Post> postPage = null;
 
         if(status.toUpperCase().equals("ON")){
-            postPage = postRepository.findByStatus(Post.OnOffStatus.ON, pageable);
+            postPage = postRepository.findByStatusOrderByCreatedDateDesc(Post.OnOffStatus.ON, pageable);
         }
 
         if(status.toUpperCase().equals("OFF")){
-            postPage = postRepository.findByStatus(Post.OnOffStatus.OFF, pageable);
+            postPage = postRepository.findByStatusOrderByCreatedDateDesc(Post.OnOffStatus.OFF, pageable);
         }
 
         assert postPage != null;
@@ -61,8 +76,8 @@ public class PostService {
 
         return PostResponseDTO.builder()
                 .id(post.getId())
-                .username(username)
-                .nickname(user.getNickname())
+                .username(post.getUser().getUsername())
+                .nickname(post.getUser().getNickname())
                 .gameTitle(post.getGameTitle())
                 .status(post.getStatus().toString())
                 .gameGenre(post.getGameGenre())
@@ -71,17 +86,24 @@ public class PostService {
                 .commentCnt(postRepository.countCommentsByPostId(post.getId()))
                 .mateRegionSi(post.getMateRegionSi())
                 .mateRegionGu(post.getMateRegionGu())
+                .mateLocation(post.getMateLocation())
                 .latitude(post.getLatitude())
                 .longitude(post.getLongitude())
+                .createdDate(post.getCreatedDate())
                 .build();
     }
 
 
     //게시글 생성
     //Status 값에 따라서 다른 로직 처리
+    @Transactional
     public PostResponseDTO createPost(String username, PostDTO postDTO) {
 
         User user = userRepository.findByUsername(username);
+
+        ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt()));
+
+        chatRoomMemberService.addMember(chatRoom.getId(), username, true);
 
         if ("ON".equals(postDTO.getStatus())) {
 
@@ -191,6 +213,7 @@ public class PostService {
                 .mateContent(offlinePostDTO.getMateContent())
                 .mateRegionSi(offlinePostDTO.getMateRegionSi())
                 .mateRegionGu(offlinePostDTO.getMateRegionGu())
+                .mateLocation(offlinePostDTO.getMateLocation())
                 .latitude(offlinePostDTO.getLatitude())
                 .longitude(offlinePostDTO.getLongitude())
                 .build();

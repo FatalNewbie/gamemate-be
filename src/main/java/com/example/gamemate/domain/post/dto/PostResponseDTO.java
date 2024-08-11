@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.SimpleTimeZone;
 
@@ -25,7 +27,7 @@ public class PostResponseDTO {
 
     private String gameGenre;
 
-    private Integer mateCnt;
+    private Long mateCnt;
 
     private String mateContent;
 
@@ -37,9 +39,13 @@ public class PostResponseDTO {
 
     private String mateRegionGu;
 
+    private String mateLocation;
+
     private BigDecimal latitude;
 
     private BigDecimal longitude;
+
+    private LocalDateTime createdDate;
 
     public void setPostUsername(String username){
         this.username = username;
@@ -57,16 +63,19 @@ public class PostResponseDTO {
         this.mateContent = post.getMateContent();
         this.mateRegionGu = post.getMateRegionGu();
         this.mateRegionSi = post.getMateRegionSi();
+        this.mateLocation = post.getMateLocation();
         this.latitude = post.getLatitude();
         this.longitude = post.getLongitude();
+        this.createdDate = post.getCreatedDate();
 
     }
 
     @Builder
     public PostResponseDTO(
             Long id, String username, String nickname, String status, String gameTitle,
-            String gameGenre, Integer mateCnt, String mateContent, Long commentCnt,
-            String mateRegionSi, String mateRegionGu, BigDecimal latitude, BigDecimal longitude
+            String gameGenre, Long mateCnt, String mateContent, Long commentCnt,
+            String mateRegionSi, String mateRegionGu, String mateLocation,
+            BigDecimal latitude, BigDecimal longitude, LocalDateTime createdDate
     ){
         this.id = id;
         this.username = username;
@@ -81,8 +90,11 @@ public class PostResponseDTO {
 
         this.mateRegionSi = mateRegionSi;
         this.mateRegionGu = mateRegionGu;
+        this.mateLocation = mateLocation;
         this.latitude = latitude;
         this.longitude = longitude;
+
+        this.createdDate = createdDate;
     }
 
 }

@@ -3,6 +3,8 @@ package com.example.gamemate.domain.post.dto;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
@@ -16,6 +18,10 @@ public class PostCommentsResponseDTO {
     private String nickname;
 
     private String content;
+
+    private LocalDateTime createdDate;
+
+    private LocalDateTime modifiedDate;
 
     private List<RecommentsResponseDTO> recomments;
 }

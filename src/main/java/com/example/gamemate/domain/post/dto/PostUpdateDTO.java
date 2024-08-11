@@ -12,7 +12,7 @@ public class PostUpdateDTO {
     private String status;
 
     @NotNull
-    private Integer mateCnt;
+    private Long mateCnt;
 
     @NotNull
     private String mateContent;
@@ -25,5 +25,4 @@ public class PostUpdateDTO {
     private BigDecimal latitude;
 
     private BigDecimal longitude;
-
 }

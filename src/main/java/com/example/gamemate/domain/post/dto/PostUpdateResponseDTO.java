@@ -20,13 +20,11 @@ public class PostUpdateResponseDTO {
 
     private String gameGenre;
 
-    private Integer mateCnt;
+    private Long mateCnt;
 
     private String mateContent;
 
     private Long commentCnt;
-
-
 
     private String mateRegionSi;
 

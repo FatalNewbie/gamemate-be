@@ -29,7 +29,7 @@ public class PostComment extends BaseEntity {
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "p_comment_id")
+    @JoinColumn(name = "parent_comment_id")
     private PostComment parentComment;
 
     @Column(nullable = false, length = 20)
