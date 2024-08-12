@@ -11,15 +11,14 @@ import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.mapper.UserMapper;
 import com.example.gamemate.domain.user.repository.UserRepository;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,13 +29,13 @@ import com.amazonaws.HttpMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 
+@Slf4j
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserMapper mapper;
-
     private final AmazonS3 s3Client;
 
     @Value("${cloud.aws.s3.bucketName}")
@@ -102,6 +101,7 @@ public class UserService {
 
     public void deletedByUsername(String username) {
         Optional<User> optionalUser = Optional.ofNullable(userRepository.findByUsername(username));
+        log.info("finduser: " + String.valueOf(optionalUser));
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             user.setDeleted(true);

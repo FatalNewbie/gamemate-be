@@ -1,11 +1,8 @@
 package com.example.gamemate.domain.user.controller;
 
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
 import com.example.gamemate.domain.user.dto.MyPageResponseDTO;
 import com.example.gamemate.domain.user.dto.RecommendResponseDTO;
-import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.dto.UpdateDTO;
 import com.example.gamemate.domain.user.mapper.UserMapper;
 import com.example.gamemate.domain.user.service.UserService;
@@ -16,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,9 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
@@ -69,6 +63,7 @@ public class UserController {
         }
         return ApiResponse.successRes(HttpStatus.OK, user);
     }
+
     @PutMapping("/update")
     public String updateUser(@RequestBody UpdateDTO updateDTO, @AuthenticationPrincipal UserDetails userDetails) {
         String name = userDetails.getUsername();
@@ -93,7 +88,6 @@ public class UserController {
         userService.deletedByUsername(username);
         return "삭제완료";
     }
-
 
     @PutMapping("/restoreUser/{username}")
     @PreAuthorize("hasRole('ADMIN')")

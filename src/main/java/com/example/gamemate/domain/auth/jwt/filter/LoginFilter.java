@@ -136,20 +136,20 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private void handleLoginAttempt(LoginDTO loginDto) {
         if (customUserDetailsService.loadUserByUsername(loginDto.getUsername()) == null) {
-            System.out.println("존재하지 않는 계정입니다. 새로운 계정을 만들어주세요.");
+            log.info("존재하지 않는 계정입니다. 새로운 계정을 만들어주세요.");
             throw new UsernameNotFoundException("존재하지 않는 계정입니다. 새로운 계정을 만들어주세요.");
         }
 
         CustomUserDetailsDTO user = (CustomUserDetailsDTO) customUserDetailsService.loadUserByUsername(loginDto.getUsername());
 
         if (!bCryptPasswordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
-            System.out.println("비밀번호가 틀립니다. 다시 확인해주세요.");
+            log.info("비밀번호가 틀립니다. 다시 확인해주세요.");
             throw new BadCredentialsException("잘못된 로그인 정보입니다.");
         }
 
-//        if (user.isDeleted()) {
-//            System.out.println("이미 탈퇴된 계정입니다. 새로운 계정을 만들어주세요.");
-//            throw new DisabledException("계정이 비활성화되었습니다.");
-//        }
+        if (user.isDeleted()) {
+            log.info("이미 탈퇴된 계정입니다. 새로운 계정을 만들어주세요.");
+            throw new DisabledException("계정이 비활성화되었습니다.");
+        }
     }
 }
