@@ -93,4 +93,3 @@ public class FriendController {
         return ApiResponse.successRes(HttpStatus.OK, pendingRequests);
     }
 }
-
