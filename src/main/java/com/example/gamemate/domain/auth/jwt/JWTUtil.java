@@ -20,6 +20,17 @@ public class JWTUtil {
 
     }
 
+    public Long getId(String token) {
+
+        return Jwts.parser()
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("id", Long.class);
+
+    }
+
     public String getUsername(String token) {
 
         return Jwts.parser()
