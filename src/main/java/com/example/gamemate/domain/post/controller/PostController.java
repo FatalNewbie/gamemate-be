@@ -14,12 +14,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
-@Tag(name = "Post", description = "Post API")
+@Tag(name = "Post", description = "게임메이트 모집 게시글 API")
 @Slf4j
 @RequestMapping("/posts")
 @RestController
@@ -58,6 +59,7 @@ public class PostController {
 
     //글 작성 api
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ApiResponse<PostResponseDTO> registerPost(
             @Valid @RequestBody PostDTO postDTO,
             @AuthenticationPrincipal UserDetails userDetails

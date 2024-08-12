@@ -1,5 +1,7 @@
 package com.example.gamemate.domain.game.controller;
 
+import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
+import com.example.gamemate.global.apiRes.ApiResponse;
 import com.example.gamemate.global.common.CustomPage;
 import com.example.gamemate.domain.game.dto.GameCommentDto;
 import com.example.gamemate.domain.game.service.GameCommentService;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,13 +34,13 @@ public class GameCommentController {
     }
 
     // 댓글 리스트 조회
-
-    // page 그대로 리턴 x 리스트만 뱉어줄 수 있게끔 특정 클래스 만들어서 페이징   오브젝트 상속
     @GetMapping
-    public ResponseEntity<CustomPage<GameCommentDto>> getAllComments(
+    public ApiResponse<CustomPage<GameCommentDto>> getAllComments(
             @PathVariable Long gameId,
             @RequestParam Optional<Integer> page,
             @RequestParam Optional<Integer> size) {
+
+        log.info("Fetching comments for game ID: {}", gameId);
 
         Pageable pageable = Pageable.unpaged();
         if (page.isPresent() && size.isPresent()) {
@@ -46,51 +49,53 @@ public class GameCommentController {
 
         Page<GameCommentDto> comments = gameCommentService.getAllComments(gameId, pageable);
         CustomPage<GameCommentDto> customPage = new CustomPage<>(comments);
-        return ResponseEntity.ok(customPage);
+        return ApiResponse.successRes(HttpStatus.OK, customPage);
     }
-
-
-
-    // 특정 코멘트 조회
-    @GetMapping("/{commentId}")
-    public ResponseEntity<GameCommentDto> getCommentById(@PathVariable Long gameId, @PathVariable Long commentId) {
-        GameCommentDto commentDto = gameCommentService.getCommentById(gameId, commentId);
-        return ResponseEntity.ok(commentDto);
-    }
-
-    // 코멘트 생성
     @PostMapping
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<GameCommentDto> createComment(
+    public ApiResponse<GameCommentDto> createComment(
+            @AuthenticationPrincipal CustomUserDetailsDTO customUserDetailsDTO,
             @PathVariable Long gameId,
-            @Valid @RequestBody GameCommentDto commentDto,
-            @AuthenticationPrincipal UserDetails userDetails) {
+            @Valid @RequestBody GameCommentDto commentDto) {
 
-        // 사용자 ID를 commentDto에 설정하거나 다른 처리를 여기에 추가할 수 있습니다.
+        String username = customUserDetailsDTO.getUsername();
+        commentDto.setUsername(username);
+
+        log.info("Creating comment for game ID: {} by user: {}", gameId, username);
+
         GameCommentDto newComment = gameCommentService.createComment(gameId, commentDto);
-        return ResponseEntity.ok(newComment);
+        return ApiResponse.successRes(HttpStatus.CREATED, newComment);
     }
 
     @PutMapping("/{commentId}")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<GameCommentDto> updateComment(
+    public ApiResponse<GameCommentDto> updateComment(
+            @AuthenticationPrincipal CustomUserDetailsDTO customUserDetailsDTO,
             @PathVariable Long gameId,
             @PathVariable Long commentId,
-            @Valid @RequestBody GameCommentDto commentDto,
-            @AuthenticationPrincipal UserDetails userDetails) {
+            @Valid @RequestBody GameCommentDto commentDto) {
+
+        String username = customUserDetailsDTO.getUsername();
+        commentDto.setUsername(username);
+
+        log.info("Updating comment ID: {} for game ID: {} by user: {}", commentId, gameId, username);
 
         GameCommentDto updatedComment = gameCommentService.updateComment(gameId, commentId, commentDto);
-        return ResponseEntity.ok(updatedComment);
+        return ApiResponse.successRes(HttpStatus.OK, updatedComment);
     }
 
     @DeleteMapping("/{commentId}")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<Void> deleteComment(
+    public ApiResponse<Void> deleteComment(
+            @AuthenticationPrincipal CustomUserDetailsDTO customUserDetailsDTO,
             @PathVariable Long gameId,
-            @PathVariable Long commentId,
-            @AuthenticationPrincipal UserDetails userDetails) {
+            @PathVariable Long commentId) {
 
-        gameCommentService.deleteComment(gameId, commentId);
-        return ResponseEntity.ok().build();
+        String username = customUserDetailsDTO.getUsername();
+
+        log.info("Deleting comment ID: {} for game ID: {} by user: {}", commentId, gameId, username);
+
+        gameCommentService.deleteComment(gameId, commentId, username);
+        return ApiResponse.successRes(HttpStatus.NO_CONTENT, null);
     }
 }

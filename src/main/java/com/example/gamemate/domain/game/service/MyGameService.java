@@ -1,5 +1,6 @@
 package com.example.gamemate.domain.game.service;
 
+import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
 import com.example.gamemate.domain.game.dto.MyGameDto;
 import com.example.gamemate.domain.game.entity.Game;
 import com.example.gamemate.domain.user.entity.User;
@@ -19,61 +20,73 @@ import org.springframework.stereotype.Service;
 public class MyGameService {
 
     private final MyGameRepository myGameRepository;
-    private final UserRepository userRepository;
     private final GameRepository gameRepository;
+    private final UserRepository userRepository;
     private final MyGameMapper myGameMapper;
 
-    public MyGameService(MyGameRepository myGameRepository, UserRepository userRepository, GameRepository gameRepository, MyGameMapper myGameMapper) {
+    public MyGameService(MyGameRepository myGameRepository, GameRepository gameRepository, UserRepository userRepository, MyGameMapper myGameMapper) {
         this.myGameRepository = myGameRepository;
-        this.userRepository = userRepository;
         this.gameRepository = gameRepository;
+        this.userRepository = userRepository;
         this.myGameMapper = myGameMapper;
     }
 
-    public Page<MyGameDto> getGameListByUserId(Long userId, Pageable pageable) {
-        Page<MyGame> myGames = myGameRepository.findByUserId(userId, pageable);
+    public boolean isGameInUserList(CustomUserDetailsDTO userDetailsDTO, Long gameId) {
+        String username = userDetailsDTO.getUsername();
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new RestApiException(GameExceptionCode.USER_NOT_FOUND);
+        }
+
+        return myGameRepository.existsByUserIdAndGameId(user.getId(), gameId);
+    }
+
+    public Page<MyGameDto> getGameListByUsername(String username, Pageable pageable) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new RestApiException(GameExceptionCode.USER_NOT_FOUND);
+        }
+        Page<MyGame> myGames = myGameRepository.findByUserId(user.getId(), pageable);
         return myGames.map(myGameMapper::toDto);
     }
 
     @Transactional
-    public MyGameDto addGameToUserList(MyGameDto myGameDto) {
+    public MyGameDto addGameToUserList(CustomUserDetailsDTO userDetailsDTO, Long gameId) {
+        String username = userDetailsDTO.getUsername();
+        User user = userRepository.findByUsername(username);
 
-        System.out.println("User ID: " + myGameDto.getUserId());
-        System.out.println("Game ID: " + myGameDto.getGameId());
-
-        // 1. DTO에서 필수 값 체크
-        if (myGameDto.getUserId() == null || myGameDto.getGameId() == null) {
+        if (user == null || gameId == null) {
             throw new RestApiException(GameExceptionCode.INVALID_INPUT);
         }
 
-        // 2. 해당 사용자가 이미 게임을 추가했는지 확인
-        boolean exists = myGameRepository.existsByUserIdAndGameId(myGameDto.getUserId(), myGameDto.getGameId());
-        if (exists) {
+        if (myGameRepository.existsByUserIdAndGameId(user.getId(), gameId)) {
             throw new RestApiException(GameExceptionCode.GAME_ALREADY_EXISTS);
         }
 
-        // 3. User와 Game 엔티티를 데이터베이스에서 조회
-        User user = userRepository.findById(myGameDto.getUserId())
-                .orElseThrow(() -> new RestApiException(GameExceptionCode.USER_NOT_FOUND));
-
-        Game game = gameRepository.findById(myGameDto.getGameId())
+        Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new RestApiException(GameExceptionCode.GAME_NOT_FOUND));
 
-        // 4. MyGame 엔티티 생성 및 관련 엔티티 설정
-        MyGame myGame = new MyGame();
-        myGame.setUser(user); // 조회된 User 설정
-        myGame.setGame(game); // 조회된 Game 설정
+        MyGame myGame = MyGame.builder()
+                .user(user)
+                .game(game)
+                .build();
 
-        // 5. MyGame 엔티티 저장
         MyGame savedMyGame = myGameRepository.save(myGame);
-
-        // 6. 저장된 MyGame 엔티티를 DTO로 변환하여 반환
         return myGameMapper.toDto(savedMyGame);
     }
 
-    public void deleteGameFromUserList(Long userId, Long gameId) {
-        MyGame myGame = myGameRepository.findByUserIdAndGameId(userId, gameId)
+    public void deleteGameFromUserList(CustomUserDetailsDTO userDetailsDTO, Long gameId) {
+        String username = userDetailsDTO.getUsername();
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new RestApiException(GameExceptionCode.USER_NOT_FOUND);
+        }
+
+        MyGame myGame = myGameRepository.findByUserIdAndGameId(user.getId(), gameId)
                 .orElseThrow(() -> new RestApiException(GameExceptionCode.GAME_NOT_FOUND));
+
         myGameRepository.delete(myGame);
     }
 }

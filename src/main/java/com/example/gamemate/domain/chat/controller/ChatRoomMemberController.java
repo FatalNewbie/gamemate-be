@@ -23,7 +23,7 @@ public class ChatRoomMemberController {
     @PostMapping("/addmember")
     public AddMemberResponse addMember(@RequestBody AddMemberRequest request){
 
-        return chatRoomMemberService.addMember(request.getChatRoomId(),request.getAddMemberUsername(),false);
+        return chatRoomMemberService.addMember(request.getChatRoomId(),request.getWriterId(),false);
     }
 
 

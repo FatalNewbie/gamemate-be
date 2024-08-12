@@ -6,43 +6,43 @@
     <title>S3 File Upload</title>
     <script>
         async function uploadFile() {
-            const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
+     const fileInput = document.getElementById('fileInput');
+     const file = fileInput.files[0];
 
-            if (!file) {
-                alert('Please select a file first!');
-                return;
-            }
+     if (!file) {
+         alert('Please select a file first!');
+         return;
+     }
 
-            try {
-                // Presigned URL 요청
-                const response = await fetch(`/presigned-url?bucketName=gameexamplebucket&objectKey=${file.name}`);
-                if (!response.ok) {
-                    throw new Error('Failed to get presigned URL');
-                }
-                const presignedUrl = await response.text();
+     try {
+         // Presigned URL 요청 (파일 이름 포함)
+         const response = await fetch(`/presigned-url?objectKey=${file.name}`);
+         if (!response.ok) {
+             throw new Error('Failed to get presigned URL');
+         }
+         const presignedUrl = await response.text();
 
-                // S3에 파일 업로드
-                const uploadResponse = await fetch(presignedUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': file.type,
-                    },
-                    body: file
-                });
+         // S3에 파일 업로드
+         const uploadResponse = await fetch(presignedUrl, {
+             method: 'PUT',
+             headers: {
+                 'Content-Type': file.type,
+             },
+             body: file
+         });
 
-                if (uploadResponse.ok) {
-                    document.getElementById('status').innerText = 'Upload successful!';
-                    const fileUrl = presignedUrl.split('?')[0];
-                    document.getElementById('fileUrl').innerHTML = `<a href="${fileUrl}" target="_blank">View uploaded file</a>`;
-                } else {
-                    throw new Error('Upload failed.');
-                }
-            } catch (error) {
-                console.error('Error uploading file:', error);
-                document.getElementById('status').innerText = 'Error uploading file.';
-            }
-        }
+         if (uploadResponse.ok) {
+             document.getElementById('status').innerText = 'Upload successful!';
+             const fileUrl = presignedUrl.split('?')[0];
+             document.getElementById('fileUrl').innerHTML = `<a href="${fileUrl}" target="_blank">View uploaded file</a>`;
+         } else {
+             throw new Error('Upload failed.');
+         }
+     } catch (error) {
+         console.error('Error uploading file:', error);
+         document.getElementById('status').innerText = 'Error uploading file.';
+     }
+ }
     </script>
 </head>
 <body>

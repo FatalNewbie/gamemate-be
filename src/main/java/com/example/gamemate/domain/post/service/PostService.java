@@ -1,5 +1,9 @@
 package com.example.gamemate.domain.post.service;
 
+import com.example.gamemate.domain.chat.domain.ChatRoom;
+import com.example.gamemate.domain.chat.repository.ChatRoomRepository;
+import com.example.gamemate.domain.chat.service.ChatRoomMemberService;
+import com.example.gamemate.domain.chat.service.ChatRoomService;
 import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.dto.*;
 import com.example.gamemate.domain.post.mapper.PostMapper;
@@ -14,21 +18,32 @@ import com.example.gamemate.global.exception.RestApiException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PostService {
 
+
+
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final PostCommentRepository postCommentRepository;
+    private final ChatRoomRepository chatRoomRepository;
+
+    private final ChatRoomMemberService chatRoomMemberService;
     private final PostMapper mapper;
 
 
 
-    public PostService(PostRepository postRepository, UserRepository userRepository, PostCommentRepository postCommentRepository, PostMapper mapper) {
+    public PostService(
+            PostRepository postRepository,
+            UserRepository userRepository,
+            ChatRoomRepository chatRoomRepository, ChatRoomMemberService chatRoomMemberService,
+            PostMapper mapper
+    ) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
-        this.postCommentRepository = postCommentRepository;
+        this.chatRoomRepository = chatRoomRepository;
+        this.chatRoomMemberService = chatRoomMemberService;
         this.mapper = mapper;
     }
 
@@ -38,11 +53,11 @@ public class PostService {
         Page<Post> postPage = null;
 
         if(status.toUpperCase().equals("ON")){
-            postPage = postRepository.findByStatus(Post.OnOffStatus.ON, pageable);
+            postPage = postRepository.findByStatusOrderByCreatedDateDesc(Post.OnOffStatus.ON, pageable);
         }
 
         if(status.toUpperCase().equals("OFF")){
-            postPage = postRepository.findByStatus(Post.OnOffStatus.OFF, pageable);
+            postPage = postRepository.findByStatusOrderByCreatedDateDesc(Post.OnOffStatus.OFF, pageable);
         }
 
         assert postPage != null;
@@ -61,8 +76,8 @@ public class PostService {
 
         return PostResponseDTO.builder()
                 .id(post.getId())
-                .username(username)
-                .nickname(user.getNickname())
+                .username(post.getUser().getUsername())
+                .nickname(post.getUser().getNickname())
                 .gameTitle(post.getGameTitle())
                 .status(post.getStatus().toString())
                 .gameGenre(post.getGameGenre())
@@ -71,40 +86,68 @@ public class PostService {
                 .commentCnt(postRepository.countCommentsByPostId(post.getId()))
                 .mateRegionSi(post.getMateRegionSi())
                 .mateRegionGu(post.getMateRegionGu())
+                .mateLocation(post.getMateLocation())
                 .latitude(post.getLatitude())
                 .longitude(post.getLongitude())
+                .createdDate(post.getCreatedDate())
                 .build();
     }
 
 
     //게시글 생성
     //Status 값에 따라서 다른 로직 처리
+//    @Transactional
+//    public PostResponseDTO createPost(String username, PostDTO postDTO) {
+//
+//        User user = userRepository.findByUsername(username);
+//
+//        if ("ON".equals(postDTO.getStatus())) {
+//
+//            Post post = handleOnlinePost(user, (OnlinePostDTO) postDTO);
+//
+//            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
+//
+//            postResponseDTO.setPostUsername(username);
+//
+//            ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt(), post));
+//
+//            chatRoomMemberService.addMember(chatRoom.getId(), username, true);
+//
+//            return postResponseDTO;
+//
+//        } else if ("OFF".equals(postDTO.getStatus())) {
+//
+//            Post post = handleOfflinePost(user, (OfflinePostDTO) postDTO);
+//
+//            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
+//
+//            postResponseDTO.setPostUsername(username);
+//
+//            ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt(), post));
+//
+//            chatRoomMemberService.addMember(chatRoom.getId(), username, true);
+//
+//            return postResponseDTO;
+//        } else {
+//            throw new RestApiException(CommonExceptionCode.INVALID_PARAMETER);
+//        }
+//    }
+
+
+    //게시글 생성
+    @Transactional
     public PostResponseDTO createPost(String username, PostDTO postDTO) {
-
         User user = userRepository.findByUsername(username);
+        Post.OnOffStatus status = "ON".equals(postDTO.getStatus()) ? Post.OnOffStatus.ON : Post.OnOffStatus.OFF;
 
-        if ("ON".equals(postDTO.getStatus())) {
+        Post post = createPost(user, postDTO, status);
+        PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
+        postResponseDTO.setPostUsername(username);
 
-            Post post = handleOnlinePost(user, (OnlinePostDTO) postDTO);
+        ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt(), post));
+        chatRoomMemberService.addMember(chatRoom.getId(), user.getId(), true);
 
-            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
-
-            postResponseDTO.setPostUsername(username);
-
-            return postResponseDTO;
-
-        } else if ("OFF".equals(postDTO.getStatus())) {
-
-            Post post = handleOfflinePost(user, (OfflinePostDTO) postDTO);
-
-            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
-
-            postResponseDTO.setPostUsername(username);
-
-            return postResponseDTO;
-        } else {
-            throw new RestApiException(CommonExceptionCode.INVALID_PARAMETER);
-        }
+        return postResponseDTO;
     }
 
     //게시글 수정
@@ -123,12 +166,10 @@ public class PostService {
                 .map(existingPost -> {
                     if (postUpdateDTO.getStatus().equals("ON")){
                         existingPost.updateOnlinePost(
-                                postUpdateDTO.getMateCnt(),
                                 postUpdateDTO.getMateContent());
                     }
                     if (postUpdateDTO.getStatus().equals("OFF")){
                         existingPost.updateOfflinePost(
-                                postUpdateDTO.getMateCnt(),
                                 postUpdateDTO.getMateContent(),
                                 postUpdateDTO.getMateRegionSi(),
                                 postUpdateDTO.getMateRegionGu(),
@@ -191,9 +232,37 @@ public class PostService {
                 .mateContent(offlinePostDTO.getMateContent())
                 .mateRegionSi(offlinePostDTO.getMateRegionSi())
                 .mateRegionGu(offlinePostDTO.getMateRegionGu())
+                .mateLocation(offlinePostDTO.getMateLocation())
                 .latitude(offlinePostDTO.getLatitude())
                 .longitude(offlinePostDTO.getLongitude())
                 .build();
+
+        return postRepository.save(post);
+    }
+
+
+    //포스트 공통으로 처리하는 로직
+    private Post createPost(User user, PostDTO postDTO, Post.OnOffStatus status) {
+        Post post = Post.builder()
+                .gameTitle(postDTO.getGameTitle())
+                .gameGenre(postDTO.getGameGenre())
+                .status(status)
+                .user(user)
+                .nickname(user.getNickname())
+                .mateCnt(postDTO.getMateCnt())
+                .mateContent(postDTO.getMateContent())
+                .build();
+
+        if (postDTO instanceof OfflinePostDTO) {
+            OfflinePostDTO offlinePost = (OfflinePostDTO) postDTO;
+            post.createOfflinePost(
+                    offlinePost.getMateRegionSi(),
+                    offlinePost.getMateRegionGu(),
+                    offlinePost.getMateLocation(),
+                    offlinePost.getLatitude(),
+                    offlinePost.getLongitude()
+                    );
+        }
 
         return postRepository.save(post);
     }

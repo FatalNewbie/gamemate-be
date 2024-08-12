@@ -96,12 +96,7 @@ public class UserController {
         return "복구완료"; // 복구 성공 메시지 반환
     }
 
-    @GetMapping("/presigned-url")
-    public ResponseEntity<String> getPresignedUrl(@AuthenticationPrincipal UserDetails userDetails) {
-        String username = userDetails.getUsername();
-        URL presignedUrl = userService.generatePresignedUrl(username);
-        return ResponseEntity.ok(presignedUrl.toString());
-    }
+
     @GetMapping("/profile")
     public ResponseEntity<String> getProfileImage(@AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
@@ -120,11 +115,6 @@ public class UserController {
         }
     }
 
-    @GetMapping("s3/images")
-    public ResponseEntity<List<String>> getImages() {
-        List<String> imageUrls = userService.listImages();
-        return ResponseEntity.ok(imageUrls); // 이미지 URL 리스트 반환
-    }
 
     // 겟 요청시 닉네임 반환, 이삭 추가
     @GetMapping("/user")

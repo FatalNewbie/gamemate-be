@@ -1,34 +1,25 @@
 package com.example.gamemate.domain.s3.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@ToString
 public class AccessLogDTO {
-    private String userName;
-
+    private Long id;
+    private String userId;
     private String endpoint;
-
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime accessTime;
-
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime leaveTime;
 
-    public void setAccessTime(String accessTime) {
-        this.accessTime = OffsetDateTime.parse(accessTime).toLocalDateTime();
+    public AccessLogDTO(Long id, String userId, String endpoint, LocalDateTime accessTime, LocalDateTime leaveTime) {
+        this.id = id;
+        this.userId = userId;
+        this.endpoint = endpoint;
+        this.accessTime = accessTime;
+        this.leaveTime = leaveTime;
     }
 
-    public void setLeaveTime(String leaveTime) {
-        this.leaveTime = OffsetDateTime.parse(leaveTime).toLocalDateTime();
-    }
 }

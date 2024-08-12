@@ -1,5 +1,6 @@
 package com.example.gamemate.domain.post.entity;
 
+import com.example.gamemate.domain.chat.domain.ChatRoom;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.global.audit.BaseEntity;
 import jakarta.persistence.*;
@@ -41,7 +42,7 @@ public class Post extends BaseEntity {
     private String nickname;
 
     @Column
-    private Integer mateCnt;
+    private Long mateCnt;
 
     @Column(length = 500)
     private String mateContent;
@@ -53,9 +54,12 @@ public class Post extends BaseEntity {
     private String mateRegionGu;
 
     @Column
+    private String mateLocation;
+
+    @Column(precision = 30, scale = 12)
     private BigDecimal latitude;
 
-    @Column
+    @Column(precision = 30, scale = 13)
     private BigDecimal longitude;
 
     @Column
@@ -64,22 +68,23 @@ public class Post extends BaseEntity {
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<PostComment> postComments = new ArrayList<>();
 
+    @OneToOne(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ChatRoom chatRoom;
+
     public enum OnOffStatus {
         ON,  // 온라인
         OFF  // 오프라인
     }
 
-    public void updateOnlinePost(Integer mateCnt, String mateContent){
-        this.mateCnt = mateCnt;
+    public void updateOnlinePost(String mateContent){
         this.mateContent = mateContent;
     }
 
     public void updateOfflinePost(
-            Integer mateCnt, String mateContent,
+            String mateContent,
             String mateRegionSi, String mateRegionGu,
             BigDecimal latitude, BigDecimal longitude
     ){
-        this.mateCnt = mateCnt;
         this.mateContent = mateContent;
         this.mateRegionGu = mateRegionGu;
         this.mateRegionSi = mateRegionSi;
@@ -87,11 +92,22 @@ public class Post extends BaseEntity {
         this.longitude = longitude;
     }
 
+    public void createOfflinePost(
+            String mateRegionSi, String mateRegionGu, String mateLocation,
+            BigDecimal latitude, BigDecimal longitude
+    ){
+        this.mateRegionGu = mateRegionGu;
+        this.mateRegionSi = mateRegionSi;
+        this.mateLocation = mateLocation;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     @Builder
     public Post(
             User user, OnOffStatus status, String gameTitle, String gameGenre,
-            String nickname, Integer mateCnt, String mateContent,
-            String mateRegionSi, String mateRegionGu,
+            String nickname, Long mateCnt, String mateContent,
+            String mateRegionSi, String mateRegionGu, String mateLocation,
             BigDecimal latitude, BigDecimal longitude
     ) {
 
@@ -104,6 +120,7 @@ public class Post extends BaseEntity {
         this.mateContent = mateContent;
         this.mateRegionSi = mateRegionSi;
         this.mateRegionGu = mateRegionGu;
+        this.mateLocation = mateLocation;
         this.latitude = latitude;
         this.longitude = longitude;
 

@@ -15,7 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Post Comment", description = "Post Comment API")
+@Tag(name = "Post Comment", description = "게임메이트 모집 글의 댓글 API")
 @RequestMapping("/post")
 @RestController
 public class PostCommentController {

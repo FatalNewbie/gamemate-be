@@ -47,7 +47,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         this.jwtUtil = jwtUtil;
         this.customUserDetailsService = customUserDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.expirationTime = 60 * 60 * 1000 * 10L;
+        this.expirationTime = 600 * 600 * 1000 * 10L;
 
     }
 

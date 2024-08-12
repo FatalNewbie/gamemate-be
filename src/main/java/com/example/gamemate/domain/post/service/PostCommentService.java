@@ -62,6 +62,8 @@ public class PostCommentService {
                         .nickname(postComment.getNickname())
                         .content(postComment.getContent())
                         .recomments(getRecomments(postComment))
+                        .createdDate(postComment.getCreatedDate())
+                        .modifiedDate(postComment.getModifiedDate())
                         .build())
                 .collect(Collectors.toList());
 
@@ -81,6 +83,8 @@ public class PostCommentService {
                         .username(postCommentRepository.findUsernameByCommentId(recomment.getId()))
                         .nickname(recomment.getNickname())
                         .content(recomment.getContent())
+                        .createdDate(recomment.getCreatedDate())
+                        .modifiedDate(recomment.getModifiedDate())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -95,9 +99,9 @@ public class PostCommentService {
 
         //대댓글일 경우 실행되는 로직
         PostComment parentComment = null;
-        if(postCommentDTO.getPCommentId() != null){
-            System.out.println(postCommentDTO.getPCommentId());
-            parentComment = postCommentRepository.findById(postCommentDTO.getPCommentId())
+        if(postCommentDTO.getParentCommentId() != null){
+            System.out.println(postCommentDTO.getParentCommentId());
+            parentComment = postCommentRepository.findById(postCommentDTO.getParentCommentId())
                     .orElseThrow(() -> new RestApiException(PostExceptionCode.COMMENT_NOT_FOUND));
         }
         ;

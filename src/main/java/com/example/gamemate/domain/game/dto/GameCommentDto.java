@@ -12,6 +12,7 @@ public class GameCommentDto {
     private Long userId;
     private Long gameId;
     private String content;
+    private String username;
     private String nickname;  // 추가
     private LocalDateTime createdDate;  // 추가
 }

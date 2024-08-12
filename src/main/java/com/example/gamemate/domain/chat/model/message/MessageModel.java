@@ -12,12 +12,12 @@ public class MessageModel {
     private String writer;
     private String content;
     private Long chatRoomId;
+    private String type;
 
-    public MessageModel(String writer,
-                        String content,
-                        Long chatRoomId) {
+    public MessageModel(String writer, String content, Long chatRoomId, String type) {
         this.writer = writer;
         this.content = content;
         this.chatRoomId = chatRoomId;
+        this.type = type;
     }
 }

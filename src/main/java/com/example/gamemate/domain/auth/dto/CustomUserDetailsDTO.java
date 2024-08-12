@@ -3,9 +3,11 @@ package com.example.gamemate.domain.auth.dto;
 import com.example.gamemate.domain.user.entity.User;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+@Slf4j
 public class CustomUserDetailsDTO implements UserDetails {
 
     private final User user;
@@ -13,6 +15,7 @@ public class CustomUserDetailsDTO implements UserDetails {
     public CustomUserDetailsDTO(User user) {
 
         this.user = user;
+        log.info("CustomUserDetailsDTO initialized with user: {}", user);
 
     }
 
@@ -52,7 +55,7 @@ public class CustomUserDetailsDTO implements UserDetails {
     }
 
     public Long getId() {
-
+        log.info("Retrieved user ID: {}", user.getId());
         return user.getId();
 
     }

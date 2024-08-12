@@ -4,11 +4,14 @@ import com.example.gamemate.domain.chat.domain.ChatRoom;
 import com.example.gamemate.domain.chat.domain.Message;
 import com.example.gamemate.domain.chat.dto.MessageDTO;
 import com.example.gamemate.domain.chat.mapper.MessageMapper;
+import com.example.gamemate.domain.chat.model.message.OutputMessageModel;
 import com.example.gamemate.domain.chat.repository.ChatRoomRepository;
 import com.example.gamemate.domain.chat.repository.MessageRepository;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.util.Pair;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -34,13 +37,24 @@ public class MessageService {
         return messageRepository.save(message);
     }
 
-    public List<MessageDTO> getAllMessagesByRoomId(Long chatRoomId){
+    public List<OutputMessageModel> getAllMessagesByRoomId(Long chatRoomId){
         ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId).orElse(null);
         List<Message> messages = messageRepository.findAllByChatRoom(chatRoom);
         return messages.stream()
-                .map(MessageMapper::toDTO)
+                .map(MessageMapper::toOutputMessageModel)
                 .collect(Collectors.toList());
 
     }
+
+    public Pair<HttpStatus,String> deleteMessageById(Long id){
+        if(messageRepository.existsById(id)){
+            messageRepository.deleteById(id);
+            return Pair.of(HttpStatus.OK, id + " message deleted");
+        } else {
+            return Pair.of(HttpStatus.NOT_FOUND, id + " message not found");
+        }
+    }
+
+
 
 }

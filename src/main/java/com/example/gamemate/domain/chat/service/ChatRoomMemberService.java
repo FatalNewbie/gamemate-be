@@ -25,7 +25,7 @@ public class ChatRoomMemberService {
     private final UserRepository userRepository;
 
     public AddMemberResponse addMember(Long roomId,
-                                       String username,
+                                       Long targetMemberId,
                                        boolean isLeader) {
         // 이미 리더가 존재하는 방에 리더 멤버가 추가되는 경우가 발생할때의 예외 처리
 
@@ -35,7 +35,8 @@ public class ChatRoomMemberService {
         ChatRoom chatRoom = chatRoomRepository.findById(roomId)
                 .orElseThrow(() -> new ChatRoomException(ChatExceptionCode.CHATROOM_NOT_FOUND));
 
-        User member = userRepository.findByUsername(username);
+        User member = userRepository.findById(targetMemberId).orElse(null);
+
 
         ChatRoomMember chatRoomMember = new ChatRoomMember(chatRoom, member, isLeader);
         chatRoomMemberRepository.save(chatRoomMember);
