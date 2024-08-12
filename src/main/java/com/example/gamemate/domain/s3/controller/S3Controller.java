@@ -40,7 +40,4 @@ public class S3Controller {
         List<String> imageUrls = s3Service.listImages();
         return ResponseEntity.ok(imageUrls); // 이미지 URL 리스트 반환
     }
-
-
-
 }

@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class AccessLogController {
@@ -23,10 +25,8 @@ public class AccessLogController {
         this.accessLogService = accessLogService;
     }
 
-    @PostMapping("/access")
-    public ResponseEntity<Void> logAccess(@RequestBody AccessLogDTO accessLogDTO) {
-        accessLogService.saveAccessLog(accessLogDTO);
-        return ResponseEntity.ok().build();
-    }
+
+
+
 
 }
