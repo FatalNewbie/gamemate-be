@@ -32,6 +32,13 @@ public class ChatRoomController {
         //return ApiResponse.successRes(HttpStatus.OK,chatRoomService.getAllChatRoomsByUser(userDetails));
     }
 
+    @GetMapping("/post/{postId}")
+    public ResponseEntity<Long> getAllChatRooms(@PathVariable Long postId,
+                                                @AuthenticationPrincipal UserDetails userDetails){
+        return ResponseEntity.ok(chatRoomService.getChatRoomByPostId(postId));
+        //return ApiResponse.successRes(HttpStatus.OK,chatRoomService.getAllChatRoomsByUser(userDetails));
+    }
+
     @GetMapping("/{roomId}")
     public ResponseEntity<Long> getChatRoomMemberCnt(@PathVariable Long roomId){
         return ResponseEntity.ok(chatRoomService.getChatRoomMemberCnt(roomId));

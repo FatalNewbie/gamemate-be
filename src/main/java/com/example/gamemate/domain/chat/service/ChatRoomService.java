@@ -8,6 +8,8 @@ import com.example.gamemate.domain.chat.model.chatroom.ChatRoomCreateRequest;
 import com.example.gamemate.domain.chat.model.chatroom.ChatRoomCreateResponse;
 import com.example.gamemate.domain.chat.model.chatroommember.AddMemberRequest;
 import com.example.gamemate.domain.chat.repository.ChatRoomRepository;
+import com.example.gamemate.domain.post.entity.Post;
+import com.example.gamemate.domain.post.repository.PostRepository;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.repository.UserRepository;
 import com.example.gamemate.global.exception.ChatExceptionCode;
@@ -30,6 +32,7 @@ public class ChatRoomService {
     private final ChatRoomMemberService chatRoomMemberService;
     private final ChatRoomMapper chatRoomMapper;
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
 
 
     public List<ChatRoomDTO> getAllChatRoomsByUser(UserDetails userDetails) {
@@ -39,6 +42,11 @@ public class ChatRoomService {
         return chatRooms.stream()
                 .map(chatRoomMapper::convertoToChatRoomDTO)
                 .collect(Collectors.toList());
+    }
+
+    public Long getChatRoomByPostId(Long postId){
+        Post post = postRepository.findById(postId).orElse(null);
+        return chatRoomRepository.findByPost(post).getId();
     }
 
     public void deleteChatRoom(Long roomId){
@@ -56,4 +64,6 @@ public class ChatRoomService {
             return chatRoomRepository.countByChatRoom(chatRoom);
 
     }
+
+
 }
