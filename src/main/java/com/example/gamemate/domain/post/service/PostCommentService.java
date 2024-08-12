@@ -60,6 +60,7 @@ public class PostCommentService {
                         .id(postComment.getId())
                         .username(postCommentRepository.findUsernameByCommentId(postComment.getId()))
                         .nickname(postComment.getNickname())
+                        .userProfile(postComment.getUserProfile())
                         .content(postComment.getContent())
                         .recomments(getRecomments(postComment))
                         .createdDate(postComment.getCreatedDate())
@@ -82,6 +83,7 @@ public class PostCommentService {
                         .id(recomment.getId())
                         .username(postCommentRepository.findUsernameByCommentId(recomment.getId()))
                         .nickname(recomment.getNickname())
+                        .userProfile(recomment.getUserProfile())
                         .content(recomment.getContent())
                         .createdDate(recomment.getCreatedDate())
                         .modifiedDate(recomment.getModifiedDate())
@@ -111,6 +113,7 @@ public class PostCommentService {
                 .post(post)
                 .parentComment(parentComment)
                 .nickname(user.getNickname())
+                .userProfile(user.getUserProfile())
                 .content(postCommentDTO.getContent())
                 .build();
 

@@ -25,6 +25,9 @@ public class PostResponseDTO {
     @Schema(description = "유저 닉네임")
     private String nickname;
 
+    @Schema(description = "유저 프로필 이미지")
+    private String userProfile;
+
 
     @Schema(description = "온/오프 상태값")
     private String status;
@@ -88,7 +91,8 @@ public class PostResponseDTO {
 
     @Builder
     public PostResponseDTO(
-            Long id, String username, String nickname, String status, String gameTitle,
+            Long id, String username, String nickname, String userProfile,
+            String status, String gameTitle,
             String gameGenre, Long mateCnt, String mateContent, Long commentCnt,
             String mateRegionSi, String mateRegionGu, String mateLocation,
             BigDecimal latitude, BigDecimal longitude, LocalDateTime createdDate
@@ -96,6 +100,7 @@ public class PostResponseDTO {
         this.id = id;
         this.username = username;
         this.nickname = nickname;
+        this.userProfile =userProfile;
 
         this.status = status;
         this.gameTitle = gameTitle;

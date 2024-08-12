@@ -21,6 +21,9 @@ public class RecommentsResponseDTO {
     @Schema(description = "유저 닉네임")
     private String nickname;
 
+    @Schema(description = "유저 프로필 이미지")
+    private String userProfile;
+
     @Schema(description = "댓글 내용")
     private String content;
 

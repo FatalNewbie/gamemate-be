@@ -26,6 +26,7 @@ public class PostCommentController {
         this.postCommentService = postCommentService;
     }
 
+    //게시글 댓글 리스트 조회 api
     @GetMapping("/{id}/comment")
     public ApiResponse<CustomPage<PostCommentsResponseDTO>> getAllComments(
             @PathVariable(name = "id") Long id,
