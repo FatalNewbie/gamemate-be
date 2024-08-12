@@ -10,6 +10,7 @@ import com.example.gamemate.domain.game.entity.GameRating;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 
 import java.util.List;
 
@@ -23,6 +24,11 @@ public interface GameMapper {
     @Mapping(source = "givenrate", target = "classes")
     @Mapping(source = "summary", target = "description")
     Game toEntity(GameApiResponse.GameItem gameItem);
+
+    @Named("toBasicGameDto")
+    @Mapping(target = "comments", ignore = true)
+    @Mapping(target = "ratings", ignore = true)
+    GameDto toBasicDto(Game game);
 
     GameDto toDto(Game game);
 

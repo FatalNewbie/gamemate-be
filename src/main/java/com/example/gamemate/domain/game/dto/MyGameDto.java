@@ -9,5 +9,6 @@ import lombok.*;
 public class MyGameDto {
     private Long id;
     private Long userId;
-    private Long gameId;
+    private String username;
+    private GameDto game;
 }
