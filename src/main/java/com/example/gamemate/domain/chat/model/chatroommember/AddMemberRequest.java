@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AddMemberRequest {
     private Long chatRoomId;
-    private String addMemberUsername;
+    private Long writerId;
 
 
 
@@ -17,9 +17,9 @@ public class AddMemberRequest {
         this.chatRoomId = chatRoomId;
     }
 
-    public AddMemberRequest(Long chatRoomId, String addMemberUsername) {
+    public AddMemberRequest(Long chatRoomId, Long writerId) {
         this.chatRoomId = chatRoomId;
-        this.addMemberUsername = addMemberUsername;
+        this.writerId = writerId;
     }
 }
 

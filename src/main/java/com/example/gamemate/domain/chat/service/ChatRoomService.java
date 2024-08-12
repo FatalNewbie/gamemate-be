@@ -31,7 +31,7 @@ public class ChatRoomService {
     private final ChatRoomMapper chatRoomMapper;
     private final UserRepository userRepository;
 
-    public ChatRoomCreateResponse createChatRoom(ChatRoomCreateRequest request, UserDetails userDetails){
+    public ChatRoomDTO createChatRoom(ChatRoomCreateRequest request, UserDetails userDetails){
 
         String chatTitle = request.getChatTitle();
         Long memberCnt = request.getMemberCnt();
@@ -41,9 +41,10 @@ public class ChatRoomService {
         // 채팅방 생성
         ChatRoom newChatRoom = chatRoomRepository.save(chatRoom);
         // 생성요청을 보낸 유저를 채팅방멤버의 방장으로 추가함.
-        chatRoomMemberService.addMember(newChatRoom.getId(), leader.getUsername(),true);
+        chatRoomMemberService.addMember(newChatRoom.getId(), leader.getId(),true);
 
-        return ChatRoomCreateResponse.from(true, "채팅방을 생성하였습니다.");
+        return chatRoomMapper.convertoToChatRoomDTO(newChatRoom);
+
     }
 
     public List<ChatRoomDTO> getAllChatRoomsByUser(UserDetails userDetails) {
@@ -55,13 +56,11 @@ public class ChatRoomService {
                 .collect(Collectors.toList());
     }
 
-    public Pair<HttpStatus,String> deleteChatRoom(Long roomId){
-        if(chatRoomRepository.existsById(roomId)){
-            chatRoomRepository.deleteById(roomId);
-            return Pair.of(HttpStatus.OK, roomId + " chatroom deleted");
-        } else {
-            return Pair.of(HttpStatus.NOT_FOUND, roomId + " not found");
-        }
+    public void deleteChatRoom(Long roomId){
+        ChatRoom chatRoom = chatRoomRepository.findById(roomId).orElseThrow(()->new ChatRoomException(ChatExceptionCode.CHATROOM_NOT_FOUND));
+
+        chatRoomRepository.deleteById(roomId);
+
     }
 
     public Long getChatRoomMemberCnt(Long roomId){

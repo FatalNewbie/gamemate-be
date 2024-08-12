@@ -1,5 +1,6 @@
 package com.example.gamemate.domain.chat.domain;
 
+import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.global.audit.BaseEntity;
 import jakarta.persistence.*;
@@ -35,6 +36,11 @@ public class ChatRoom extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "leader")
     private User leader;
+
+    // 채팅방 모집 게시글
+    @OneToOne
+    @JoinColumn(name = "post", unique = true)
+    private Post post;
 
 
     public ChatRoom(String title, User leader, Long memberCnt) {

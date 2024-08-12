@@ -1,10 +1,12 @@
 package com.example.gamemate.domain.chat.controller;
 
+import com.example.gamemate.domain.chat.domain.ChatRoom;
 import com.example.gamemate.domain.chat.dto.ChatRoomDTO;
 import com.example.gamemate.domain.chat.model.chatroom.ChatRoomCreateRequest;
 import com.example.gamemate.domain.chat.model.chatroom.ChatRoomCreateResponse;
 import com.example.gamemate.domain.chat.service.ChatRoomService;
 
+import com.example.gamemate.global.apiRes.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
@@ -23,27 +25,30 @@ public class ChatRoomController {
     private final ChatRoomService chatRoomService;
 
     @PostMapping("/")
-    public ChatRoomCreateResponse createChatRoom(@RequestBody ChatRoomCreateRequest request,
-                                                 @AuthenticationPrincipal UserDetails userDetails){
-        return chatRoomService.createChatRoom(request,userDetails);
+    public ResponseEntity<ChatRoomDTO> createChatRoom(@RequestBody ChatRoomCreateRequest request,
+                                                @AuthenticationPrincipal UserDetails userDetails){
+        //return ApiResponse.successRes(HttpStatus.OK,chatRoomService.createChatRoom(request,userDetails));
+        return ResponseEntity.ok(chatRoomService.createChatRoom(request,userDetails));
     }
 
     @GetMapping("/")
     public ResponseEntity<List<ChatRoomDTO>> getAllChatRooms(@AuthenticationPrincipal UserDetails userDetails){
-
         return ResponseEntity.ok(chatRoomService.getAllChatRoomsByUser(userDetails));
+        //return ApiResponse.successRes(HttpStatus.OK,chatRoomService.getAllChatRoomsByUser(userDetails));
     }
 
     @GetMapping("/{roomId}")
     public ResponseEntity<Long> getChatRoomMemberCnt(@PathVariable Long roomId){
-
-        Long result = chatRoomService.getChatRoomMemberCnt(roomId);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(chatRoomService.getChatRoomMemberCnt(roomId));
+        //return ApiResponse.successRes(HttpStatus.OK,chatRoomService.getChatRoomMemberCnt(roomId));
     }
 
     @DeleteMapping("/{roomId}")
-    public ResponseEntity<String> deleteChatRoom(@PathVariable Long roomId){
-        Pair<HttpStatus, String> result = chatRoomService.deleteChatRoom(roomId);
-        return ResponseEntity.status(result.getFirst()).body(result.getSecond());
+    public ResponseEntity<Long> deleteChatRoom(@PathVariable Long roomId){
+        chatRoomService.deleteChatRoom(roomId);
+        //return ApiResponse.successRes(HttpStatus.OK,roomId);
+        return ResponseEntity.ok(roomId);
     }
-    }
+
+
+}

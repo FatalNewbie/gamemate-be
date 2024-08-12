@@ -1,5 +1,6 @@
 package com.example.gamemate.domain.post.entity;
 
+import com.example.gamemate.domain.chat.domain.ChatRoom;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.global.audit.BaseEntity;
 import jakarta.persistence.*;
@@ -63,6 +64,9 @@ public class Post extends BaseEntity {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<PostComment> postComments = new ArrayList<>();
+
+    @OneToOne(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ChatRoom chatRoom;
 
     public enum OnOffStatus {
         ON,  // 온라인
