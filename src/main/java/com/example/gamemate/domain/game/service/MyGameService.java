@@ -31,6 +31,17 @@ public class MyGameService {
         this.myGameMapper = myGameMapper;
     }
 
+    public boolean isGameInUserList(CustomUserDetailsDTO userDetailsDTO, Long gameId) {
+        String username = userDetailsDTO.getUsername();
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new RestApiException(GameExceptionCode.USER_NOT_FOUND);
+        }
+
+        return myGameRepository.existsByUserIdAndGameId(user.getId(), gameId);
+    }
+
     public Page<MyGameDto> getGameListByUsername(String username, Pageable pageable) {
         User user = userRepository.findByUsername(username);
         if (user == null) {

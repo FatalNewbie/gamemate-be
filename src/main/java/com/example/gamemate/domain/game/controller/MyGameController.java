@@ -29,6 +29,19 @@ public class MyGameController {
         this.myGameService = myGameService;
     }
 
+    @GetMapping("/my-games/{gameId}/exists")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ApiResponse<Boolean> isGameInUserList(
+            @AuthenticationPrincipal CustomUserDetailsDTO customUserDetailsDTO,
+            @PathVariable Long gameId) {
+
+        String username = customUserDetailsDTO.getUsername();
+        log.info("Checking if game ID: {} exists in username: {}'s list", gameId, username);
+
+        boolean exists = myGameService.isGameInUserList(customUserDetailsDTO, gameId);
+        return ApiResponse.successRes(HttpStatus.OK, exists);
+    }
+
     @GetMapping("/my-games")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ApiResponse<CustomPage<MyGameDto>> getUserGameList(

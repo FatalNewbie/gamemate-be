@@ -28,14 +28,19 @@ public class GameRatingService {
     }
 
     public GameRatingDto getUserRatingForGame(String username, Long gameId) {
-
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new RestApiException(GameExceptionCode.USER_NOT_FOUND);
         }
 
+        // 평점이 존재하지 않을 경우 기본 평점 0을 반환하도록 수정
         GameRating rating = gameRatingRepository.findByUserIdAndGameId(user.getId(), gameId)
-                .orElseThrow(() -> new RestApiException(GameExceptionCode.GAME_RATING_NOT_FOUND));
+                .orElseGet(() -> GameRating.builder()
+                        .user(user)
+                        .game(Game.builder().id(gameId).build()) // 게임 정보에 gameId만 설정
+                        .rating(0) // 기본 평점 0
+                        .build()
+                );
 
         return gameRatingMapper.toDto(rating);
     }
@@ -69,7 +74,11 @@ public class GameRatingService {
         GameRating rating = gameRatingRepository.findByUserIdAndGameId(user.getId(), gameId)
                 .orElseThrow(() -> new RestApiException(GameExceptionCode.GAME_RATING_NOT_FOUND));
 
-        gameRatingMapper.updateEntityFromDto(ratingDto, rating);
+        // 기존의 식별자를 유지하며 DTO로부터 필요한 정보를 업데이트
+        if (ratingDto.getRating() != 0) {
+            rating.setRating(ratingDto.getRating());
+        }
+
         GameRating updatedRating = gameRatingRepository.save(rating);
         return gameRatingMapper.toDto(updatedRating);
     }
