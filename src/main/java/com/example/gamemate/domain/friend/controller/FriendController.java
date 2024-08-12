@@ -92,4 +92,5 @@ public class FriendController {
         List<FriendResponseDTO> pendingRequests = friendService.getSentFriendRequests(username);
         return ApiResponse.successRes(HttpStatus.OK, pendingRequests);
     }
+
 }
