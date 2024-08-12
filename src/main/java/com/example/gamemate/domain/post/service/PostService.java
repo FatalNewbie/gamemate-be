@@ -145,7 +145,7 @@ public class PostService {
         postResponseDTO.setPostUsername(username);
 
         ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt(), post));
-        chatRoomMemberService.addMember(chatRoom.getId(), username, true);
+        chatRoomMemberService.addMember(chatRoom.getId(), user.getId(), true);
 
         return postResponseDTO;
     }
