@@ -6,6 +6,8 @@ import com.example.gamemate.domain.chat.model.message.MessageModel;
 import com.example.gamemate.domain.chat.model.message.OutputMessageModel;
 import com.example.gamemate.domain.chat.service.MessageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.util.Pair;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -14,6 +16,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,14 +56,14 @@ public class MessageController {
         String username = (String)auth.getPrincipal();
 
         Message newMessage =messageService.saveMessage(messageModel.getChatRoomId(),
-                messageModel.getContent(), username, time,"CHAT" );
+                messageModel.getContent(), username, time, messageModel.getType() );
 
         return new OutputMessageModel(newMessage.getId(),
                 messageModel.getWriter(),
                 messageModel.getChatRoomId(),
                 messageModel.getContent(),
                 time,
-                OutputMessageModel.MessageType.CHAT);
+                messageModel.getType(),newMessage.getWriter().getId());
 
     }
     // MessageMapping의 경로로 클라이언트가 메시지를 보내오면 sendframe에 담사어 전송함.
@@ -68,10 +71,16 @@ public class MessageController {
     // 그 메시지 브로커는  그 경로를 인지한다음에 클라이언트에게 보내준다.
 
 
-    @GetMapping("/message/{roomId}")
-    public ResponseEntity<List<MessageDTO>> getAllMessagesByRoomId(@PathVariable Long roomId){
-        List<MessageDTO> messages = messageService.getAllMessagesByRoomId(roomId);
+    @GetMapping("/message/{roomId}/{messageId}")
+    public ResponseEntity<List<OutputMessageModel>> getAllMessagesByRoomId(@PathVariable Long roomId, @PathVariable Long messageId){
+        List<OutputMessageModel> messages = messageService.getAllMessagesByRoomId(roomId);
         return ResponseEntity.ok(messages);
+    }
+
+    @DeleteMapping("message/{id}")
+    public ResponseEntity<String> deleteMessageById(@PathVariable Long id){
+        Pair<HttpStatus, String> result = messageService.deleteMessageById(id);
+        return ResponseEntity.status(result.getFirst()).body(result.getSecond());
     }
 
 
