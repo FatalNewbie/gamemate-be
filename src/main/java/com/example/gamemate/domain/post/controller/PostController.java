@@ -20,7 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
-@Tag(name = "Post", description = "Post API")
+@Tag(name = "Post", description = "게임메이트 모집 게시글 API")
 @Slf4j
 @RequestMapping("/posts")
 @RestController

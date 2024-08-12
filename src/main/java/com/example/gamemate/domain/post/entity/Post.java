@@ -76,17 +76,15 @@ public class Post extends BaseEntity {
         OFF  // 오프라인
     }
 
-    public void updateOnlinePost(Long mateCnt, String mateContent){
-        this.mateCnt = mateCnt;
+    public void updateOnlinePost(String mateContent){
         this.mateContent = mateContent;
     }
 
     public void updateOfflinePost(
-            Long mateCnt, String mateContent,
+            String mateContent,
             String mateRegionSi, String mateRegionGu,
             BigDecimal latitude, BigDecimal longitude
     ){
-        this.mateCnt = mateCnt;
         this.mateContent = mateContent;
         this.mateRegionGu = mateRegionGu;
         this.mateRegionSi = mateRegionSi;

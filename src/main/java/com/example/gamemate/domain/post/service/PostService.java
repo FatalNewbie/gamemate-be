@@ -133,6 +133,8 @@ public class PostService {
 //        }
 //    }
 
+
+    //게시글 생성
     @Transactional
     public PostResponseDTO createPost(String username, PostDTO postDTO) {
         User user = userRepository.findByUsername(username);
@@ -164,12 +166,10 @@ public class PostService {
                 .map(existingPost -> {
                     if (postUpdateDTO.getStatus().equals("ON")){
                         existingPost.updateOnlinePost(
-                                postUpdateDTO.getMateCnt(),
                                 postUpdateDTO.getMateContent());
                     }
                     if (postUpdateDTO.getStatus().equals("OFF")){
                         existingPost.updateOfflinePost(
-                                postUpdateDTO.getMateCnt(),
                                 postUpdateDTO.getMateContent(),
                                 postUpdateDTO.getMateRegionSi(),
                                 postUpdateDTO.getMateRegionGu(),
