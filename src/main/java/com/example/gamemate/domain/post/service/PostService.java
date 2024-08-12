@@ -78,6 +78,7 @@ public class PostService {
                 .id(post.getId())
                 .username(post.getUser().getUsername())
                 .nickname(post.getUser().getNickname())
+                .userProfile(post.getUser().getUserProfile())
                 .gameTitle(post.getGameTitle())
                 .status(post.getStatus().toString())
                 .gameGenre(post.getGameGenre())
@@ -92,46 +93,6 @@ public class PostService {
                 .createdDate(post.getCreatedDate())
                 .build();
     }
-
-
-    //게시글 생성
-    //Status 값에 따라서 다른 로직 처리
-//    @Transactional
-//    public PostResponseDTO createPost(String username, PostDTO postDTO) {
-//
-//        User user = userRepository.findByUsername(username);
-//
-//        if ("ON".equals(postDTO.getStatus())) {
-//
-//            Post post = handleOnlinePost(user, (OnlinePostDTO) postDTO);
-//
-//            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
-//
-//            postResponseDTO.setPostUsername(username);
-//
-//            ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt(), post));
-//
-//            chatRoomMemberService.addMember(chatRoom.getId(), username, true);
-//
-//            return postResponseDTO;
-//
-//        } else if ("OFF".equals(postDTO.getStatus())) {
-//
-//            Post post = handleOfflinePost(user, (OfflinePostDTO) postDTO);
-//
-//            PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
-//
-//            postResponseDTO.setPostUsername(username);
-//
-//            ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt(), post));
-//
-//            chatRoomMemberService.addMember(chatRoom.getId(), username, true);
-//
-//            return postResponseDTO;
-//        } else {
-//            throw new RestApiException(CommonExceptionCode.INVALID_PARAMETER);
-//        }
-//    }
 
 
     //게시글 생성
@@ -203,45 +164,7 @@ public class PostService {
     }
 
 
-    // 온라인 포스트 처리 로직
-    private Post handleOnlinePost(User user, OnlinePostDTO onlinePostRequest) {
-
-        Post post = Post.builder()
-                .gameTitle(onlinePostRequest.getGameTitle())
-                .gameGenre(onlinePostRequest.getGameGenre())
-                .status(Post.OnOffStatus.ON)
-                .user(user)
-                .nickname(user.getNickname())
-                .mateCnt(onlinePostRequest.getMateCnt())
-                .mateContent(onlinePostRequest.getMateContent())
-                .build();
-
-        return postRepository.save(post);
-    }
-
-    //오프라인 포스트 처리 로직
-    private Post handleOfflinePost(User user, OfflinePostDTO offlinePostDTO) {
-
-        Post post = Post.builder()
-                .gameTitle(offlinePostDTO.getGameTitle())
-                .gameGenre(offlinePostDTO.getGameGenre())
-                .status(Post.OnOffStatus.OFF)
-                .user(user)
-                .nickname(user.getNickname())
-                .mateCnt(offlinePostDTO.getMateCnt())
-                .mateContent(offlinePostDTO.getMateContent())
-                .mateRegionSi(offlinePostDTO.getMateRegionSi())
-                .mateRegionGu(offlinePostDTO.getMateRegionGu())
-                .mateLocation(offlinePostDTO.getMateLocation())
-                .latitude(offlinePostDTO.getLatitude())
-                .longitude(offlinePostDTO.getLongitude())
-                .build();
-
-        return postRepository.save(post);
-    }
-
-
-    //포스트 공통으로 처리하는 로직
+    //포스트 처리하는 로직
     private Post createPost(User user, PostDTO postDTO, Post.OnOffStatus status) {
         Post post = Post.builder()
                 .gameTitle(postDTO.getGameTitle())

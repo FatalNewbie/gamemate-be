@@ -51,7 +51,6 @@ public class PostController {
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails
     ){
-
         PostResponseDTO post = postService.readPost(userDetails.getUsername(), id);
 
         return ApiResponse.successRes(HttpStatus.OK,post);
