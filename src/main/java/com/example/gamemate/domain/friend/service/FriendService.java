@@ -180,15 +180,33 @@ public class FriendService {
                 .collect(Collectors.toList());
     }
 
-    public List<FriendResponseDTO> getPendingFriendRequests(String username) {
+    public List<FriendResponseDTO> getReceivedFriendRequests(String username) {
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new RestApiException(FriendExceptionCode.INVALID_USER_ID);
         }
 
-        List<Friend> pendingRequests = friendRepository.findPendingRequestsByReceiverId(user.getId());
+        List<Friend> receivedPendingRequests = friendRepository.findPendingRequestsByReceiverId(user.getId());
 
-        return pendingRequests.stream()
+        return receivedPendingRequests.stream()
+                .map(friend -> new FriendResponseDTO(
+                        null,
+                        friend.getStatus(),
+                        new UserDTO(friend.getRequester()),
+                        new UserDTO(friend.getReceiver()),
+                        null))
+                .collect(Collectors.toList());
+    }
+
+    public List<FriendResponseDTO> getSentFriendRequests(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new RestApiException(FriendExceptionCode.INVALID_USER_ID);
+        }
+
+        List<Friend> sentPendingRequests = friendRepository.findPendingRequestsByRequesterId(user.getId());
+
+        return sentPendingRequests.stream()
                 .map(friend -> new FriendResponseDTO(
                         null,
                         friend.getStatus(),

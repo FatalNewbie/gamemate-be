@@ -79,10 +79,17 @@ public class FriendController {
         return ApiResponse.successRes(HttpStatus.OK, friends);
     }
 
-    @GetMapping("/requests")
-    public ApiResponse<List<FriendResponseDTO>> getPendingFriendRequests(@AuthenticationPrincipal UserDetails userDetails) {
+    @GetMapping("/received-requests")
+    public ApiResponse<List<FriendResponseDTO>> getReceivedFriendRequests(@AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
-        List<FriendResponseDTO> pendingRequests = friendService.getPendingFriendRequests(username);
+        List<FriendResponseDTO> pendingRequests = friendService.getReceivedFriendRequests(username);
+        return ApiResponse.successRes(HttpStatus.OK, pendingRequests);
+    }
+
+    @GetMapping("/sent-requests")
+    public ApiResponse<List<FriendResponseDTO>> getSentFriendRequests(@AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername();
+        List<FriendResponseDTO> pendingRequests = friendService.getSentFriendRequests(username);
         return ApiResponse.successRes(HttpStatus.OK, pendingRequests);
     }
 }
