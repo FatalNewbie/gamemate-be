@@ -10,5 +10,6 @@ public interface FriendRepositoryCustom {
     List<Friend> findFriendsByStatus(Long userId, Friend.Status status);
     List<User> findFriendUsersByUserId(Long userId, Friend.Status status);
     Optional<Friend> findFriendRelationship(Long requesterId, Long receiverId);
-    List<Friend> findPendingRequestsByReceiverId(Long receiverId);  // 추가
+    List<Friend> findPendingRequestsByReceiverId(Long receiverId);
+    List<Friend> findPendingRequestsByRequesterId(Long requesterId);
 }

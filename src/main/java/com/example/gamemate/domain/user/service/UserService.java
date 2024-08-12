@@ -11,15 +11,14 @@ import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.mapper.UserMapper;
 import com.example.gamemate.domain.user.repository.UserRepository;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,13 +29,13 @@ import com.amazonaws.HttpMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 
+@Slf4j
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserMapper mapper;
-
     private final AmazonS3 s3Client;
 
     @Value("${cloud.aws.s3.bucketName}")
@@ -102,6 +101,7 @@ public class UserService {
 
     public void deletedByUsername(String username) {
         Optional<User> optionalUser = Optional.ofNullable(userRepository.findByUsername(username));
+        log.info("finduser: " + String.valueOf(optionalUser));
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             user.setDeleted(true);
@@ -122,22 +122,7 @@ public class UserService {
         }
     }
 
-    public URL generatePresignedUrl(String username) {
-        String objectKey = username + "_profile_image";
 
-        Date expiration = new Date();
-        long expTimeMillis = expiration.getTime();
-        expTimeMillis += 1000 * 60 * 60; // 1시간
-        expiration.setTime(expTimeMillis);
-
-        // presigned URL 요청 생성
-        GeneratePresignedUrlRequest generatePresignedUrlRequest =
-                new GeneratePresignedUrlRequest(bucketName, objectKey)
-                        .withMethod(HttpMethod.PUT)
-                        .withExpiration(expiration);
-
-        return s3Client.generatePresignedUrl(generatePresignedUrlRequest);
-    }
 
 
     public String getProfileImageUrl(String username) {
@@ -175,17 +160,7 @@ public class UserService {
             System.out.println("사용자를 찾을 수 없습니다: " + username);
         }
     }
-    public List<String> listImages() {
-        List<String> imageUrls = new ArrayList<>();
 
-        ObjectListing objectListing = s3Client.listObjects(bucketName);
-        for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
-            String imageUrl = s3Client.getUrl(bucketName, objectSummary.getKey()).toString();
-            imageUrls.add(imageUrl); // 이미지 URL 리스트에 추가
-        }
-
-        return imageUrls; // 이미지 URL 리스트 반환
-    }
 
 
 }

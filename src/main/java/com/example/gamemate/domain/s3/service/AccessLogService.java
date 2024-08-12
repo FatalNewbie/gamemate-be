@@ -1,5 +1,6 @@
 package com.example.gamemate.domain.s3.service;
 
+import com.example.gamemate.domain.auth.jwt.JWTUtil;
 
 import com.example.gamemate.domain.s3.dto.AccessLogDTO;
 import com.example.gamemate.domain.s3.entity.AccessLog;
@@ -10,24 +11,21 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
+
 @Service
 public class AccessLogService {
 
 
     private final AccessLogRepository accessLogRepository;
 
-    public AccessLogService(AccessLogRepository accessLogRepository){
+    private final JWTUtil JWTUtil;
+
+
+    public AccessLogService(AccessLogRepository accessLogRepository, com.example.gamemate.domain.auth.jwt.JWTUtil JWTUtil){
         this.accessLogRepository = accessLogRepository;
+        this.JWTUtil = JWTUtil;
     }
 
-    public void saveAccessLog(AccessLogDTO accessLogDTO) {
 
-        AccessLog accessLog = new AccessLog(
-                accessLogDTO.getUserName(),
-                accessLogDTO.getEndpoint(),
-                accessLogDTO.getAccessTime(),
-                accessLogDTO.getLeaveTime()
-        );
-        accessLogRepository.save(accessLog);
-    }
 }

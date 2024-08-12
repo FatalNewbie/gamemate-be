@@ -71,5 +71,14 @@ public class FriendRepositoryCustomImpl implements FriendRepositoryCustom {
                 .where(friend.receiver.id.eq(receiverId).and(friend.status.eq(Friend.Status.PENDING)))
                 .fetch();
     }
+
+    @Override
+    public List<Friend> findPendingRequestsByRequesterId(Long requesterId) {
+        QFriend friend = QFriend.friend;
+
+        return queryFactory.selectFrom(friend)
+                .where(friend.requester.id.eq(requesterId).and(friend.status.eq(Friend.Status.PENDING)))
+                .fetch();
+    }
 }
 

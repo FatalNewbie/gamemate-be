@@ -1,11 +1,8 @@
 package com.example.gamemate.domain.user.controller;
 
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
 import com.example.gamemate.domain.user.dto.MyPageResponseDTO;
 import com.example.gamemate.domain.user.dto.RecommendResponseDTO;
-import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.dto.UpdateDTO;
 import com.example.gamemate.domain.user.mapper.UserMapper;
 import com.example.gamemate.domain.user.service.UserService;
@@ -16,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,9 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
@@ -69,6 +63,7 @@ public class UserController {
         }
         return ApiResponse.successRes(HttpStatus.OK, user);
     }
+
     @PutMapping("/update")
     public String updateUser(@RequestBody UpdateDTO updateDTO, @AuthenticationPrincipal UserDetails userDetails) {
         String name = userDetails.getUsername();
@@ -94,7 +89,6 @@ public class UserController {
         return "삭제완료";
     }
 
-
     @PutMapping("/restoreUser/{username}")
     @PreAuthorize("hasRole('ADMIN')")
     public String restoreUser(@PathVariable String username) {
@@ -102,12 +96,7 @@ public class UserController {
         return "복구완료"; // 복구 성공 메시지 반환
     }
 
-    @GetMapping("/presigned-url")
-    public ResponseEntity<String> getPresignedUrl(@AuthenticationPrincipal UserDetails userDetails) {
-        String username = userDetails.getUsername();
-        URL presignedUrl = userService.generatePresignedUrl(username);
-        return ResponseEntity.ok(presignedUrl.toString());
-    }
+
     @GetMapping("/profile")
     public ResponseEntity<String> getProfileImage(@AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
@@ -126,11 +115,6 @@ public class UserController {
         }
     }
 
-    @GetMapping("s3/images")
-    public ResponseEntity<List<String>> getImages() {
-        List<String> imageUrls = userService.listImages();
-        return ResponseEntity.ok(imageUrls); // 이미지 URL 리스트 반환
-    }
 
     // 겟 요청시 닉네임 반환, 이삭 추가
     @GetMapping("/user")

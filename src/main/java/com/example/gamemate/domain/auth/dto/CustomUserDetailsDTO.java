@@ -84,4 +84,10 @@ public class CustomUserDetailsDTO implements UserDetails {
         return true;
 
     }
+
+    public boolean isDeleted() {
+
+        return user.isDeleted();
+
+    }
 }

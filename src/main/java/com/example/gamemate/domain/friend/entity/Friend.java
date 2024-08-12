@@ -36,6 +36,6 @@ public class Friend {
     private LocalDateTime acceptedDate;
 
     public enum Status {
-        PENDING, ACCEPTED, REJECTED
+        PENDING, ACCEPTED, REJECTED, CANCELED
     }
 }
