@@ -122,22 +122,7 @@ public class UserService {
         }
     }
 
-    public URL generatePresignedUrl(String username) {
-        String objectKey = username + "_profile_image";
 
-        Date expiration = new Date();
-        long expTimeMillis = expiration.getTime();
-        expTimeMillis += 1000 * 60 * 60; // 1시간
-        expiration.setTime(expTimeMillis);
-
-        // presigned URL 요청 생성
-        GeneratePresignedUrlRequest generatePresignedUrlRequest =
-                new GeneratePresignedUrlRequest(bucketName, objectKey)
-                        .withMethod(HttpMethod.PUT)
-                        .withExpiration(expiration);
-
-        return s3Client.generatePresignedUrl(generatePresignedUrlRequest);
-    }
 
 
     public String getProfileImageUrl(String username) {
@@ -175,17 +160,7 @@ public class UserService {
             System.out.println("사용자를 찾을 수 없습니다: " + username);
         }
     }
-    public List<String> listImages() {
-        List<String> imageUrls = new ArrayList<>();
 
-        ObjectListing objectListing = s3Client.listObjects(bucketName);
-        for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
-            String imageUrl = s3Client.getUrl(bucketName, objectSummary.getKey()).toString();
-            imageUrls.add(imageUrl); // 이미지 URL 리스트에 추가
-        }
-
-        return imageUrls; // 이미지 URL 리스트 반환
-    }
 
 
 }
