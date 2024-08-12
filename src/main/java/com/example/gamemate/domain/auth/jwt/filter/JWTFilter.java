@@ -39,13 +39,42 @@ public class JWTFilter extends OncePerRequestFilter {
 
         boolean isOAuth2User = isOAuth2User();
 
-        //request에서 Authorization 헤더를 찾음
-        String authorization = request.getHeader("Authorization");
+        //cookie들을 불러온 뒤 Authorization Key에 담긴 쿠키를 찾음
+        String authorization = null;
+        Cookie[] cookies = request.getCookies();
+
+        if(cookies != null) {
+            for (Cookie cookie : cookies) {
+
+                log.info("cookie name" + cookie.getName());
+                if (cookie.getName().equals("Authorization")) {
+//                if ("Authorization".equals(cookie.getName())) {
+
+                    authorization = cookie.getValue();
+                    log.info("token check from cookie: " + authorization);
+                    break;
+
+                }
+            }
+        }
+//        else {
+//        //request에서 Authorization 헤더를 찾음
+//        authorization = "Bearer " + request.getHeader("Authorization");
+//        }
+
+        // 쿠키에서 Authorization을 찾지 못한 경우, 헤더에서 가져오기
+        if (authorization == null) {
+            authorization = request.getHeader("Authorization");
+            if (authorization != null) {
+                log.info("token check from header: " + authorization);
+            }
+        }
+
 
         //Authorization 헤더 검증
-        if(authorization == null || !authorization.startsWith("Bearer ")) {
+        if(authorization == null) {
 
-            log.info("token null or not Bearer");
+            log.info("token is null");
             filterChain.doFilter(request, response);
 
             //조건에 해당되면 메소드 종료
@@ -55,14 +84,24 @@ public class JWTFilter extends OncePerRequestFilter {
         log.info("authorization now");
 
         //Bearer 부분 제거 후 순수 토큰만 획득
-        String token = authorization.split(" ")[1];
+//        String token = authorization.split(" ")[1];
+        String token = null;
+        String[] authParts = authorization.split(" ");
+        if (authParts.length == 2 && "Bearer".equalsIgnoreCase(authParts[0])) {
+            token = authParts[1];
+        } else {
+            log.info("Invalid authorization format");
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid authorization format");
+            return;
+        }
 
         //토큰 소멸 시간 검증
         //유효기간이 만료한 경우
         if(jwtUtil.isExpired(token)) {
 
             log.info("token expired");
-            filterChain.doFilter(request, response);
+//            filterChain.doFilter(request, response);
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token has expired");
 
             //조건에 해당되면 메소드 종료
             return;
@@ -117,8 +156,14 @@ public class JWTFilter extends OncePerRequestFilter {
     }
 
     private boolean isOAuth2User() {
-        return SecurityContextHolder.getContext().getAuthentication() != null &&
-            SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof CustomOAuth2UserDTO;
+        return SecurityContextHolder
+            .getContext()
+            .getAuthentication() != null
+            &&
+            SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal() instanceof CustomOAuth2UserDTO;
     }
 
 }

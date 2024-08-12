@@ -17,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -106,12 +107,20 @@ public class SecurityConfig {
                 .anyRequest().permitAll())
 
             //JWTFilter 등록
-            .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class)
+            .addFilterBefore(new JWTFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)
 
             //필터 추가
             //AuthenticationManager() 메소드에 authenticationConfiguration 객체를 넣어야 함
             //AuthenticationManager()와 JWTUtil, customUserDetailsService, bCryptPasswordEncoder() 인수 전달
-            .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, customUserDetailsService, bCryptPasswordEncoder()), UsernamePasswordAuthenticationFilter.class)
+            .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),
+                                        jwtUtil,
+                                        customUserDetailsService,
+                                        bCryptPasswordEncoder()),
+                                        UsernamePasswordAuthenticationFilter.class
+            )
+
+            //JWTFilter가 OAuth2LoginAuthenticationFilter 뒤에 실행되게
+            .addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class)
 
             //세션 설정
             //JWT를 통한 인증/인가를 위해 세션을 STATELESS 상태로 설정
@@ -137,6 +146,7 @@ public class SecurityConfig {
                     configuration.setAllowedHeaders(Collections.singletonList("*"));
                     configuration.setMaxAge(3600L);
 
+                    configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
                     configuration.setExposedHeaders(Collections.singletonList("Authorization"));
 
                     return configuration;
