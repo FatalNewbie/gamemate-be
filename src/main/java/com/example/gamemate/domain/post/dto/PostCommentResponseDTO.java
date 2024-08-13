@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 @Getter
 public class PostCommentResponseDTO {
 
+    @Schema(description = "유저 id")
+    private Long id;
+
     @Schema(description = "유저 아이디")
     private String username;
 

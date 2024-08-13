@@ -20,6 +20,9 @@ public class PostResponseDTO {
     private Long id;
 
     @Schema(description = "유저 아이디")
+    private Long userId;
+
+    @Schema(description = "유저 아이디")
     private String username;
 
     @Schema(description = "유저 닉네임")
@@ -76,6 +79,7 @@ public class PostResponseDTO {
         this.status = post.getStatus().toString();
         this.gameTitle = post.getGameTitle();
         this.gameGenre = post.getGameGenre();
+        this.userId = post.getUser().getId();
         this.username = post.getUser().getUsername();
         this.nickname = post.getNickname();
         this.mateCnt = post.getMateCnt();
@@ -91,13 +95,14 @@ public class PostResponseDTO {
 
     @Builder
     public PostResponseDTO(
-            Long id, String username, String nickname, String userProfile,
+            Long id, Long userId, String username, String nickname, String userProfile,
             String status, String gameTitle,
             String gameGenre, Long mateCnt, String mateContent, Long commentCnt,
             String mateRegionSi, String mateRegionGu, String mateLocation,
             BigDecimal latitude, BigDecimal longitude, LocalDateTime createdDate
     ){
         this.id = id;
+        this.userId = userId;
         this.username = username;
         this.nickname = nickname;
         this.userProfile =userProfile;
