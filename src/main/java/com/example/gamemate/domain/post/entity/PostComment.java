@@ -3,6 +3,7 @@ package com.example.gamemate.domain.post.entity;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.global.audit.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,6 +36,9 @@ public class PostComment extends BaseEntity {
     @Column(nullable = false, length = 20)
     private String nickname;
 
+    @Schema(description = "유저 프로필 이미지")
+    private String userProfile;
+
     @Column(nullable = false)
     private String content;
 
@@ -48,15 +52,14 @@ public class PostComment extends BaseEntity {
     public PostComment(
             User user, Post post,
             PostComment parentComment,
-            String nickname, String content
+            String nickname, String content, String userProfile
     ){
-
         this.user = user;
         this.post = post;
         this.parentComment = parentComment;
         this.nickname = nickname;
+        this.userProfile = userProfile;
         this.content = content;
-
     }
 
     public void updateComment(String content){

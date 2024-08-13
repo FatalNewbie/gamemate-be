@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,8 @@ public class PostCommentController {
         this.postCommentService = postCommentService;
     }
 
+    //게시글 댓글 리스트 조회 api
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/{id}/comment")
     public ApiResponse<CustomPage<PostCommentsResponseDTO>> getAllComments(
             @PathVariable(name = "id") Long id,
@@ -38,6 +41,7 @@ public class PostCommentController {
     }
 
     //게시글 댓글 작성 api
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/{id}/comment")
     public ApiResponse<PostCommentResponseDTO> registerPostComment(
             @PathVariable(name = "id") Long id,
@@ -52,6 +56,7 @@ public class PostCommentController {
     }
 
     //게시글 댓글 수정 api
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/{postId}/comment/{commentId}")
     public ApiResponse<Object> editComment(
             @PathVariable Long postId,
@@ -68,6 +73,7 @@ public class PostCommentController {
 
 
     //게시글 댓글 삭제 api
+    @PreAuthorize("hasRole('ROLE_USER')")
     @DeleteMapping("/{postId}/comment/{commentId}")
     public ApiResponse<Object> removeComment(
             @PathVariable Long postId,

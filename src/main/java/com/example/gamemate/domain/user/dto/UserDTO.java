@@ -19,6 +19,7 @@ public class UserDTO {
     private String nickname;
     private String role;
     private boolean deleted;
+    private String userProfile;
     private List<String> preferredGenres;
     private List<String> playTimes;
 
@@ -28,6 +29,7 @@ public class UserDTO {
         this.nickname = user.getNickname();
         this.role = user.getRole().name();
         this.deleted = user.isDeleted();
+        this.userProfile = user.getUserProfile();
         this.preferredGenres = user.getPreferredGenres().stream().map(genre -> genre.getName()).collect(Collectors.toList());
         this.playTimes = user.getPlayTimes().stream().map(playtime -> playtime.getTimeSlot()).collect(Collectors.toList());
     }

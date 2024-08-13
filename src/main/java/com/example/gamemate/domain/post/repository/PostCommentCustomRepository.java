@@ -18,4 +18,6 @@ public interface PostCommentCustomRepository {
 
     String findUsernameByCommentId(Long userId);
 
+    String findNicknameByCommentId(Long commentId);
+
 }

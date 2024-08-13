@@ -58,14 +58,13 @@ public class GameCommentController {
             @PathVariable Long gameId,
             @Valid @RequestBody GameCommentDto commentDto) {
 
-        String username = customUserDetailsDTO.getUsername();
-        commentDto.setUsername(username);
+        log.info("Creating comment for game ID: {} by user: {}", gameId, customUserDetailsDTO.getUsername());
 
-        log.info("Creating comment for game ID: {} by user: {}", gameId, username);
-
-        GameCommentDto newComment = gameCommentService.createComment(gameId, commentDto);
+        // commentDto에는 사용자 이름을 설정하지 않아도 됩니다. 이는 서비스에서 처리됩니다.
+        GameCommentDto newComment = gameCommentService.createUserCommentForGame(customUserDetailsDTO, gameId, commentDto);
         return ApiResponse.successRes(HttpStatus.CREATED, newComment);
     }
+
 
     @PutMapping("/{commentId}")
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -76,11 +75,9 @@ public class GameCommentController {
             @Valid @RequestBody GameCommentDto commentDto) {
 
         String username = customUserDetailsDTO.getUsername();
-        commentDto.setUsername(username);
-
         log.info("Updating comment ID: {} for game ID: {} by user: {}", commentId, gameId, username);
 
-        GameCommentDto updatedComment = gameCommentService.updateComment(gameId, commentId, commentDto);
+        GameCommentDto updatedComment = gameCommentService.updateComment(gameId, commentId, username, commentDto);
         return ApiResponse.successRes(HttpStatus.OK, updatedComment);
     }
 

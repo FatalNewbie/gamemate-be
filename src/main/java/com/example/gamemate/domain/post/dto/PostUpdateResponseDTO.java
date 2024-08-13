@@ -11,12 +11,14 @@ import java.math.BigDecimal;
 @Getter
 public class PostUpdateResponseDTO {
 
+    @Schema(description = "유저 id")
+    private Long userId;
+
     @Schema(description = "유저 아이디")
     private String username;
 
     @Schema(description = "유저 닉네임")
     private String nickname;
-
 
     @Schema(description = "온/오프 상태값")
     private String status;

@@ -71,8 +71,8 @@ public class MessageController {
     // 그 메시지 브로커는  그 경로를 인지한다음에 클라이언트에게 보내준다.
 
 
-    @GetMapping("/message/{roomId}/{messageId}")
-    public ResponseEntity<List<OutputMessageModel>> getAllMessagesByRoomId(@PathVariable Long roomId, @PathVariable Long messageId){
+    @GetMapping("/message/{roomId}")
+    public ResponseEntity<List<OutputMessageModel>> getAllMessagesByRoomId(@PathVariable Long roomId){
         List<OutputMessageModel> messages = messageService.getAllMessagesByRoomId(roomId);
         return ResponseEntity.ok(messages);
     }
