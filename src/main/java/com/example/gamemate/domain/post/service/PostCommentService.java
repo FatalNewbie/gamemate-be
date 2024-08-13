@@ -40,6 +40,7 @@ public class PostCommentService {
         this.mapper = mapper;
     }
 
+    //댓글 리스트 조회
     public CustomPage<PostCommentsResponseDTO> readPostComments(Long id, Pageable pageable){
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
@@ -83,6 +84,7 @@ public class PostCommentService {
                         .id(recomment.getId())
                         .username(postCommentRepository.findUsernameByCommentId(recomment.getId()))
                         .nickname(recomment.getNickname())
+                        .parentCommentId(parentComment.getId())
                         .userProfile(recomment.getUserProfile())
                         .content(recomment.getContent())
                         .createdDate(recomment.getCreatedDate())

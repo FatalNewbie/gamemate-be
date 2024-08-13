@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -102,6 +103,7 @@ public class SecurityConfig {
             //경로별 인가 작업
             .authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/login", "/", "/join","/friend/**", "/games/**").permitAll()
+                    .requestMatchers("/posts/**","/post/**").hasRole("USER")
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**").permitAll() // Swagger 경로 허용
                 .requestMatchers("/ws/**").permitAll() // WebSocket 핸드셰이크 경로 허용
                 .anyRequest().permitAll())
