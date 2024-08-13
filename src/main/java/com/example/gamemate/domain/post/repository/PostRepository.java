@@ -11,4 +11,6 @@ public interface PostRepository extends JpaRepository<Post, Long>, PostCustomRep
 
     Page<Post> findByStatusOrderByCreatedDateDesc(Post.OnOffStatus status, Pageable pageable);
 
+    Page<Post> findByUserId(Long userId, Pageable pageable);
+
 }
