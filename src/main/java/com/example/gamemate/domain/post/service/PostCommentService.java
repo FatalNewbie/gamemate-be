@@ -40,6 +40,7 @@ public class PostCommentService {
         this.mapper = mapper;
     }
 
+    //댓글 리스트 조회
     public CustomPage<PostCommentsResponseDTO> readPostComments(Long id, Pageable pageable){
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new RestApiException(PostExceptionCode.POST_NOT_FOUND));
@@ -58,13 +59,15 @@ public class PostCommentService {
         List<PostCommentsResponseDTO> commentsDTO = filteredComments.stream()
                 .map(postComment -> PostCommentsResponseDTO.builder()
                         .id(postComment.getId())
+                        .userId(postComment.getUser().getId())
                         .username(postCommentRepository.findUsernameByCommentId(postComment.getId()))
-                        .nickname(postComment.getNickname())
+                        .nickname(postCommentRepository.findNicknameByCommentId(postComment.getId()))
                         .userProfile(postComment.getUserProfile())
                         .content(postComment.getContent())
                         .recomments(getRecomments(postComment))
                         .createdDate(postComment.getCreatedDate())
                         .modifiedDate(postComment.getModifiedDate())
+                        .deletedDate(postComment.getDeletedDate())
                         .build())
                 .collect(Collectors.toList());
 
@@ -76,17 +79,20 @@ public class PostCommentService {
         return customComments;
     }
 
-    //게시글 댓글 조회
+    //게시글 대댓글 조회
     private List<RecommentsResponseDTO> getRecomments(PostComment parentComment){
         return parentComment.getReComments().stream()
                 .map(recomment -> RecommentsResponseDTO.builder()
                         .id(recomment.getId())
+                        .userId(recomment.getUser().getId())
                         .username(postCommentRepository.findUsernameByCommentId(recomment.getId()))
-                        .nickname(recomment.getNickname())
+                        .nickname(postCommentRepository.findNicknameByCommentId(recomment.getId()))
+                        .parentCommentId(parentComment.getId())
                         .userProfile(recomment.getUserProfile())
                         .content(recomment.getContent())
                         .createdDate(recomment.getCreatedDate())
                         .modifiedDate(recomment.getModifiedDate())
+                        .deletedDate(recomment.getDeletedDate())
                         .build())
                 .collect(Collectors.toList());
     }

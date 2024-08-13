@@ -60,4 +60,9 @@ public class CustomOAuth2UserDTO implements OAuth2User {
 
     }
 
+    public String getRole() {
+
+        return oAuth2DTO.getRole();
+
+    }
 }

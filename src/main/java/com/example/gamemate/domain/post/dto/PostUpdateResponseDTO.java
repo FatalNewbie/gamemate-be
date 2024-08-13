@@ -11,6 +11,9 @@ import java.math.BigDecimal;
 @Getter
 public class PostUpdateResponseDTO {
 
+    @Schema(description = "유저 id")
+    private Long userId;
+
     @Schema(description = "유저 아이디")
     private String username;
 

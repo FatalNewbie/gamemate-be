@@ -15,6 +15,12 @@ public class RecommentsResponseDTO {
     @Schema(description = "댓글 id")
     private Long id;
 
+    @Schema(description = "대댓글의 부모 아이디")
+    private Long parentCommentId;
+
+    @Schema(description = "유저 id")
+    private Long userId;
+
     @Schema(description = "유저 아이디")
     private String username;
 
@@ -32,4 +38,7 @@ public class RecommentsResponseDTO {
 
     @Schema(description = "수정시간")
     private LocalDateTime modifiedDate;
+
+    @Schema(description = "삭제시간")
+    private LocalDateTime deletedDate;
 }

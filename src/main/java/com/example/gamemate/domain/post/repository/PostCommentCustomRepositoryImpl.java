@@ -93,5 +93,14 @@ public class PostCommentCustomRepositoryImpl implements PostCommentCustomReposit
                 .fetchOne();
     }
 
+    @Override
+    public String findNicknameByCommentId(Long commentId) {
+        return jpaQueryFactory
+                .select(user.nickname)
+                .from(postComment)
+                .join(postComment.user, user)
+                .where(postComment.id.eq(commentId))
+                .fetchOne();
+    }
 
 }
