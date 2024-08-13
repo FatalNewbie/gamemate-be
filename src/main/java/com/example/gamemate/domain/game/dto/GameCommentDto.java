@@ -14,5 +14,6 @@ public class GameCommentDto {
     private String content;
     private String username;
     private String nickname;  // 추가
+    private String userProfile;
     private LocalDateTime createdDate;  // 추가
 }

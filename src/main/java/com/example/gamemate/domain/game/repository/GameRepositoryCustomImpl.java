@@ -24,20 +24,32 @@ public class GameRepositoryCustomImpl implements GameRepositoryCustom {
 
     @Override
     public Page<Game> findGamesByTitleAndDeveloper(String title, String developer, Pageable pageable) {
-        List<Game> games = queryFactory
-                .selectFrom(game)
-                .where(titleContains(title), developerContains(developer))
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetch();
+        if (pageable.isUnpaged()) {
+            // pageable이 Unpaged인 경우 전체 결과를 반환
+            List<Game> games = queryFactory
+                    .selectFrom(game)
+                    .where(titleContains(title), developerContains(developer))
+                    .fetch();
 
-        long total = queryFactory
-                .selectFrom(game)
-                .where(titleContains(title), developerContains(developer))
-                .fetchCount();
+            return new PageImpl<>(games);
+        } else {
+            // pageable이 Unpaged가 아닌 경우 페이징 처리된 결과를 반환
+            List<Game> games = queryFactory
+                    .selectFrom(game)
+                    .where(titleContains(title), developerContains(developer))
+                    .offset(pageable.getOffset())
+                    .limit(pageable.getPageSize())
+                    .fetch();
 
-        return new PageImpl<>(games, pageable, total);
+            long total = queryFactory
+                    .selectFrom(game)
+                    .where(titleContains(title), developerContains(developer))
+                    .fetchCount();
+
+            return new PageImpl<>(games, pageable, total);
+        }
     }
+
 
     private BooleanExpression titleContains(String title) {
         return title != null ? game.title.containsIgnoreCase(title) : null;
