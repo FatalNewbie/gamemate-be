@@ -34,6 +34,7 @@ public class PostController {
 
 
     //글 List 조회 api
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping
     public ApiResponse<CustomPage<PostResponseDTO>> getAllPosts(
             @RequestParam(name = "status") String status,
@@ -46,6 +47,7 @@ public class PostController {
     }
 
     //글 조회 api
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/{id}")
     public ApiResponse<PostResponseDTO> getPostWithComments(
             @PathVariable Long id,
@@ -57,8 +59,8 @@ public class PostController {
     }
 
     //글 작성 api
-    @PostMapping
     @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping
     public ApiResponse<PostResponseDTO> registerPost(
             @Valid @RequestBody PostDTO postDTO,
             @AuthenticationPrincipal UserDetails userDetails
@@ -70,6 +72,7 @@ public class PostController {
     }
 
     //글 수정 api
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/{id}")
     public ApiResponse<PostUpdateResponseDTO> editPost(
             @PathVariable Long id,
@@ -83,6 +86,7 @@ public class PostController {
     }
 
     //글 삭제 api
+    @PreAuthorize("hasRole('ROLE_USER')")
     @DeleteMapping("/{id}")
     public ApiResponse<Long> removePost(
             @PathVariable Long id,

@@ -15,6 +15,9 @@ public class RecommentsResponseDTO {
     @Schema(description = "댓글 id")
     private Long id;
 
+    @Schema(description = "대댓글의 부모 아이디")
+    private Long parentCommentId;
+
     @Schema(description = "유저 아이디")
     private String username;
 

@@ -19,6 +19,9 @@ public class PostCommentResponseDTO {
     @Schema(description = "유저 닉네임")
     private String nickname;
 
+    @Schema(description = "대댓글의 부모 아이디")
+    private Long parentCommentId;
+
     @Schema(description = "유저 프로필 이미지")
     private String userProfile;
 
