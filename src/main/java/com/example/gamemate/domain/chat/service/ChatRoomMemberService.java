@@ -1,10 +1,9 @@
 package com.example.gamemate.domain.chat.service;
 
-import com.example.gamemate.domain.chat.domain.ChatRoom;
-import com.example.gamemate.domain.chat.domain.ChatRoomMember;
+import com.example.gamemate.domain.chat.entity.ChatRoom;
+import com.example.gamemate.domain.chat.entity.ChatRoomMember;
 
 
-import com.example.gamemate.domain.chat.model.chatroommember.AddMemberRequest;
 import com.example.gamemate.domain.chat.model.chatroommember.AddMemberResponse;
 import com.example.gamemate.domain.chat.repository.ChatRoomMemberRepository;
 import com.example.gamemate.domain.chat.repository.ChatRoomRepository;
@@ -13,7 +12,6 @@ import com.example.gamemate.domain.user.repository.UserRepository;
 import com.example.gamemate.global.exception.ChatExceptionCode;
 import com.example.gamemate.global.exception.ChatRoomException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor

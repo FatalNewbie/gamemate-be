@@ -1,7 +1,6 @@
 package com.example.gamemate.domain.chat.controller;
 
-import com.example.gamemate.domain.chat.domain.Message;
-import com.example.gamemate.domain.chat.dto.MessageDTO;
+import com.example.gamemate.domain.chat.entity.Message;
 import com.example.gamemate.domain.chat.model.message.MessageModel;
 import com.example.gamemate.domain.chat.model.message.OutputMessageModel;
 import com.example.gamemate.domain.chat.service.MessageService;
@@ -15,7 +14,6 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,9 +69,9 @@ public class MessageController {
     // 그 메시지 브로커는  그 경로를 인지한다음에 클라이언트에게 보내준다.
 
 
-    @GetMapping("/message/{roomId}")
-    public ResponseEntity<List<OutputMessageModel>> getAllMessagesByRoomId(@PathVariable Long roomId){
-        List<OutputMessageModel> messages = messageService.getAllMessagesByRoomId(roomId);
+    @GetMapping("/message/{roomId}/{messageId}")
+    public ResponseEntity<List<OutputMessageModel>> getMessagesAfter(@PathVariable Long roomId,@PathVariable Long messageId){
+        List<OutputMessageModel> messages = messageService.getMessagesByRoomIdAndMessageId(roomId,messageId);
         return ResponseEntity.ok(messages);
     }
 

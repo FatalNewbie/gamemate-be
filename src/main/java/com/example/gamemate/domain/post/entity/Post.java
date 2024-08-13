@@ -1,6 +1,6 @@
 package com.example.gamemate.domain.post.entity;
 
-import com.example.gamemate.domain.chat.domain.ChatRoom;
+import com.example.gamemate.domain.chat.entity.ChatRoom;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.global.audit.BaseEntity;
 import jakarta.persistence.*;

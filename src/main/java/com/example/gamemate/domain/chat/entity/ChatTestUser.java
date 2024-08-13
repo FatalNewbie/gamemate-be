@@ -1,4 +1,4 @@
-package com.example.gamemate.domain.chat.domain;
+package com.example.gamemate.domain.chat.entity;
 
 import com.example.gamemate.global.audit.BaseEntity;
 import jakarta.persistence.Entity;

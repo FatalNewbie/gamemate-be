@@ -1,13 +1,11 @@
 package com.example.gamemate.domain.post.service;
 
-import com.example.gamemate.domain.chat.domain.ChatRoom;
+import com.example.gamemate.domain.chat.entity.ChatRoom;
 import com.example.gamemate.domain.chat.repository.ChatRoomRepository;
 import com.example.gamemate.domain.chat.service.ChatRoomMemberService;
-import com.example.gamemate.domain.chat.service.ChatRoomService;
 import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.post.dto.*;
 import com.example.gamemate.domain.post.mapper.PostMapper;
-import com.example.gamemate.domain.post.repository.PostCommentRepository;
 import com.example.gamemate.domain.post.repository.PostRepository;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.repository.UserRepository;

@@ -1,15 +1,9 @@
 package com.example.gamemate.domain.chat.controller;
 
-import com.example.gamemate.domain.chat.domain.ChatRoom;
 import com.example.gamemate.domain.chat.dto.ChatRoomDTO;
-import com.example.gamemate.domain.chat.model.chatroom.ChatRoomCreateRequest;
-import com.example.gamemate.domain.chat.model.chatroom.ChatRoomCreateResponse;
 import com.example.gamemate.domain.chat.service.ChatRoomService;
 
-import com.example.gamemate.global.apiRes.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.util.Pair;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;

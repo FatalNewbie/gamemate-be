@@ -1,7 +1,6 @@
 package com.example.gamemate.domain.chat.repository;
 
-import com.example.gamemate.domain.chat.domain.ChatRoom;
-import com.example.gamemate.domain.chat.domain.Message;
+import com.example.gamemate.domain.chat.entity.ChatRoom;
 import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.example.gamemate.domain.chat.domain;
+package com.example.gamemate.domain.chat.entity;
 
 import com.example.gamemate.domain.post.entity.Post;
 import com.example.gamemate.domain.user.entity.User;

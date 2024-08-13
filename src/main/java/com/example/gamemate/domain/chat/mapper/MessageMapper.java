@@ -1,7 +1,6 @@
 package com.example.gamemate.domain.chat.mapper;
 
-import com.example.gamemate.domain.chat.domain.Message;
-import com.example.gamemate.domain.chat.dto.MessageDTO;
+import com.example.gamemate.domain.chat.entity.Message;
 import com.example.gamemate.domain.chat.model.message.OutputMessageModel;
 
 public class MessageMapper {
