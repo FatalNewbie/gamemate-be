@@ -66,16 +66,14 @@ public class UserController {
 
     @PutMapping("/update")
     public String updateUser(@RequestBody UpdateDTO updateDTO, @AuthenticationPrincipal UserDetails userDetails) {
-        String name = userDetails.getUsername();
+        // 현재 인증된 사용자 이름을 가져옵니다.
+        String currentUsername = userDetails.getUsername();
 
-        UpdateDTO user = userService.findByUsernameForUpdate(name);
-
-        // 입력받은 정보로 사용자 정보 업데이트
-        user.setPassword(updateDTO.getPassword());
-        user.setNickname(updateDTO.getNickname());
+        // UpdateDTO에 현재 사용자의 사용자명을 설정
+        updateDTO.setUsername(currentUsername);
 
         // 사용자 정보 업데이트
-        UpdateDTO updatedUser = userService.update(user);
+        UpdateDTO updatedUser = userService.update(updateDTO);
 
         return "수정완료";
     }

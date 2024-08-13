@@ -15,8 +15,14 @@ import java.util.stream.Collectors;
 public interface UserMapper {
 
     MyPageResponseDTO userToMyPageDto(User user);
-    UpdateDTO userToUpdateDto(User user);
-    User updateDtoToUser(UpdateDTO updateDTO);
+    // 기존 방식에서 CustomUserMapper를 직접 호출하여 매핑 처리
+    default UpdateDTO userToUpdateDto(User user, CustomUserMapper customUserMapper) {
+        return customUserMapper.userToUpdateDto(user);
+    }
+
+    default User updateDtoToUser(UpdateDTO updateDTO, CustomUserMapper customUserMapper, User existingUser) {
+        return customUserMapper.updateDtoToUser(updateDTO, existingUser);
+    }
     @Mapping(target = "preferredGenres", source = "preferredGenres", qualifiedByName = "genresToIds")
     @Mapping(target = "playTimes", source = "playTimes", qualifiedByName = "playTimesToIds")
     RecommendResponseDTO userToRecommendResponseDTO(User user);

@@ -7,8 +7,13 @@ import com.amazonaws.services.s3.model.*;
 import com.example.gamemate.domain.user.dto.MyPageResponseDTO;
 import com.example.gamemate.domain.user.dto.UpdateDTO;
 import com.example.gamemate.domain.user.dto.RecommendResponseDTO;
+import com.example.gamemate.domain.user.entity.Genre;
+import com.example.gamemate.domain.user.entity.PlayTime;
 import com.example.gamemate.domain.user.entity.User;
+import com.example.gamemate.domain.user.mapper.CustomUserMapper;
 import com.example.gamemate.domain.user.mapper.UserMapper;
+import com.example.gamemate.domain.user.repository.GenreRepository;
+import com.example.gamemate.domain.user.repository.PlayTimeRepository;
 import com.example.gamemate.domain.user.repository.UserRepository;
 
 import java.io.IOException;
@@ -17,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,8 +40,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final GenreRepository genreRepository;
+    private final PlayTimeRepository playTimeRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserMapper mapper;
+    private final CustomUserMapper customUserMapper;
     private final AmazonS3 s3Client;
 
     @Value("${cloud.aws.s3.bucketName}")
@@ -43,13 +52,21 @@ public class UserService {
 
 
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
-                       UserMapper mapper, AmazonS3 s3Client){
+    public UserService(UserRepository userRepository,
+                       GenreRepository genreRepository,
+                       PlayTimeRepository playTimeRepository,
+                       BCryptPasswordEncoder bCryptPasswordEncoder,
+                       UserMapper mapper,
+                       AmazonS3 s3Client,
+                       CustomUserMapper customUserMapper){
 
         this.userRepository = userRepository;
+        this.genreRepository = genreRepository;
+        this.playTimeRepository = playTimeRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.mapper = mapper;
         this.s3Client = s3Client;
+        this.customUserMapper = customUserMapper;
 
     }
 
@@ -78,7 +95,7 @@ public class UserService {
 
         User user = userRepository.findByUsername(username);
         if(!user.equals("")){
-            return mapper.userToUpdateDto(user);
+            return mapper.userToUpdateDto(user, customUserMapper);
         }
 
         return null;
@@ -86,17 +103,45 @@ public class UserService {
     }
 
     public UpdateDTO update(UpdateDTO updateDTO) {
-        // 사용자 엔티티 생성
-        User user = mapper.updateDtoToUser(updateDTO);
+        User existingUser = userRepository.findByUsername(updateDTO.getUsername());
+
+        if (existingUser == null) {
+            throw new RuntimeException("User not found");
+        }
+
+        // 사용자 엔티티 업데이트
+        User user = customUserMapper.updateDtoToUser(updateDTO, existingUser);
 
         // 비밀번호 암호화
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if (updateDTO.getPassword() != null) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
+
+        // 선호 장르 업데이트
+        if (updateDTO.getPreferredGenres() != null) {
+            List<Genre> genres = genreRepository.findAllById(
+                    updateDTO.getPreferredGenres().stream()
+                            .map(Long::valueOf)
+                            .collect(Collectors.toList())
+            );
+            user.setPreferredGenres(genres);
+        }
+
+        // 플레이 시간대 업데이트
+        if (updateDTO.getPlayTimes() != null) {
+            List<PlayTime> playTimes = playTimeRepository.findAllById(
+                    updateDTO.getPlayTimes().stream()
+                            .map(Long::valueOf)
+                            .collect(Collectors.toList())
+            );
+            user.setPlayTimes(playTimes);
+        }
 
         // 사용자 정보 업데이트
         User updatedUser = userRepository.save(user);
 
         // 업데이트된 사용자 DTO 반환
-        return mapper.userToUpdateDto(updatedUser);
+        return customUserMapper.userToUpdateDto(updatedUser);
     }
 
     public void deletedByUsername(String username) {
