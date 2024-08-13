@@ -17,7 +17,13 @@ public interface GameCommentMapper {
 
     @Mapping(source = "userId", target = "user.id")
     @Mapping(source = "gameId", target = "game.id")
+    @Mapping(target = "user.nickname", ignore = true) // If you don't want to map this directly
+    @Mapping(target = "user.username", ignore = true) // If you don't want to map this directly
     GameComment toEntity(GameCommentDto commentDto);
 
+    @Mapping(source = "userId", target = "user.id")
+    @Mapping(source = "gameId", target = "game.id")
+    @Mapping(target = "user.nickname", ignore = true) // If you don't want to map this directly
+    @Mapping(target = "user.username", ignore = true) // If you don't want to map this directly
     void updateEntityFromDto(GameCommentDto commentDto, @MappingTarget GameComment comment);
 }
