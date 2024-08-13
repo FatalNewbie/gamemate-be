@@ -33,12 +33,6 @@ public class PostComment extends BaseEntity {
     @JoinColumn(name = "parent_comment_id")
     private PostComment parentComment;
 
-    @Column(nullable = false, length = 20)
-    private String nickname;
-
-    @Schema(description = "유저 프로필 이미지")
-    private String userProfile;
-
     @Column(nullable = false)
     private String content;
 
@@ -50,15 +44,14 @@ public class PostComment extends BaseEntity {
 
     @Builder
     public PostComment(
-            User user, Post post,
+            User user,
+            Post post,
             PostComment parentComment,
-            String nickname, String content, String userProfile
+            String content
     ){
         this.user = user;
         this.post = post;
         this.parentComment = parentComment;
-        this.nickname = nickname;
-        this.userProfile = userProfile;
         this.content = content;
     }
 

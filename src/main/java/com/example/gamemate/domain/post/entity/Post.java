@@ -38,11 +38,11 @@ public class Post extends BaseEntity {
     @Column(length = 50)
     private String gameGenre;
 
-    @Column(length = 20)
-    private String nickname;
-
     @Column
     private Long mateCnt;
+
+    @Column
+    private Long memberCnt;
 
     @Column(length = 500)
     private String mateContent;
@@ -92,6 +92,10 @@ public class Post extends BaseEntity {
         this.longitude = longitude;
     }
 
+    public void updateMemberCnt(Long memberCnt){
+        this.memberCnt = memberCnt;
+    }
+
     public void createOfflinePost(
             String mateRegionSi, String mateRegionGu, String mateLocation,
             BigDecimal latitude, BigDecimal longitude
@@ -105,18 +109,26 @@ public class Post extends BaseEntity {
 
     @Builder
     public Post(
-            User user, OnOffStatus status, String gameTitle, String gameGenre,
-            String nickname, Long mateCnt, String mateContent,
-            String mateRegionSi, String mateRegionGu, String mateLocation,
-            BigDecimal latitude, BigDecimal longitude
+            User user,
+            OnOffStatus status,
+            String gameTitle,
+            String gameGenre,
+            Long mateCnt,
+            Long memberCnt,
+            String mateContent,
+            String mateRegionSi,
+            String mateRegionGu,
+            String mateLocation,
+            BigDecimal latitude,
+            BigDecimal longitude
     ) {
 
         this.user = user;
         this.status = status;
         this.gameTitle = gameTitle;
         this.gameGenre = gameGenre;
-        this.nickname = nickname;
         this.mateCnt = mateCnt;
+        this.memberCnt = memberCnt;
         this.mateContent = mateContent;
         this.mateRegionSi = mateRegionSi;
         this.mateRegionGu = mateRegionGu;

@@ -44,6 +44,9 @@ public class PostResponseDTO {
     @Schema(description = "모집 인원 수")
     private Long mateCnt;
 
+    @Schema(description = "모집된 인원 수")
+    private Long memberCnt;
+
     @Schema(description = "게시글 내용")
     private String mateContent;
 
@@ -73,6 +76,10 @@ public class PostResponseDTO {
         this.username = username;
     }
 
+    public void setMemberCnt(){
+        this.memberCnt = 1L;
+    }
+
 
     public PostResponseDTO(Post post) {
         this.id = post.getId();
@@ -81,8 +88,9 @@ public class PostResponseDTO {
         this.gameGenre = post.getGameGenre();
         this.userId = post.getUser().getId();
         this.username = post.getUser().getUsername();
-        this.nickname = post.getNickname();
+        this.nickname = post.getUser().getNickname();
         this.mateCnt = post.getMateCnt();
+        this.memberCnt = post.getMemberCnt();
         this.mateContent = post.getMateContent();
         this.mateRegionGu = post.getMateRegionGu();
         this.mateRegionSi = post.getMateRegionSi();
@@ -95,11 +103,23 @@ public class PostResponseDTO {
 
     @Builder
     public PostResponseDTO(
-            Long id, Long userId, String username, String nickname, String userProfile,
-            String status, String gameTitle,
-            String gameGenre, Long mateCnt, String mateContent, Long commentCnt,
-            String mateRegionSi, String mateRegionGu, String mateLocation,
-            BigDecimal latitude, BigDecimal longitude, LocalDateTime createdDate
+            Long id, Long userId,
+            String username,
+            String nickname,
+            String userProfile,
+            String status,
+            String gameTitle,
+            String gameGenre,
+            Long mateCnt,
+            Long memberCnt,
+            String mateContent,
+            Long commentCnt,
+            String mateRegionSi,
+            String mateRegionGu,
+            String mateLocation,
+            BigDecimal latitude,
+            BigDecimal longitude,
+            LocalDateTime createdDate
     ){
         this.id = id;
         this.userId = userId;
@@ -111,6 +131,7 @@ public class PostResponseDTO {
         this.gameTitle = gameTitle;
         this.gameGenre = gameGenre;
         this.mateCnt = mateCnt;
+        this.memberCnt = memberCnt;
         this.mateContent = mateContent;
         this.commentCnt = commentCnt;
 

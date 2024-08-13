@@ -81,6 +81,7 @@ public class PostService {
                 .status(post.getStatus().toString())
                 .gameGenre(post.getGameGenre())
                 .mateCnt(post.getMateCnt())
+                .memberCnt(post.getMemberCnt())
                 .mateContent(post.getMateContent())
                 .commentCnt(postRepository.countCommentsByPostId(post.getId()))
                 .mateRegionSi(post.getMateRegionSi())
@@ -169,8 +170,8 @@ public class PostService {
                 .gameGenre(postDTO.getGameGenre())
                 .status(status)
                 .user(user)
-                .nickname(user.getNickname())
                 .mateCnt(postDTO.getMateCnt())
+                .memberCnt(1L)
                 .mateContent(postDTO.getMateContent())
                 .build();
 

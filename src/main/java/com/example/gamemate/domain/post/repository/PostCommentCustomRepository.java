@@ -16,8 +16,4 @@ public interface PostCommentCustomRepository {
 
     Long getPCommentId(Long recommentId);
 
-    String findUsernameByCommentId(Long userId);
-
-    String findNicknameByCommentId(Long commentId);
-
 }
