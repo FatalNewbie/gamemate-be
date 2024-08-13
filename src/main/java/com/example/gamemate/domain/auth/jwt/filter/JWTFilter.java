@@ -1,11 +1,8 @@
 package com.example.gamemate.domain.auth.jwt.filter;
 
-import com.example.gamemate.domain.auth.dto.CustomOAuth2UserDTO;
 import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
-import com.example.gamemate.domain.auth.dto.OAuth2DTO;
 import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.entity.User.RoleType;
-import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
 import com.example.gamemate.domain.auth.jwt.JWTUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -37,7 +34,7 @@ public class JWTFilter extends OncePerRequestFilter {
         FilterChain filterChain
     ) throws ServletException, IOException {
 
-        boolean isOAuth2User = isOAuth2User();
+//        boolean isOAuth2User = isOAuth2User();
 
         //cookie들을 불러온 뒤 Authorization Key에 담긴 쿠키를 찾음
         String authorization = null;
@@ -114,22 +111,22 @@ public class JWTFilter extends OncePerRequestFilter {
         Authentication authToken;
 
         //OAuth2 사용자의 경우
-        if(isOAuth2User) {
+//        if(isOAuth2User) {
+//
+//            //oath2DTO를 생성하여 값 set
+//            OAuth2DTO oAuth2DTO = new OAuth2DTO();
+//            oAuth2DTO.setUsername(username);
+//            oAuth2DTO.setRole(role);
+//
+//            CustomOAuth2UserDTO customOAuth2UserDTO = new CustomOAuth2UserDTO(oAuth2DTO);
+//
+//            authToken = new UsernamePasswordAuthenticationToken(
+//                customOAuth2UserDTO,
+//                null,
+//                customOAuth2UserDTO.getAuthorities()
+//            );
 
-            //oath2DTO를 생성하여 값 set
-            OAuth2DTO oAuth2DTO = new OAuth2DTO();
-            oAuth2DTO.setUsername(username);
-            oAuth2DTO.setRole(role);
-
-            CustomOAuth2UserDTO customOAuth2UserDTO = new CustomOAuth2UserDTO(oAuth2DTO);
-
-            authToken = new UsernamePasswordAuthenticationToken(
-                customOAuth2UserDTO,
-                null,
-                customOAuth2UserDTO.getAuthorities()
-            );
-
-        } else {
+//        } else {
 
             //user를 생성하여 값 set
             User user = new User();
@@ -146,7 +143,7 @@ public class JWTFilter extends OncePerRequestFilter {
                 null,
                 customUserDetails.getAuthorities()
             );
-        }
+//        }
 
         //세션에 사용자 등록
         SecurityContextHolder.getContext().setAuthentication(authToken);
@@ -155,15 +152,15 @@ public class JWTFilter extends OncePerRequestFilter {
 
     }
 
-    private boolean isOAuth2User() {
-        return SecurityContextHolder
-            .getContext()
-            .getAuthentication() != null
-            &&
-            SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal() instanceof CustomOAuth2UserDTO;
-    }
+//    private boolean isOAuth2User() {
+//        return SecurityContextHolder
+//            .getContext()
+//            .getAuthentication() != null
+//            &&
+//            SecurityContextHolder
+//                .getContext()
+//                .getAuthentication()
+//                .getPrincipal() instanceof CustomOAuth2UserDTO;
+//    }
 
 }
