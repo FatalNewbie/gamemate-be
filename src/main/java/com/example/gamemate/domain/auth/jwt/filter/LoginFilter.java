@@ -7,16 +7,12 @@ import com.example.gamemate.domain.auth.jwt.JWTUtil;
 import com.example.gamemate.domain.user.service.CustomUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 import lombok.extern.slf4j.Slf4j;
-import java.util.TimeZone;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -119,7 +115,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String role = auth.getAuthority();
 
         // JWT 생성
-        String token = jwtUtil.createJwt(id, username, role, expirationTime);
+        String token = jwtUtil.createJwt(id, username, role, auth.getAuthority(), expirationTime);
 
         response.addHeader("Authorization", "Bearer " + token);
 

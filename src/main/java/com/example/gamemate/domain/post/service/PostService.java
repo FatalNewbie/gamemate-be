@@ -190,4 +190,12 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    //마이페이지에 게시글을 불러오는 로직
+    public CustomPage<PostResponseDTO> readPostsByUserId(Long userId, Pageable pageable) {
+        Page<Post> postPage = postRepository.findByUserId(userId, pageable); // 사용자 ID에 따라 게시글 조회
+
+        return new CustomPage<>(postPage.map(PostResponseDTO::new)); // PostResponseDTO로 매핑
+    }
+
+
 }

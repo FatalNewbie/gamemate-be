@@ -46,6 +46,16 @@ public class PostController {
         return ApiResponse.successRes(HttpStatus.OK,posts);
     }
 
+    //User 글 List 조회 api
+    @GetMapping("/user")
+    public ApiResponse<CustomPage<PostResponseDTO>> getUserPosts(
+        @RequestParam(name = "userId") Long userId,  // 사용자 ID
+        @PageableDefault(size = 3) Pageable pageable
+    ) {
+        CustomPage<PostResponseDTO> posts = postService.readPostsByUserId(userId, pageable); // 사용자 ID에 따른 메소드 호출
+        return ApiResponse.successRes(HttpStatus.OK, posts);
+    }
+
     //글 조회 api
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/{id}")

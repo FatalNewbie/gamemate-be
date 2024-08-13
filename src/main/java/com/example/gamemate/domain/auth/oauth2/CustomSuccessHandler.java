@@ -40,11 +40,13 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         Long id = customOAuth2UserDTO.getId();
         String username = customOAuth2UserDTO.getUsername();
 
+
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
         GrantedAuthority auth = iterator.next();
 
-        String token = jwtUtil.createJwt(id, username , auth.getAuthority(), expirationTime);
+        String role = customOAuth2UserDTO.getRole();
+        String token = jwtUtil.createJwt(id, username, role, auth.getAuthority(), expirationTime);
 
         response.addCookie(createCookie("Authorization", token));
         response.sendRedirect("http://localhost:3000/");
@@ -55,7 +57,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         Cookie cookie = new Cookie(key, value);
         cookie.setMaxAge((int) (expirationTime / 1000));
-        cookie.setSecure(true);
+//        cookie.setSecure(true);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
 
