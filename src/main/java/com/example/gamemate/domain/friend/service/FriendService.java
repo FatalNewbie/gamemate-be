@@ -174,6 +174,7 @@ public class FriendService {
                         friend.getNickname(),
                         friend.getRole().name(),
                         friend.isDeleted(),
+                        friend.getUserProfile(),
                         friend.getPreferredGenres().stream().map(genre -> genre.getName()).collect(Collectors.toList()),
                         friend.getPlayTimes().stream().map(playtime -> playtime.getTimeSlot()).collect(Collectors.toList())
                 ))
