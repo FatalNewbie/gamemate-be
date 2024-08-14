@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +45,7 @@ public class GameCommentController {
 
         Pageable pageable = Pageable.unpaged();
         if (page.isPresent() && size.isPresent()) {
-            pageable = PageRequest.of(page.get(), size.get());
+            pageable = PageRequest.of(page.get(), size.get(), Sort.by(Sort.Direction.DESC, "createdDate"));
         }
 
         Page<GameCommentDto> comments = gameCommentService.getAllComments(gameId, pageable);
