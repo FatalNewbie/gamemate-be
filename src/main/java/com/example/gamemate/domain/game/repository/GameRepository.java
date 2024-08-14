@@ -15,5 +15,7 @@ public interface GameRepository extends JpaRepository<Game, Long>, GameRepositor
     List<Game> findAllByDeletedDateIsNull(); // 새로운 메서드 추가
     Optional<Game> findByIdAndDeletedDateIsNull(Long id);
 
+    Page<Game> findGameByPlatform(String filter, Pageable pageable);
+
 
 }

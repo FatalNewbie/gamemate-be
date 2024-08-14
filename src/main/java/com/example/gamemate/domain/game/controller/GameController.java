@@ -8,6 +8,7 @@ import com.example.gamemate.domain.game.service.GameService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -68,7 +69,8 @@ public class GameController {
             @RequestParam Optional<String> title,
             @RequestParam Optional<String> developer,
             @RequestParam Optional<Integer> page,
-            @RequestParam Optional<Integer> size) {
+            @RequestParam Optional<Integer> size
+    ) {
 
         log.info("Fetching games with optional title: {} and developer: {}", title.orElse(""), developer.orElse(""));
 
@@ -87,9 +89,32 @@ public class GameController {
             games = gameService.getAllGames(pageable);
         }
 
+
         CustomPage<GameDto> customPage = new CustomPage<>(games);
         return ApiResponse.successRes(HttpStatus.OK, customPage);
     }
+
+    @GetMapping("/games/search")
+    public ApiResponse<CustomPage<GameDto>> getFilteredGames(
+            @RequestParam(defaultValue = "") String filter,
+            @RequestParam Optional<Integer> page,
+            @RequestParam Optional<Integer> size
+    ) {
+
+        Pageable pageable = Pageable.unpaged(); // 기본적으로 모든 데이터를 가져오는 설정
+        if (page.isPresent() && size.isPresent()) {
+            pageable = PageRequest.of(page.get(), size.get());
+        }
+
+        Page<GameDto> games;
+
+        games = gameService.getFilteredGames(pageable, filter);
+
+        CustomPage<GameDto> customPage = new CustomPage<>(games);
+        return ApiResponse.successRes(HttpStatus.OK, customPage);
+    }
+
+
 
     //게임상세 조회 api
     @GetMapping("/games/{id}")

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -68,6 +69,7 @@ public class GameService {
     }
 
     public Page<GameDto> getAllGames(Pageable pageable) {
+
         if (pageable.isUnpaged()) {
             List<Game> games = gameRepository.findAllByDeletedDateIsNull(); // 페이징 없이 모든 데이터 가져오기
             return new PageImpl<>(games.stream().map(gameMapper::toDto).collect(Collectors.toList()));
@@ -75,6 +77,19 @@ public class GameService {
             return gameRepository.findAllByDeletedDateIsNull(pageable)
                     .map(gameMapper::toDto);
         }
+    }
+
+    public Page<GameDto> getFilteredGames(Pageable pageable, String filter) {
+
+        Page<Game> gamePage;
+        if(filter.isEmpty()){
+            gamePage = gameRepository.findAll(pageable);
+        }else {
+            gamePage = gameRepository.findGameByPlatform(filter, pageable);
+        }
+
+        // Page<GameDto>로 변환하여 반환
+        return gamePage.map(gameMapper::toDto);
     }
 
     public GameDto getGameById(Long id) {
