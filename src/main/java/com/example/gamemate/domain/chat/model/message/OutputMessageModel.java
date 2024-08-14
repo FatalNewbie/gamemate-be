@@ -19,25 +19,22 @@ public class OutputMessageModel {
     private String time;
     private String type;
     private Long writerId;
+    private String writerProfile;
 
     public enum MessageType {
         CHAT, JOIN, LEAVE, INVITE
     }
 
 
-    public OutputMessageModel( Long id,
-                               String writer,
-                              Long chatRoomId,
-                              String content,
-                              String time,
-                               String type,
-                               Long writerId) {
-        this.id=id;
+
+    public OutputMessageModel(Long id, String writer, Long chatRoomId, String content, String time, String type, Long writerId, String writerProfile) {
+        this.id = id;
         this.writer = writer;
         this.chatRoomId = chatRoomId;
         this.content = content;
         this.time = time;
         this.type = type;
-        this.writerId=writerId;
+        this.writerId = writerId;
+        this.writerProfile = writerProfile;
     }
 }

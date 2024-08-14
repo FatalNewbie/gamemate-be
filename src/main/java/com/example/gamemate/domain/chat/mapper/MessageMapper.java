@@ -16,6 +16,7 @@ public class MessageMapper {
                 .time(message.getTime())
                 .type(message.getType())
                 .writerId(message.getWriter().getId())
+                .writerProfile(message.getWriter().getUserProfile())
                 .build();
 
         // 필요한 다른 필드들도 설정

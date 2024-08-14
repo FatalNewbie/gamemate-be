@@ -12,6 +12,7 @@ import com.example.gamemate.domain.user.repository.UserRepository;
 import com.example.gamemate.global.exception.ChatExceptionCode;
 import com.example.gamemate.global.exception.ChatRoomException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -42,6 +43,14 @@ public class ChatRoomMemberService {
         return AddMemberResponse.from(true, "멤버를 추가하였습니다.");
 
 
+    }
+
+    public void deleteMember(Long roomId, UserDetails userDetails){
+        ChatRoom chatRoom = chatRoomRepository.findById(roomId).orElseThrow(()->new ChatRoomException(ChatExceptionCode.CHATROOM_NOT_FOUND));
+        User user = userRepository.findByUsername(userDetails.getUsername());
+
+        ChatRoomMember chatRoomMember= chatRoomMemberRepository.findByChatRoomAndMember(chatRoom,user);
+        chatRoomMemberRepository.deleteById(chatRoomMember.getId());
     }
 
 }

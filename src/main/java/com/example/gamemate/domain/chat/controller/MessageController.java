@@ -61,7 +61,7 @@ public class MessageController {
                 messageModel.getChatRoomId(),
                 messageModel.getContent(),
                 time,
-                messageModel.getType(),newMessage.getWriter().getId());
+                messageModel.getType(),newMessage.getWriter().getId(), newMessage.getWriter().getUserProfile());
 
     }
     // MessageMapping의 경로로 클라이언트가 메시지를 보내오면 sendframe에 담사어 전송함.
