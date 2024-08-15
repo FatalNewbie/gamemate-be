@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-@Tag(name = "S3Controller", description ="S3 API")
+@Tag(name = "S3Controller", description ="S3 API ")
 @RestController
 @RequiredArgsConstructor
 public class S3Controller {
