@@ -38,16 +38,12 @@ public class AuthService {
 
     public void joinProcess(JoinDTO joinDTO) {
 
+        if(isEmailDuplicated(joinDTO.getUsername())) {
+            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
+        }
+
         List<Integer> preferredGenres = joinDTO.getPreferredGenres();
         List<Integer> playTimes = joinDTO.getPlayTimes();
-
-        Boolean isExist = userRepository.existsByUsername(joinDTO.getUsername());
-
-        if(isExist) {
-
-            return;
-
-        }
 
         User data = new User();
 
@@ -69,6 +65,14 @@ public class AuthService {
 
         userRepository.save(data);
 
+    }
+
+    public boolean isEmailDuplicated(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public boolean isNicknameDuplicated(String nickname) {
+        return userRepository.existsByNickname(nickname);
     }
 
 //    public String getNaverAuthorizeUrl(String type)
