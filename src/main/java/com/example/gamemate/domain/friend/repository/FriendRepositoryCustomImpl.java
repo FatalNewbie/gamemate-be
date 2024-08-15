@@ -24,6 +24,17 @@ public class FriendRepositoryCustomImpl implements FriendRepositoryCustom {
     }
 
     @Override
+    public List<Friend> findAcceptedFriendsByUserId(Long userId) {
+        QFriend friend = QFriend.friend;
+
+        return queryFactory.selectFrom(friend)
+                .where(friend.status.eq(Friend.Status.ACCEPTED)
+                        .and(friend.requester.id.eq(userId)
+                                .or(friend.receiver.id.eq(userId))))
+                .fetch();
+    }
+
+    @Override
     public List<Friend> findFriendsByStatus(Long userId, Friend.Status status) {
         QFriend friend = QFriend.friend;
 
@@ -79,6 +90,15 @@ public class FriendRepositoryCustomImpl implements FriendRepositoryCustom {
         return queryFactory.selectFrom(friend)
                 .where(friend.requester.id.eq(requesterId).and(friend.status.eq(Friend.Status.PENDING)))
                 .fetch();
+    }
+
+    @Override
+    public void deleteFriendsByUserId(Long userId) {
+        QFriend friend = QFriend.friend;
+
+        queryFactory.delete(friend)
+                .where(friend.requester.id.eq(userId).or(friend.receiver.id.eq(userId)))
+                .execute();
     }
 }
 

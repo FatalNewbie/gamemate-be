@@ -8,8 +8,11 @@ import java.util.Optional;
 
 public interface FriendRepositoryCustom {
     List<Friend> findFriendsByStatus(Long userId, Friend.Status status);
+    List<Friend> findAcceptedFriendsByUserId(Long userId);
     List<User> findFriendUsersByUserId(Long userId, Friend.Status status);
     Optional<Friend> findFriendRelationship(Long requesterId, Long receiverId);
     List<Friend> findPendingRequestsByReceiverId(Long receiverId);
     List<Friend> findPendingRequestsByRequesterId(Long requesterId);
+
+    void deleteFriendsByUserId(Long userId);
 }

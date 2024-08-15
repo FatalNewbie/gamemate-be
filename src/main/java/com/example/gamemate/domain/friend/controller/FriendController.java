@@ -93,4 +93,13 @@ public class FriendController {
         return ApiResponse.successRes(HttpStatus.OK, pendingRequests);
     }
 
+    @DeleteMapping("/deletefriendinfo")
+    public ApiResponse<String> deleteAllFriendInfo(
+            @AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername();
+
+        String response = friendService.deleteUserRelatedFriend(username);
+        return ApiResponse.successRes(HttpStatus.OK, response);
+    }
+
 }

@@ -217,5 +217,14 @@ public class FriendService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public String deleteUserRelatedFriend(String userName) {
+        User deletingUser = userRepository.findByUsername(userName);
+        // 친구 관계 삭제
+        friendRepository.deleteFriendsByUserId(deletingUser.getId());
+
+        return "유저의 친구 관련 데이터가 모두 삭제되었습니다.";
+    }
+
 }
 
