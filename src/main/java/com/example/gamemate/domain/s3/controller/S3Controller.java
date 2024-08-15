@@ -4,6 +4,7 @@ import com.example.gamemate.domain.s3.service.AccessLogService;
 import com.example.gamemate.domain.s3.service.S3Service;
 import com.example.gamemate.domain.s3.entity.AccessLog;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +22,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-@Controller
+@Tag(name = "S3Controller", description ="S3 API ")
+@RestController
 @RequiredArgsConstructor
 public class S3Controller {
 
     private final S3Service s3Service;
     private final AccessLogService accessLogService;
+
 
     @GetMapping("/presigned-url")
     public ResponseEntity<String> getPresignedUrl(@AuthenticationPrincipal UserDetails userDetails) {
