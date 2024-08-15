@@ -14,4 +14,6 @@ public interface GameCommentRepository extends JpaRepository<GameComment, Long> 
     Page<GameComment> findByGameIdAndDeletedDateIsNull(Long gameId, Pageable pageable);
     List<GameComment> findByGameIdAndDeletedDateIsNull(Long gameId);
     Optional<GameComment> findByGameIdAndIdAndDeletedDateIsNull(Long gameId, Long commentId);
+    List<GameComment> findCommentByUserId(Long userId);
+
 }

@@ -11,13 +11,17 @@ import com.example.gamemate.domain.user.entity.User;
 import com.example.gamemate.domain.user.repository.UserRepository;
 import com.example.gamemate.global.common.CustomPage;
 import com.example.gamemate.global.exception.CommonExceptionCode;
+import com.example.gamemate.global.exception.GameExceptionCode;
 import com.example.gamemate.global.exception.PostExceptionCode;
 import com.example.gamemate.global.exception.RestApiException;
+import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import jakarta.transaction.Transactional;
 
+@Slf4j
 @Service
 public class PostService {
 
@@ -160,6 +164,26 @@ public class PostService {
             throw new RestApiException(CommonExceptionCode.USER_NOT_MATCH);
 
         postRepository.deleteById(id);
+    }
+
+    //회원탈퇴 시 게시글 삭제
+    @Transactional
+    public void deletePostsByUsername(String username) {
+        // 사용자 조회
+        User user = userRepository.findByUsername(username);
+        log.info(username);
+
+        if (user == null) {
+            throw new RestApiException(GameExceptionCode.USER_NOT_FOUND);
+        }
+
+        // 해당 유저의 모든 게시글을 찾음
+        List<Post> userPosts = postRepository.deletePostsByUserId(user.getId());
+        log.info("deletePostsByUserId");
+
+        // 게시글 삭제
+        postRepository.deleteAll(userPosts);
+        log.info("deleteAll");
     }
 
 

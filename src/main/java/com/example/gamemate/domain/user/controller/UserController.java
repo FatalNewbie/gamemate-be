@@ -1,19 +1,22 @@
 package com.example.gamemate.domain.user.controller;
 
 import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
+import com.example.gamemate.domain.game.service.GameCommentService;
+import com.example.gamemate.domain.game.service.GameRatingService;
+import com.example.gamemate.domain.post.service.PostService;
 import com.example.gamemate.domain.user.dto.MyPageResponseDTO;
 import com.example.gamemate.domain.user.dto.RecommendResponseDTO;
 import com.example.gamemate.domain.user.dto.UpdateDTO;
 import com.example.gamemate.domain.user.mapper.UserMapper;
 import com.example.gamemate.domain.user.service.UserService;
 import com.example.gamemate.global.apiRes.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,21 +24,32 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URL;
-import java.util.List;
-
+@Tag(name = "User", description = "게임메이트 유저 API")
 @Slf4j
-@Controller
+@RestController
 @ResponseBody
 public class UserController {
 
     private final UserService userService;
+    private final PostService postService;
+    private final GameCommentService gameCommentService;
+    private final GameRatingService gameRatingService;
     private final UserMapper mapper;
 
-    public UserController(UserService userService, UserMapper mapper) {
+    public UserController(
+        UserService userService,
+        PostService postService,
+        GameCommentService gameCommentService,
+        GameRatingService gameRatingService,
+        UserMapper mapper
+    ) {
 
         this.userService = userService;
+        this.postService = postService;
+        this.gameCommentService = gameCommentService;
+        this.gameRatingService = gameRatingService;
         this.mapper = mapper;
 
     }
@@ -79,12 +93,27 @@ public class UserController {
     }
 
     @GetMapping("/delete")
-    public String deleteByName(@RequestParam("username") String username) {
+    public ResponseEntity<String> deleteByName(@RequestParam("username") String username) {
         // 로그 추가
         log.info("deleteCheck");
 
+        //게시글 삭제
+        postService.deletePostsByUsername(username);
+        log.info("deletePostsByUsername");
+
+        // 댓글 삭제
+        gameCommentService.deleteCommentsByUsername(username);
+        log.info("deleteCommentsByUsername");
+
+        // 평점 삭제
+        gameRatingService.deleteUserRatingsByUsername(username);
+        log.info("deleteUserRatingsByUsername");
+
+        // 유저 삭제
         userService.deletedByUsername(username);
-        return "삭제완료";
+        log.info("deletedByUsername");
+
+        return ResponseEntity.ok("User deleted successfully");
     }
 
     @PutMapping("/restoreUser/{username}")

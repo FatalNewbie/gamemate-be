@@ -2,11 +2,18 @@ package com.example.gamemate.domain.auth.controller;
 
 import com.example.gamemate.domain.auth.dto.JoinDTO;
 import com.example.gamemate.domain.auth.service.AuthService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Auth", description = "게임메이트 인증 API")
 @Slf4j
 @RestController
 public class AuthController {
@@ -22,12 +29,38 @@ public class AuthController {
     @PostMapping("/join")
     public String joinProcess(@RequestBody JoinDTO joinDTO) {
 
-        System.out.println(joinDTO.getUsername());
+        log.info(joinDTO.getUsername());
         authService.joinProcess(joinDTO);
 
         return "ok";
 
     }
+
+    @GetMapping("/check-availability")
+    public ResponseEntity<Map<String, String>> checkAvailability(
+        @RequestParam("username") String username,
+        @RequestParam("nickname") String nickname) {
+
+        Map<String, String> response = new HashMap<>();
+
+        boolean isUsernameExist = authService.isEmailDuplicated(username);
+        boolean isNicknameExist = authService.isNicknameDuplicated(nickname);
+
+        if (isUsernameExist) {
+            response.put("emailError", "이미 존재하는 이메일입니다.");
+        }
+
+        if (isNicknameExist) {
+            response.put("nicknameError", "이미 존재하는 닉네임입니다.");
+        }
+
+        if (response.isEmpty()) {
+            return ResponseEntity.ok(response);
+        }
+
+        return ResponseEntity.badRequest().body(response);
+    }
+
 
 //    @GetMapping("/naver-login")
 //    public void naverLogin(HttpServletRequest request, HttpServletResponse response)
