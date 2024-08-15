@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication(scanBasePackages = {"com.example.gamemate"})
 @EnableJpaAuditing
-public class GamemateApplication {
+public class 	GamemateApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GamemateApplication.class, args);
