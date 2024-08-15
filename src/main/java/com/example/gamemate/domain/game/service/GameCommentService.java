@@ -12,6 +12,7 @@ import com.example.gamemate.domain.game.entity.GameComment;
 import com.example.gamemate.domain.game.repository.GameCommentRepository;
 import com.example.gamemate.domain.game.repository.GameRepository;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class GameCommentService {
 
@@ -119,6 +121,30 @@ public class GameCommentService {
         // Soft delete 처리
         comment.setDeletedDate(LocalDateTime.now());
         gameCommentRepository.save(comment);
+    }
+
+    // 회원탈퇴 시 댓글 삭제 메서드
+    @Transactional
+    public void deleteCommentsByUsername(String username) {
+        // 사용자 조회
+        User user = userRepository.findByUsername(username);
+        log.info(username);
+
+        if (user == null) {
+            throw new RestApiException(GameExceptionCode.USER_NOT_FOUND);
+        }
+
+        // 해당 username을 가진 유저의 모든 댓글을 조회
+        List<GameComment> comments = gameCommentRepository.findCommentByUserId(
+            user.getId());
+        log.info("findCommentByUserId");
+
+        // 모든 댓글에 대해 soft delete 처리
+        for (GameComment comment : comments) {
+            comment.setDeletedDate(LocalDateTime.now());
+            gameCommentRepository.save(comment);
+        }
+        log.info("setDeletedComment");
     }
 }
 
