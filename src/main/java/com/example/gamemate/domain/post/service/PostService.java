@@ -104,10 +104,12 @@ public class PostService {
         User user = userRepository.findByUsername(username);
         Post.OnOffStatus status = "ON".equals(postDTO.getStatus()) ? Post.OnOffStatus.ON : Post.OnOffStatus.OFF;
 
+        //게시글 생성
         Post post = createPost(user, postDTO, status);
         PostResponseDTO postResponseDTO = mapper.PostToPostResponse(post);
         postResponseDTO.setPostUsername(username);
 
+        //채팅방 생성
         ChatRoom chatRoom = chatRoomRepository.save(new ChatRoom(postDTO.getGameTitle(), user, postDTO.getMateCnt(), post));
         chatRoomMemberService.addMember(chatRoom.getId(), user.getId(), true);
 

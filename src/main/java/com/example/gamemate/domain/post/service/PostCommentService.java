@@ -196,7 +196,7 @@ public class PostCommentService {
             }
 
          /*
-           대댓글 삭제
+           댓글 삭제
           */
         }else if(postCommentRepository.hasRecomments(commentId) == 0){
             postCommentRepository.deleteById(commentId);

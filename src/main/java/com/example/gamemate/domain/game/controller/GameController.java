@@ -94,7 +94,7 @@ public class GameController {
         return ApiResponse.successRes(HttpStatus.OK, customPage);
     }
 
-    @GetMapping("/games/search")
+    @GetMapping("/games/filter")
     public ApiResponse<CustomPage<GameDto>> getFilteredGames(
             @RequestParam(defaultValue = "") String filter,
             @RequestParam Optional<Integer> page,
