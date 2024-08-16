@@ -7,6 +7,8 @@
 ***
 ## 배포 주소
 
+http://ec2-54-82-46-230.compute-1.amazonaws.com/
+
 * * *
 ## 프로젝트 목적
 * 유저가 다양한 게임 모임을 생성/참여하여 커뮤니티를 이룸
@@ -15,10 +17,10 @@
 
 ***
 ## ERD
-
+![erd.png](images/erd.png)
 ***
 ## FlowChart
-![flowchart.png](images%2Fflowchart.png)
+![img.png](images/figma.png)
 ***
 ### WireFrame
 ![img.png](images/wireframe.png)
@@ -39,12 +41,14 @@
 
 ML
 
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
+
 
 
 ***
 ## Directory 구조 
 
-
+    Backend
     .
     │  
     │  
@@ -81,7 +85,27 @@ ML
     │  └─resources
     │              
     └─test
-    
+
+
+
+    Front
+    src
+    ├─ apis
+    ├─ assets
+    ├─ components
+    ├─ hooks
+    ├─ layouts
+    ├─ pages
+    ├─ utils
+    ├─ App.css
+    ├─ App.js
+    ├─ App.test.js
+    ├─ axiosInstance.js
+    ├─ index.css
+    ├─ index.js
+    ├─ logo.svg
+    ├─ reportWebVitals.js
+    └─ setupTests.js
 
 
 
@@ -135,9 +159,9 @@ ML
   * 데이터를 필요할 때 마다 가져오면서 무한 스크롤 구현
 ## 5. 관리자 기능
 * google analytics 를 통해 접속자 수, 평균 참여 시간, 행동 등을 파악
-* 
 ## 6. 유저 추천 기능
-* 
+* 토큰의 유저 정보를 가져와 선호 게임 장르와 플레이 시간대를 파이썬 서버로 전송
+* DB에 저장되 있는 유저의 정보중 코사인 유사도가 높은 유저를 추출하여 프론트엔드로 전송
 
 ***
 ### API 명세서
@@ -146,24 +170,15 @@ swagger로 보여주기 - 배포 이후에 링크 넣기
 ***
 ### 역할 분담
 
-* 박원정
-  * 머신러닝 모델 및 전용 서버 구축
-  * 유저 관계 시스템(친구) 구현 
-  
-* 고의성
-  * 회원 인증/인가 처리
-* 김경래
-  * amazon s3을 이용한 프로필 이미지 설정 구현
-  * google analytics 연동 
-* 김연지
-  * 게시글 CRUD 구현
-* 김이삭
-  * 채팅 기능 구현
-* 조한휘
-  * 프론트 레이아웃 구현
-  * 게임리스트 CRUD 구현
 
-표로 다시 만들어서 사진 추가 예정
+| | 이름  | 역할                                      |
+|---|-----|-----------------------------------------|
+| ![img.png](images/img.png) | 박원정 | 머신러닝 모델 및 전용 서버 구축<br/>유저 관계 시스템(친구) 구현 |
+|![img_1.png](images/img_1.png) | 고의성 | 회원 인즘/인가 처리                             |
+|![img_2.png](images/img_2.png) | 김경래 | amazon s3을 이용한 프로필 이미지 설정 구현<br/>  google analytics 연동                                  |
+| ![img_3.png](images/img_3.png) | 김연지 | 게시글 CRUD 구현                                   |
+| ![img_4.png](images/img_4.png) | 김이삭 | 채팅 기능 구현                                   |
+|![img_5.png](images/img_5.png) | 조한휘 | 게임리스트 CRUD 구현<br/>      프론트 레이아웃 구현                              |
 
 
 
