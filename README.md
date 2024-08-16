@@ -165,20 +165,20 @@ ML
 
 ***
 ### API 명세서
-swagger로 보여주기 - 배포 이후에 링크 넣기
+http://ec2-54-82-46-230.compute-1.amazonaws.com:8080/swagger-ui/index.html
 
 ***
 ### 역할 분담
 
 
-| | 이름  | 역할                                      |
-|---|-----|-----------------------------------------|
-| ![img.png](images/img.png) | 박원정 | 머신러닝 모델 및 전용 서버 구축<br/>유저 관계 시스템(친구) 구현 |
-|![img_1.png](images/img_1.png) | 고의성 | 회원 인즘/인가 처리                             |
-|![img_2.png](images/img_2.png) | 김경래 | amazon s3을 이용한 프로필 이미지 설정 구현<br/>  google analytics 연동                                  |
-| ![img_3.png](images/img_3.png) | 김연지 | 게시글 CRUD 구현                                   |
-| ![img_4.png](images/img_4.png) | 김이삭 | 채팅 기능 구현                                   |
-|![img_5.png](images/img_5.png) | 조한휘 | 게임리스트 CRUD 구현<br/>      프론트 레이아웃 구현                              |
+| | 이름  | 역할                                                     |
+|---|-----|--------------------------------------------------------|
+| ![img.png](images/img.png) | 박원정 | 머신러닝 모델 및 전용 서버 구축<br/>유저 관계 시스템(친구) 구현                |
+|![img_1.png](images/img_1.png) | 고의성 | 회원 인증/인가 처리                                            |
+|![img_2.png](images/img_2.png) | 김경래 | amazon s3을 이용한 프로필 이미지 설정 구현<br/>  google analytics 연동 |
+| ![img_3.png](images/img_3.png) | 김연지 | 게시글 CRUD 구현                                            |
+| ![img_4.png](images/img_4.png) | 김이삭 | 채팅 기능 구현                                               |
+|![img_5.png](images/img_5.png) | 조한휘 | 게임리스트 CRUD 구현<br/>      프론트 레이아웃 구현                    |
 
 
 
