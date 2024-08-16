@@ -3,6 +3,7 @@ package com.example.gamemate.global.config;
 
 import com.example.gamemate.global.Interceptor.WebSocketAuthInterceptor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -15,12 +16,15 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker // stomp를 사용하기위한 어노테이션
 public class WebSocketStomConfig implements WebSocketMessageBrokerConfigurer {
 
+    @Value("${CORS_ALLOWED_ORIGINS:http://localhost:3000}") // 환경변수와 기본값 설정
+    private String allowedOrigins;
+
     //private final WebSocketAuthInterceptor webSocketAuthInterceptor;
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")  // <-- 웹소켓 핸드쉐이크로 커넥션 형성. 웹소켓은 HTTP로 핸드쉐이크 한 후에 웹소켓 프로토콜로 변환. 커넥션 형성. 이 연결을 위한 엔드포인트.
-                .setAllowedOrigins("http://localhost:3000") // <-- /ws 엔드포인트에 대해 http://localhost:3000에서의 요청을 허용
+                .setAllowedOrigins(allowedOrigins) // <-- /ws 엔드포인트에 대해 http://localhost:3000에서의 요청을 허용
                 //.addInterceptors(new JwtHandshakeInterceptor ()) // 인터셉터 추가
                 .withSockJS(); // <- 웹소켓을 지원하지않는 브라우저에서 sockjs를 통해 실시간 통신을 지원.
     }

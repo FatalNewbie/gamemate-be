@@ -6,6 +6,8 @@ import com.example.gamemate.domain.auth.jwt.filter.LoginFilter;
 import com.example.gamemate.domain.user.service.CustomUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,6 +36,9 @@ public class SecurityConfig {
     //JWTUtil 주입
     private final JWTUtil jwtUtil;
     private final CustomUserDetailsService customUserDetailsService;
+
+    @Value("${CORS_ALLOWED_ORIGINS:http://localhost:3000}") // 환경변수와 기본값 설정
+    private String allowedOrigins;
 
     public SecurityConfig(
         AuthenticationConfiguration authenticationConfiguration,
@@ -134,7 +139,7 @@ public class SecurityConfig {
 
                     CorsConfiguration configuration = new CorsConfiguration();
 
-                    configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+                    configuration.setAllowedOrigins(Collections.singletonList(allowedOrigins));
                     configuration.setAllowedMethods(Collections.singletonList("*"));
                     configuration.setAllowCredentials(true);
                     configuration.setAllowedHeaders(Collections.singletonList("*"));
