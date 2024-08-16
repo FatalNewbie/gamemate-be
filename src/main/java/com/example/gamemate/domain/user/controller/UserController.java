@@ -1,6 +1,7 @@
 package com.example.gamemate.domain.user.controller;
 
 import com.example.gamemate.domain.auth.dto.CustomUserDetailsDTO;
+import com.example.gamemate.domain.friend.service.FriendService;
 import com.example.gamemate.domain.game.service.GameCommentService;
 import com.example.gamemate.domain.game.service.GameRatingService;
 import com.example.gamemate.domain.post.service.PostService;
@@ -36,6 +37,7 @@ public class UserController {
     private final PostService postService;
     private final GameCommentService gameCommentService;
     private final GameRatingService gameRatingService;
+    private final FriendService friendService;
     private final UserMapper mapper;
 
     public UserController(
@@ -43,6 +45,7 @@ public class UserController {
         PostService postService,
         GameCommentService gameCommentService,
         GameRatingService gameRatingService,
+        FriendService friendService,
         UserMapper mapper
     ) {
 
@@ -50,6 +53,7 @@ public class UserController {
         this.postService = postService;
         this.gameCommentService = gameCommentService;
         this.gameRatingService = gameRatingService;
+        this.friendService = friendService;
         this.mapper = mapper;
 
     }
@@ -108,6 +112,10 @@ public class UserController {
         // 평점 삭제
         gameRatingService.deleteUserRatingsByUsername(username);
         log.info("deleteUserRatingsByUsername");
+
+        //친구 관계 삭제
+        friendService.deleteUserRelatedFriend(username);
+        log.info("deleteUserRelatedFriend");
 
         // 유저 삭제
         userService.deletedByUsername(username);
