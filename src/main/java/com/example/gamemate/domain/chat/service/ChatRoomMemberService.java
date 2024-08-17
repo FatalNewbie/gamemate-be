@@ -36,6 +36,11 @@ public class ChatRoomMemberService {
 
         User member = userRepository.findById(targetMemberId).orElse(null);
 
+        boolean alreadyExists = chatRoomMemberRepository.existsByChatRoomAndMember(chatRoom,member);
+        
+        if(alreadyExists){
+            return AddMemberResponse.from(false,"멤버가 이미 초대되어있습니다.");
+        }
 
         ChatRoomMember chatRoomMember = new ChatRoomMember(chatRoom, member, isLeader);
         chatRoomMemberRepository.save(chatRoomMember);
