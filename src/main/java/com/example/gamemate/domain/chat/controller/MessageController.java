@@ -4,6 +4,9 @@ import com.example.gamemate.domain.chat.entity.Message;
 import com.example.gamemate.domain.chat.model.message.MessageModel;
 import com.example.gamemate.domain.chat.model.message.OutputMessageModel;
 import com.example.gamemate.domain.chat.service.MessageService;
+import com.example.gamemate.domain.user.dto.MyPageResponseDTO;
+import com.example.gamemate.domain.user.entity.User;
+import com.example.gamemate.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
@@ -37,6 +40,7 @@ public class MessageController {
 //
 
     private final MessageService messageService;
+    private final UserService userService;
 
     @MessageMapping("/message/send/{roomId}") // "/app/message/send/"+roomId 클라이언트쪽에서 메시지를 보내오는 경로
     @SendTo("/topic/chat/{roomId}") // 특정 목적지를 설정. 메시지브로커는 이 경로에 해당하는 응답채널을 통해서 구독자에게 메시지를 전달할 수 있게 된다.
@@ -53,11 +57,13 @@ public class MessageController {
         //UserDetails userDetails = (UserDetails) auth.getPrincipal();
         String username = (String)auth.getPrincipal();
 
+        MyPageResponseDTO user = userService.findByUsernameForMyPage(username);
+
         Message newMessage =messageService.saveMessage(messageModel.getChatRoomId(),
                 messageModel.getContent(), username, time, messageModel.getType() );
 
         return new OutputMessageModel(newMessage.getId(),
-                messageModel.getWriter(),
+                user.getNickname(),
                 messageModel.getChatRoomId(),
                 messageModel.getContent(),
                 time,
